@@ -22,8 +22,8 @@ public partial class _Default : System.Web.UI.Page
         Response.Redirect("Login.aspx");
     }
 
-    protected void btnCarrinho_Click(object sender, EventArgs e)
+    protected void btnProdutos_Click(object sender, EventArgs e)
     {
-        Response.Redirect("Carrinho.aspx");
+        Response.Redirect("Produtos.aspx");
     }
 }

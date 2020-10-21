@@ -15,7 +15,7 @@
         <asp:Button ID="btnTelaLogin" runat="server" OnClick="btnTelaLogin_Click" Text="Login" Width="78px" />
     
         <br />
-        <asp:Button ID="btnCarrinho" runat="server" OnClick="btnCarrinho_Click" Text="Carrinho" Width="78px" />
+        <asp:Button ID="btnProdutos" runat="server" OnClick="btnProdutos_Click" Text="Produtos" Width="78px" />
     
     </div>
     </form>
