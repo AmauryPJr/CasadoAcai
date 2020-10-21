@@ -14,6 +14,9 @@
         .auto-style2 {
             font-size: 16pt;
         }
+        p {
+            font-family: 'CHICKEN Pie';
+        }
         </style>
 </head>
 <body>
