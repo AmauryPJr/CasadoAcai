@@ -28,6 +28,10 @@ public partial class Carrinho : System.Web.UI.Page
         CarregarAdicionais();
 
         gvAdicional.Visible = true;
+
+        CarragarFormaPagto();
+
+        gvForma.Visible = true;
     }
 
     protected void btnVoltar_Click(object sender, EventArgs e)
@@ -79,10 +83,19 @@ public partial class Carrinho : System.Web.UI.Page
     {
         string[] adicionais = { "Morango", "Chocolate", "Caramelo", "Menta", "Tutti frutti", "Maracujá" };
 
-        gvAdicional.DataSource = adicionais;
+        DataTable listaAdd = new DataTable();
+        listaAdd.Columns.Add("Adicional");
+
+        for (int i = 0; i < adicionais.GetLength(0); i++)
+        {
+            listaAdd.Rows.Add();
+            listaAdd.Rows[i]["Adicional"] = adicionais[i].ToString();            
+        }
+
+        gvAdicional.DataSource = listaAdd;
         gvAdicional.DataBind();
     }
-    
+
     private void CarregarProduto(int tipoProd)
     {
         listaDescripto.Columns.Add("id_prod", typeof(int));
@@ -105,12 +118,35 @@ public partial class Carrinho : System.Web.UI.Page
             linha["nome_prod"]   = cripto.Decrypt(listaProd.Table.Rows[i]["nome_prod"].ToString());
             linha["id_tipoProd"] = listaProd.Table.Rows[i]["id_tipoProd"].ToString();
             linha["tam_prod"]    = cripto.Decrypt(listaProd.Table.Rows[i]["tam_prod"].ToString());
-            linha["preco_prod"]  = cripto.Decrypt(listaProd.Table.Rows[i]["preco_prod"].ToString());
+            linha["preco_prod"]  = cripto.Decrypt(listaProd.Table.Rows[i]["preco_prod"].ToString()).Replace('.', ',');
 
             listaDescripto.Rows.Add(linha);
         }
 
         gvProduto.DataSource = listaDescripto;
         gvProduto.DataBind();
+    }
+
+    private void CarragarFormaPagto()
+    {
+        listaDescripto.Columns.Add("id_forma", typeof(int));
+        listaDescripto.Columns.Add("tipo_forma", typeof(string));
+
+        DataView tipoForma;
+
+        tipoForma = (DataView)DSForma.Select(DataSourceSelectArguments.Empty);
+
+        for (int i = 0; i < tipoForma.Table.Rows.Count; i++)
+        {
+            DataRow linha = listaDescripto.NewRow();
+
+            linha["id_forma"] = tipoForma.Table.Rows[i]["id_forma"].ToString();
+            linha["tipo_forma"] = cripto.Decrypt(tipoForma.Table.Rows[i]["tipo_forma"].ToString());
+
+            listaDescripto.Rows.Add(linha);
+        }
+
+        gvForma.DataSource = listaDescripto;
+        gvForma.DataBind();
     }
 }
