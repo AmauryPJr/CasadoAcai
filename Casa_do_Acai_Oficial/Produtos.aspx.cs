@@ -12,7 +12,7 @@ public partial class Carrinho : System.Web.UI.Page
 
     DataTable listaDescripto = new DataTable();
 
-    
+    string morango, chocolate, caramelo, menta, tuttiFrutti, maracujá;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -29,9 +29,8 @@ public partial class Carrinho : System.Web.UI.Page
 
         gvAdicional.Visible = true;
 
-        CarragarFormaPagto();
-
-        gvForma.Visible = true;
+        btnContinuar.Text = "Adicionar ao Carrinho";
+        btnContinuar.Width = 200;
     }
 
     protected void btnVoltar_Click(object sender, EventArgs e)
@@ -40,7 +39,10 @@ public partial class Carrinho : System.Web.UI.Page
 
         gvProduto.Visible = true;
 
-        btnVoltar.Visible = false;       
+        btnContinuar.Text = "Continuar";
+
+        btnVoltar.Visible = false;
+        btnContinuar.Width = 130;
     }
 
     protected void imbAcai_Click(object sender, ImageClickEventArgs e)
@@ -127,26 +129,13 @@ public partial class Carrinho : System.Web.UI.Page
         gvProduto.DataBind();
     }
 
-    private void CarragarFormaPagto()
+    protected void rbEscolhaProd_CheckedChanged(object sender, EventArgs e)
     {
-        listaDescripto.Columns.Add("id_forma", typeof(int));
-        listaDescripto.Columns.Add("tipo_forma", typeof(string));
+        
+    }
 
-        DataView tipoForma;
-
-        tipoForma = (DataView)DSForma.Select(DataSourceSelectArguments.Empty);
-
-        for (int i = 0; i < tipoForma.Table.Rows.Count; i++)
-        {
-            DataRow linha = listaDescripto.NewRow();
-
-            linha["id_forma"] = tipoForma.Table.Rows[i]["id_forma"].ToString();
-            linha["tipo_forma"] = cripto.Decrypt(tipoForma.Table.Rows[i]["tipo_forma"].ToString());
-
-            listaDescripto.Rows.Add(linha);
-        }
-
-        gvForma.DataSource = listaDescripto;
-        gvForma.DataBind();
+    protected void rbEscolhaAdd_CheckedChanged(object sender, EventArgs e)
+    {
+            
     }
 }

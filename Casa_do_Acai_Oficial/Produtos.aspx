@@ -7,10 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
     <style type="text/css">
-        .auto-style1 {
-            margin-left: 360px;
-            font-family: 'CHICKEN Pie';
-        }
         .auto-style2 {
             font-size: 16pt;
         }
@@ -23,19 +19,14 @@
     <form id="form1" runat="server">        
         <p>Escolha um ou mais produtos !</p>
         <asp:ImageButton ID="imbAcai" runat="server" Height="125px" ImageUrl="~/Imagens/Acai.png" Width="135px" OnClick="imbAcai_Click" />
-
         <asp:ImageButton ID="imbSacole" runat="server" Height="125px" ImageUrl="~/Imagens/Sacole.png" Width="135px" OnClick="imbSacole_Click" />
-
         <asp:ImageButton ID="imbGeladinho" runat="server" Height="125px" ImageUrl="~/Imagens/Geladinho.png" Width="135px" OnClick="imbGeladinho_Click" />
         <br />
         <br />
         <br />
         <asp:ImageButton ID="ImbSorvete" runat="server" Height="125px" ImageUrl="~/Imagens/Sorvete.png" Width="135px" OnClick="ImbSorvete_Click" />
-
         <asp:ImageButton ID="imbPicole" runat="server" Height="125px" ImageUrl="~/Imagens/Picole.png" Width="135px" OnClick="imbPicole_Click" />
-
         <asp:ImageButton ID="ImbCremosinho" runat="server" Height="125px" ImageUrl="~/Imagens/Cremosinho.png" Width="135px" OnClick="ImbCremosinho_Click" />
-        <br />
         <br />
         <br />
         <div ID="teste1">
@@ -50,7 +41,7 @@
                             <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:RadioButton ID="rbEscolha" runat="server" />
+                            <asp:RadioButton ID="rbEscolhaProd" runat="server" OnCheckedChanged="rbEscolhaProd_CheckedChanged" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Tamanho" SortExpression="tam_prod">
@@ -87,7 +78,7 @@
                             <asp:CheckBox ID="CheckBox1" runat="server" />
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:RadioButton ID="rbEscolha" runat="server" />
+                            <asp:RadioButton ID="rbEscolhaAdd" runat="server" AutoPostBack="True" OnCheckedChanged="rbEscolhaAdd_CheckedChanged" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -100,6 +91,7 @@
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
+            <br />
         </div>
         <br />
         <asp:Button ID="btnVoltar" runat="server" text="Voltar" Width="130px" OnClick="btnVoltar_Click" BackColor="#990099" Font-Names="CHICKEN Pie" Font-Size="16px" ForeColor="White" Visible="False"/>
