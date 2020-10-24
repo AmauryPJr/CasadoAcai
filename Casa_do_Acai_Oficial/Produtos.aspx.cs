@@ -12,25 +12,75 @@ public partial class Carrinho : System.Web.UI.Page
 
     DataTable listaDescripto = new DataTable();
 
-    string morango, chocolate, caramelo, menta, tuttiFrutti, maracujá;
+    string[] adicionais = { "Morango", "Chocolate", "Caramelo", "Menta", "Tutti frutti", "Maracujá" };
 
+    private bool ImbAcaiClicado = false;
+    
     protected void Page_Load(object sender, EventArgs e)
     {
                    
     }
+    
+    protected void imbAcai_Click(object sender, ImageClickEventArgs e)
+    {
+        CarregarProduto(1);
+        gvProduto.Visible = true;
+        ImbAcaiClicado = true;
+        AcaiClicado();
+        gvAdicional.Visible = false;
+    }
+
+    protected void imbSacole_Click(object sender, ImageClickEventArgs e)
+    {
+        CarregarProduto(2);
+        gvProduto.Visible = true;
+        ImbAcaiClicado = false;
+        AcaiClicado();
+        EscolherOutroProd();
+    }
+
+    protected void imbGeladinho_Click(object sender, ImageClickEventArgs e)
+    {
+        CarregarProduto(3);
+        gvProduto.Visible = true;
+        ImbAcaiClicado = false;
+        AcaiClicado();
+        EscolherOutroProd();
+    }
+
+    protected void ImbSorvete_Click(object sender, ImageClickEventArgs e)
+    {
+        CarregarProduto(4);
+        gvProduto.Visible = true;
+        ImbAcaiClicado = false;
+        AcaiClicado();
+        EscolherOutroProd();
+    }
+
+    protected void imbPicole_Click(object sender, ImageClickEventArgs e)
+    {
+        CarregarProduto(5);
+        gvProduto.Visible = true;
+        ImbAcaiClicado = false;
+        AcaiClicado();
+        EscolherOutroProd();
+    }
+
+    protected void ImbCremosinho_Click(object sender, ImageClickEventArgs e)
+    {
+        CarregarProduto(6);
+        gvProduto.Visible = true;
+        ImbAcaiClicado = false;
+        AcaiClicado();
+        EscolherOutroProd();
+    }
 
     protected void btnContinuar_Click(object sender, EventArgs e)
     {
-        btnVoltar.Visible = true;
-
+        btnVoltar.Visible = true;        
         gvProduto.Visible = false;
-
-        CarregarAdicionais();
-
+        AcaiClicado();
         gvAdicional.Visible = true;
-
-        btnContinuar.Text = "Adicionar ao Carrinho";
-        btnContinuar.Width = 200;
     }
 
     protected void btnVoltar_Click(object sender, EventArgs e)
@@ -39,52 +89,58 @@ public partial class Carrinho : System.Web.UI.Page
 
         gvProduto.Visible = true;
 
-        btnContinuar.Text = "Continuar";
-
         btnVoltar.Visible = false;
-        btnContinuar.Width = 130;
+        btnAdicionar.Visible = false;
+        btnContinuar.Visible = true;
     }
 
-    protected void imbAcai_Click(object sender, ImageClickEventArgs e)
+    protected void btnAdicionar_Click(object sender, EventArgs e)
     {
-        gvProduto.Visible = true;
-        CarregarProduto(1);
-    }
+        DataView listaProd;
+        listaProd = (DataView)DSProduto.Select(DataSourceSelectArguments.Empty);
+        lbl.Text = "";
+        lbl2.Text = "";
 
-    protected void imbSacole_Click(object sender, ImageClickEventArgs e)
-    {
-        gvProduto.Visible = true;
-        CarregarProduto(2);
-    }
+        foreach (GridViewRow linha in gvProduto.Rows)
+        {
+            RadioButton rbEscolhaProd;
 
-    protected void imbGeladinho_Click(object sender, ImageClickEventArgs e)
-    {
-        gvProduto.Visible = true;
-        CarregarProduto(3);
-    }
+            rbEscolhaProd = (RadioButton)linha.FindControl("rbEscolhaProd");
 
-    protected void ImbSorvete_Click(object sender, ImageClickEventArgs e)
-    {
-        gvProduto.Visible = true;
-        CarregarProduto(4);
-    }
+            if (rbEscolhaProd.Checked == true)
+            {
+                int linhaSelecionada = linha.DataItemIndex;
 
-    protected void imbPicole_Click(object sender, ImageClickEventArgs e)
-    {
-        gvProduto.Visible = true;
-        CarregarProduto(5);
-    }
+                Session["idProd"] = Convert.ToString(listaProd.Table.Rows[linhaSelecionada]["id_prod"]);
 
-    protected void ImbCremosinho_Click(object sender, ImageClickEventArgs e)
-    {
-        gvProduto.Visible = true;
-        CarregarProduto(6);
+                lbl.Text += Session["idProd"].ToString();
+            }
+        }
+
+        if (gvAdicional.Visible == false)
+            return;
+        else
+        {
+            foreach (GridViewRow linha in gvAdicional.Rows)
+            {
+                RadioButton rbEscolhaAdd;
+
+                rbEscolhaAdd = (RadioButton)linha.FindControl("rbEscolhaAdd");
+
+                if (rbEscolhaAdd.Checked == true)
+                {
+                    string AddSelecionado = adicionais[linha.DataItemIndex].ToString();
+
+                    Session["Adicional"] = AddSelecionado;
+
+                    lbl2.Text += Session["Adicional"].ToString() + " ";
+                }
+            }
+        }
     }
 
     private void CarregarAdicionais()
     {
-        string[] adicionais = { "Morango", "Chocolate", "Caramelo", "Menta", "Tutti frutti", "Maracujá" };
-
         DataTable listaAdd = new DataTable();
         listaAdd.Columns.Add("Adicional");
 
@@ -127,15 +183,37 @@ public partial class Carrinho : System.Web.UI.Page
 
         gvProduto.DataSource = listaDescripto;
         gvProduto.DataBind();
+    }    
+
+    private void AcaiClicado()
+    {
+        if (ImbAcaiClicado == true)
+        {
+            CarregarAdicionais();
+
+            btnContinuar.Visible = true;
+
+            btnAdicionar.Visible = false;
+        }
+        else
+        {
+            btnContinuar.Visible = false;
+
+            btnAdicionar.Visible = true;
+        }
     }
 
-    protected void rbEscolhaProd_CheckedChanged(object sender, EventArgs e)
+    private void EscolherOutroProd()
     {
-        
-    }
+        if (gvAdicional.Visible == true)
+        {
+            gvAdicional.Visible = false;
 
-    protected void rbEscolhaAdd_CheckedChanged(object sender, EventArgs e)
-    {
-            
+            ImbAcaiClicado = false;
+
+            btnVoltar.Visible = false;
+
+            AcaiClicado();
+        }
     }
 }

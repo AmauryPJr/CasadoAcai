@@ -23,7 +23,6 @@
         <asp:ImageButton ID="imbGeladinho" runat="server" Height="125px" ImageUrl="~/Imagens/Geladinho.png" Width="135px" OnClick="imbGeladinho_Click" />
         <br />
         <br />
-        <br />
         <asp:ImageButton ID="ImbSorvete" runat="server" Height="125px" ImageUrl="~/Imagens/Sorvete.png" Width="135px" OnClick="ImbSorvete_Click" />
         <asp:ImageButton ID="imbPicole" runat="server" Height="125px" ImageUrl="~/Imagens/Picole.png" Width="135px" OnClick="imbPicole_Click" />
         <asp:ImageButton ID="ImbCremosinho" runat="server" Height="125px" ImageUrl="~/Imagens/Cremosinho.png" Width="135px" OnClick="ImbCremosinho_Click" />
@@ -41,7 +40,7 @@
                             <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:RadioButton ID="rbEscolhaProd" runat="server" OnCheckedChanged="rbEscolhaProd_CheckedChanged" />
+                            <asp:RadioButton ID="rbEscolhaProd" runat="server" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Tamanho" SortExpression="tam_prod">
@@ -78,7 +77,7 @@
                             <asp:CheckBox ID="CheckBox1" runat="server" />
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:RadioButton ID="rbEscolhaAdd" runat="server" AutoPostBack="True" OnCheckedChanged="rbEscolhaAdd_CheckedChanged" />
+                            <asp:RadioButton ID="rbEscolhaAdd" runat="server" AutoPostBack="True" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -96,6 +95,11 @@
         <br />
         <asp:Button ID="btnVoltar" runat="server" text="Voltar" Width="130px" OnClick="btnVoltar_Click" BackColor="#990099" Font-Names="CHICKEN Pie" Font-Size="16px" ForeColor="White" Visible="False"/>
         <asp:Button ID="btnContinuar" runat="server" text="Continuar" Width="130px" OnClick="btnContinuar_Click" BackColor="#990099" Font-Names="CHICKEN Pie" Font-Size="16px" ForeColor="White"/>
+        <asp:Button ID="btnAdicionar" runat="server" text="Adicionar" Width="130px" OnClick="btnAdicionar_Click" BackColor="#990099" Font-Names="CHICKEN Pie" Font-Size="16px" ForeColor="White" Visible="False"/>
+        <br />
+        <asp:Label ID="lbl" runat="server" Text="Label"></asp:Label>
+        <br />
+        <asp:Label ID="lbl2" runat="server" Text="Label"></asp:Label>
         <br />
         <br />
         <div ID="teste2">
