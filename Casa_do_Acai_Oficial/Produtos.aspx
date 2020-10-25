@@ -97,9 +97,11 @@
         <asp:Button ID="btnContinuar" runat="server" text="Continuar" Width="130px" OnClick="btnContinuar_Click" BackColor="#990099" Font-Names="CHICKEN Pie" Font-Size="16px" ForeColor="White"/>
         <asp:Button ID="btnAdicionar" runat="server" text="Adicionar" Width="130px" OnClick="btnAdicionar_Click" BackColor="#990099" Font-Names="CHICKEN Pie" Font-Size="16px" ForeColor="White" Visible="False"/>
         <br />
-        <asp:Label ID="lbl" runat="server" Text="Label"></asp:Label>
+        <asp:Label ID="lblIds" runat="server" Text="Label"></asp:Label>
         <br />
-        <asp:Label ID="lbl2" runat="server" Text="Label"></asp:Label>
+        <asp:Label ID="lblAdd" runat="server" Text="Label"></asp:Label>
+        <br />
+        <asp:Label ID="lblQtdIds" runat="server" Text="Label"></asp:Label>
         <br />
         <br />
         <div ID="teste2">

@@ -98,8 +98,9 @@ public partial class Carrinho : System.Web.UI.Page
     {
         DataView listaProd;
         listaProd = (DataView)DSProduto.Select(DataSourceSelectArguments.Empty);
-        lbl.Text = "";
-        lbl2.Text = "";
+        lblIds.Text = "";
+        lblAdd.Text = "";
+        int qtdIds = 0;
 
         foreach (GridViewRow linha in gvProduto.Rows)
         {
@@ -109,11 +110,16 @@ public partial class Carrinho : System.Web.UI.Page
 
             if (rbEscolhaProd.Checked == true)
             {
+                qtdIds++;
+                
                 int linhaSelecionada = linha.DataItemIndex;
 
                 Session["idProd"] = Convert.ToString(listaProd.Table.Rows[linhaSelecionada]["id_prod"]);
+                Session["qtdIds"] = qtdIds;
 
-                lbl.Text += Session["idProd"].ToString();
+                lblIds.Text += Session["idProd"].ToString();
+
+                lblQtdIds.Text = qtdIds.ToString();
             }
         }
 
@@ -133,7 +139,7 @@ public partial class Carrinho : System.Web.UI.Page
 
                     Session["Adicional"] = AddSelecionado;
 
-                    lbl2.Text += Session["Adicional"].ToString() + " ";
+                    lblAdd.Text += Session["Adicional"].ToString() + " ";
                 }
             }
         }
