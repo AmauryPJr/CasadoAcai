@@ -27,7 +27,7 @@ public partial class Login : System.Web.UI.Page
         return (new WebClient()).DownloadString(url);
     }
 
-    protected void btnLogar_Click(object sender, EventArgs e)
+    protected void btnEntrar_Click(object sender, EventArgs e)
     {
         DataView listaLogin;
 

@@ -32,7 +32,6 @@ public partial class CadastroLogin : System.Web.UI.Page
         {
             string endereco = "" + dados.end + ", " + dados.bairro + " " + dados.cidade + " - " + dados.uf + "";
             Response.Write("<script>confirm('Confirma o seu Endereço: "+endereco+"')</script>");
-            lblEndereco.Text = endereco;
         }
         else
         {
@@ -258,15 +257,15 @@ public partial class CadastroLogin : System.Web.UI.Page
         {
             SenhaFraca();
         }
-    }    
+    }
 
-    protected void btnCadastrar_Click(object sender, EventArgs e)
+    protected void btnFinalizar_Click(object sender, EventArgs e)
     {
-        DSCadastroCliente.InsertParameters["NOME"].DefaultValue            = cripto.Encrypt(txtNome.Text);
-        DSCadastroCliente.InsertParameters["TELEFONE"].DefaultValue        = cripto.Encrypt(txtTelefone.Text);
-        DSCadastroCliente.InsertParameters["CEP"].DefaultValue             = cripto.Encrypt(txtCEP.Text);
-        DSCadastroCliente.InsertParameters["NUMERO"].DefaultValue          = cripto.Encrypt(txtNumero.Text);
-        
+        DSCadastroCliente.InsertParameters["NOME"].DefaultValue = cripto.Encrypt(txtNome.Text);
+        DSCadastroCliente.InsertParameters["TELEFONE"].DefaultValue = cripto.Encrypt(txtTelefone.Text);
+        DSCadastroCliente.InsertParameters["CEP"].DefaultValue = cripto.Encrypt(txtCEP.Text);
+        DSCadastroCliente.InsertParameters["NUMERO"].DefaultValue = cripto.Encrypt(txtNumero.Text);
+
         if (txtComplemento.Text != "")
         {
             DSCadastroCliente.InsertParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt(txtComplemento.Text);
@@ -280,7 +279,7 @@ public partial class CadastroLogin : System.Web.UI.Page
 
         if (ddlGenero.SelectedIndex == 0)
         {
-            genero = "F";            
+            genero = "F";
         }
 
         if (ddlGenero.SelectedIndex == 1)
@@ -293,24 +292,22 @@ public partial class CadastroLogin : System.Web.UI.Page
             genero = "PND";
         }
 
-        DSCadastroCliente.InsertParameters["GENERO"].DefaultValue          = cripto.Encrypt(genero);
-        DSCadastroCliente.InsertParameters["DATANASC"].DefaultValue        = cripto.Encrypt(txtDataNasc.Text);
-        DSCadastroCliente.InsertParameters["EMAIL"].DefaultValue           = cripto.Encrypt(txtEmail.Text);
-        DSCadastroCliente.InsertParameters["CPF"].DefaultValue             = cripto.Encrypt(txtCPF.Text);
-        DSCadastroCliente.InsertParameters["SENHA"].DefaultValue           = cripto.Encrypt(txtSenha.Text);
+        DSCadastroCliente.InsertParameters["GENERO"].DefaultValue = cripto.Encrypt(genero);
+        DSCadastroCliente.InsertParameters["DATANASC"].DefaultValue = cripto.Encrypt(txtDataNasc.Text);
+        DSCadastroCliente.InsertParameters["EMAIL"].DefaultValue = cripto.Encrypt(txtEmail.Text);
+        DSCadastroCliente.InsertParameters["CPF"].DefaultValue = cripto.Encrypt(txtCPF.Text);
+        DSCadastroCliente.InsertParameters["SENHA"].DefaultValue = cripto.Encrypt(txtSenha.Text);
 
         DSCadastroCliente.Insert();
-                
+
         LimparCampos();
-        
-        Response.Redirect("LoginCasa.aspx");
     }
 
     public void SenhaForte()
     {
         Response.Write("<script>alert('A sua senha é Forte. Clique em Cadastar para finalizar o Cadastro !');</script>");
 
-        btnCadastrar.Enabled = true;
+        btnFinalizar.Enabled = true;
     }
 
     public void SenhaMedia()
@@ -339,5 +336,5 @@ public partial class CadastroLogin : System.Web.UI.Page
         ddlGenero.ClearSelection();
         txtCPF.Text = "";
         txtSenha.Text = "";
-    }
+    }    
 }
