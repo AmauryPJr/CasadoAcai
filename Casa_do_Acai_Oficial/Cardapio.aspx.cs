@@ -172,38 +172,20 @@ public partial class Carrinho : System.Web.UI.Page
 
         listaProd = (DataView)DSProduto.Select(DataSourceSelectArguments.Empty);
 
-        listaDescripto.DefaultView.RowFilter = "id_tipoProd = '" + tipoProd + "'";
-
-        if (tipoProd == 1)
+        listaDescripto.DefaultView.RowFilter = "id_tipoProd = '" + tipoProd + "'";        
+        
+        for (int i = 0; i < listaProd.Table.Rows.Count; i++)
         {
-            for (int i = 0; i < listaProd.Table.Rows.Count; i++)
-            {
-                DataRow linha = listaDescripto.NewRow();
+            DataRow linha = listaDescripto.NewRow();
 
-                linha["id_prod"]     = listaProd.Table.Rows[i]["id_prod"].ToString();
-                linha["nome_prod"]   = cripto.Decrypt(listaProd.Table.Rows[i]["nome_prod"].ToString());
-                linha["id_tipoProd"] = listaProd.Table.Rows[i]["id_tipoProd"].ToString();
-                linha["tam_prod"]    = cripto.Decrypt(listaProd.Table.Rows[i]["tam_prod"].ToString());
-                linha["preco_prod"]  = cripto.Decrypt(listaProd.Table.Rows[i]["preco_prod"].ToString()).Replace('.', ',');
+            linha["id_prod"]     = listaProd.Table.Rows[i]["id_prod"].ToString();
+            linha["nome_prod"]   = cripto.Decrypt(listaProd.Table.Rows[i]["nome_prod"].ToString());
+            linha["id_tipoProd"] = listaProd.Table.Rows[i]["id_tipoProd"].ToString();
+            linha["tam_prod"]    = cripto.Decrypt(listaProd.Table.Rows[i]["tam_prod"].ToString());
+            linha["preco_prod"]  = cripto.Decrypt(listaProd.Table.Rows[i]["preco_prod"].ToString()).Replace('.', ',');
 
-                listaDescripto.Rows.Add(linha);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < listaProd.Table.Rows.Count; i++)
-            {
-                DataRow linha = listaDescripto.NewRow();
-
-                linha["id_prod"]     = listaProd.Table.Rows[i]["id_prod"].ToString();
-                linha["nome_prod"]   = cripto.Decrypt(listaProd.Table.Rows[i]["nome_prod"].ToString());
-                linha["id_tipoProd"] = listaProd.Table.Rows[i]["id_tipoProd"].ToString();
-                linha["tam_prod"]    = listaProd.Table.Rows[i]["tam_prod"].ToString();
-                linha["preco_prod"]  = cripto.Decrypt(listaProd.Table.Rows[i]["preco_prod"].ToString()).Replace('.', ',');
-
-                listaDescripto.Rows.Add(linha);
-            }
-        }
+            listaDescripto.Rows.Add(linha);
+        }        
 
         gvProduto.DataSource = listaDescripto;
         gvProduto.DataBind();

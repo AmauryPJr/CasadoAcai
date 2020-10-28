@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -212,7 +213,7 @@
                                     <div class="row">
                                         <input class="btn" id="btnProximo" type="button" name="" value="Próximo"
                                             onclick="handleAvanced()">
-                                        <input class="btn" id="btnVoltar" type="button" name="" value="Voltar"
+                                        <input class="btn" id="btnVoltar1" type="button" name="" value="Voltar"
                                             onclick="handleBack()">
                                     </div>
                                 </div>
@@ -238,7 +239,7 @@
                                     </div>
                                     <div class="row">
                                         <asp:Button runat="server" class="btn" id="btnFinalizar" type="button" name="" Text="Finalizar" OnClick="btnFinalizar_Click"/>
-                                        <input class="btn" id="btnVoltar" type="button" name="" value="Voltar"
+                                        <input class="btn" id="btnVoltar2" type="button" name="" value="Voltar"
                                             onclick="handleGoBack()">
                                     </div>
                                 </div>
@@ -254,7 +255,7 @@
         </div>
         <br />
         <br />
-        <asp:SqlDataSource ID="DSCadastroCliente" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO cadastro_cliente(nome_cli, tel_cli, cep_cli, num_cli, comp_cli, email_cli, dtnasc_cli, gen_cli, cpf_cli, senha_cli) VALUES (@NOME, @TELEFONE, @CEP, @NUMERO, @COMPLEMENTO, @EMAIL, @DATANASC, @GENERO, @CPF, @SENHA)" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM [cadastro_cliente]">
+        <asp:SqlDataSource ID="DSCadastroCliente" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO cadastro_cliente(nome_cli, tel_cli, cep_cli, num_cli, comp_cli, email_cli, dtnasc_cli, gen_cli, cpf_cli, senha_cli) VALUES (@NOME, @TELEFONE, @CEP, @NUMERO, @COMPLEMENTO, @EMAIL, @DATANASC, @GENERO, @CPF, @SENHA)" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM cadastro_cliente">
             <InsertParameters>
                 <asp:Parameter Name="NOME" />
                 <asp:Parameter Name="TELEFONE" />
@@ -273,3 +274,4 @@
     </form>
 </body>
 </html>
+
