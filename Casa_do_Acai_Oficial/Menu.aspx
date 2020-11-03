@@ -20,7 +20,7 @@
 <body>
     <div class="header">
         <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="./index.html" style="margin-left: 17%;" id="a">CasaDoAç@í</a>
+            <a class="navbar-brand" href="Menu.aspx" style="margin-left: 17%;" id="a">CasaDoAç@í</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -38,7 +38,7 @@
                         <a class="nav-link" id="btn3" href="Contato.aspx" onclick="mudarCor('btn3')">CONTATO</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="btn4" href="Cardapio.aspx" onclick="mudarCor('btn4')">CADÁPIO</a>
+                        <a class="nav-link" id="btn4" href="Cardapio_NaoLogado.aspx" onclick="mudarCor('btn4')">CADÁPIO</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="btn5" href="Login.aspx" onclick="mudarCor('btn5')">LOGIN</a>
@@ -83,6 +83,46 @@
         </div>
         <div class="direita col-6">
             <!-- <p>Teste para ver</p> -->
+        </div>
+    </div>
+
+    <div class="principal" style="margin-top: 5px;">
+        <div class="row container-fluid ">
+            <div class="col-12 col-md-3 text-center">
+                <p class="tituloFooter">ENDEREÇO</p>
+                <p class="textoFooter">Rua H30B, 108 </p>
+                <p class="textoFooter">Campus do CTA</p>
+                <p class="textoFooter"> São José dos Campos</p>
+            </div>
+            <div class="col-12 col-md-3 text-center">
+                <p class="tituloFooter">CONTATO</p>
+
+                <p class="textoFooter">joao03araujo@gmail.com</p>
+                <p class="textoFooter"> Tel : (12) 99709-2686</p>
+
+            </div>
+
+            <div class="col-12 col-md-3 text-center">
+                <p class="tituloFooter">HORÁRIOS</p>
+
+                <p class="textoFooter">ABERTO DE SEG À SEX </p>
+                <p class="textoFooter">09:00 - 22:00</p><br>
+
+                <p class="textoFooter">SÁB/DOM e FERIADOS </p>
+                <p class="textoFooter" style="margin-bottom: 4px;"> 13:00 - 21:00</p>
+
+            </div>
+
+            <div class="col-12 col-md-3 text-center">
+                <p>Logo</p>
+                <a><i class="fa fa-facebook fa-lg icon" aria-hidden="true"></i></a>
+                <a><i class="fa fa-instagram fa-lg icon" aria-hidden="true"></i></a>
+
+            </div>
+        </div>
+        <div class="divCopy">
+            <p class="textoCopy text-center"><i class="fa fa-copyright" aria-hidden="true"></i> Todos os direitos
+                reservados a MNT-Gaming 2020</p>
         </div>
     </div>
     <script>

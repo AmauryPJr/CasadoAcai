@@ -1,0 +1,37 @@
+﻿@import"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+
+.prod1 {
+    width: 165px;
+    height: 155px;
+    margin-left: 25px;
+    margin-top: 35px;
+}
+
+.prod2 {
+    width: 165px;
+    height: 155px;
+    margin-left: 25px;
+    margin-top: 35px;
+}
+
+#textosNossoSabor p {
+    font-family: chicken-pie;
+    margin-bottom: 0;
+}
+
+#divSabor {
+    margin-top: 10%;
+}
+
+#btnLogin {
+    background: none;
+    border: 2px solid #FF00FF;
+    color: black;
+    padding: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 12px 0;
+    margin-left: 40%;
+    margin-top: 20px;
+    font-family: chicken pie;
+}

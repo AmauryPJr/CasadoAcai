@@ -1,4 +1,7 @@
-﻿.header {
+﻿@import"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+
+
+.header {
     background-image: linear-gradient(90deg, #9932CC 0%, #FF00FF 90%);
 }
 
@@ -10,61 +13,138 @@ nav {
     height: 70px;
 }
 
-    nav a {
-        color: white;
-        font-family: chicken-pie;
-    }
+nav a {
+    color: white;
+    font-family: chicken-pie;
+}
 
-        nav a:hover {
-            color: white;
-        }
+nav a:hover {
+    color: white;
+}
 
-    nav ul li a {
-        color: aliceblue;
-        font-family: chicken-pie;
-    }
+nav ul li a {
+    color: aliceblue;
+    font-family: chicken-pie;
+}
 
-        nav ul li a:hover {
-            color: black;
-            transition: .9s;
-        }
+nav ul li a:hover {
+    color: black;
+    transition: .9s;
+}
 
-        nav ul li a:after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            transform: translateX(-50%) scaleX(0);
-            -webkit-transform: translateX(-50%) scaleX(0);
-            -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-            width: 100%;
-            height: 2px;
-            background-color: rgba(255, 255, 255, 0.9);
-            -webkit-transition: transform 250ms;
-            transition: transform 250ms;
-        }
+nav ul li a:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%) scaleX(0);
+    -webkit-transform: translateX(-50%) scaleX(0);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.9);
+    -webkit-transition: transform 250ms;
+    transition: transform 250ms;
+}
 
-        nav ul li a:hover:after {
-            -webkit-transform: translateX(-50%) scaleX(1);
-            transform: translateX(-50%) scaleX(1);
-        }
+nav ul li a:hover:after {
+    -webkit-transform: translateX(-50%) scaleX(1);
+    transform: translateX(-50%) scaleX(1);
+}
 
 .mudar_cor {
     color: black !important;
 }
 
-#slides {
-    width: 100%;
-    height: 50px;
+#banner1 {
+    height: 450px;
 }
 
-.esquerda {
+#esquerda {
     float: left;
-    width: 50%;
 }
 
-.direita {
+#direita {
     float: right;
     width: 50%;
+    margin-top: 5%;
+}
+
+#esquerda2 {
+    float: left;
+}
+
+#direita2 {
+    float: right;
+    width: 50%;
+}
+
+
+.textoFooter {
+    margin-bottom: 0;
+    color: white;
+    font-family: chicken-pie;
+}
+
+.textoCopy {
+    margin-top: 15px;
+    color: white;
+    font-family: chicken-pie;
+}
+
+.tituloFooter {
+    margin-top: 15px;
+    color: white;
+    font-family: chicken-pie;
+}
+
+.principal {
+    background-image: linear-gradient(90deg, #FF00FF 0%, #9932CC 90%);
+    margin-bottom: 0;
+    height: 235px;
+}
+
+.divCopy {
+    border-top: 0.7px solid white;
+}
+
+.icon {
+    color: white;
+}
+
+#btnCardapio {
+    background: none;
+    border: 2px solid #FF00FF;
+    color: black;
+    padding: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 12px 0;
+    margin-left: 42%;
+    font-family: chicken pie;
+}
+
+#btnCardapio2 {
+    background: none;
+    border: 2px solid #FF00FF;
+    color: black;
+    padding: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 12px 0;
+    margin-left: 42%;
+    font-family: chicken pie;
+}
+
+#btnQuemSomos {
+    background: none;
+    border: 2px solid #FF00FF;
+    color: black;
+    padding: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 12px 0;
+    margin-left: 42%;
+    font-family: chicken pie;
 }

@@ -24,7 +24,7 @@ public partial class CadastroLogin : System.Web.UI.Page
         }
     }
 
-    protected void btnVerificarCEP_Click(object sender, EventArgs e)
+    protected void btnValidarCEP_Click(object sender, EventArgs e)
     {
         var dados = sc.consultaCEP(txtCEP.Text);
 
@@ -39,7 +39,7 @@ public partial class CadastroLogin : System.Web.UI.Page
         }
     }
 
-    protected void btnVerificarCPF_Click(object sender, EventArgs e)
+    protected void btnValidarCPF_Click(object sender, EventArgs e)
     {
         if (Validacao.ValidarCPF(txtCPF.Text) == true)
         {
@@ -52,7 +52,51 @@ public partial class CadastroLogin : System.Web.UI.Page
         }
     }
 
-    protected void btnVerificarSenha_Click(object sender, EventArgs e)
+    protected void btnFinalizar_Click(object sender, EventArgs e)
+    {
+        DSCadastroCliente.InsertParameters["NOME"].DefaultValue = cripto.Encrypt(txtNome.Text);
+        DSCadastroCliente.InsertParameters["TELEFONE"].DefaultValue = cripto.Encrypt(txtTelefone.Text);
+        DSCadastroCliente.InsertParameters["CEP"].DefaultValue = cripto.Encrypt(txtCEP.Text);
+        DSCadastroCliente.InsertParameters["NUMERO"].DefaultValue = cripto.Encrypt(txtNumero.Text);
+
+        if (txtComplemento.Text != "")
+        {
+            DSCadastroCliente.InsertParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt(txtComplemento.Text);
+        }
+        else
+        {
+            DSCadastroCliente.InsertParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt("Sem Complemento");
+        }
+
+        string genero = "";
+
+        if (ddlGenero.SelectedIndex == 0)
+        {
+            genero = "F";
+        }
+
+        if (ddlGenero.SelectedIndex == 1)
+        {
+            genero = "M";
+        }
+
+        if (ddlGenero.SelectedIndex == 2)
+        {
+            genero = "PND";
+        }
+
+        DSCadastroCliente.InsertParameters["GENERO"].DefaultValue = cripto.Encrypt(genero);
+        DSCadastroCliente.InsertParameters["DATANASC"].DefaultValue = cripto.Encrypt(txtDataNasc.Text);
+        DSCadastroCliente.InsertParameters["EMAIL"].DefaultValue = cripto.Encrypt(txtEmail.Text);
+        DSCadastroCliente.InsertParameters["CPF"].DefaultValue = cripto.Encrypt(txtCPF.Text);
+        DSCadastroCliente.InsertParameters["SENHA"].DefaultValue = cripto.Encrypt(txtSenha.Text);
+
+        DSCadastroCliente.Insert();
+
+        LimparCampos();
+    }
+
+    protected void btnValidarSenha_Click(object sender, EventArgs e)
     {
         int qtd_Letras = 0;
         int cont = 0;
@@ -257,50 +301,6 @@ public partial class CadastroLogin : System.Web.UI.Page
         {
             SenhaFraca();
         }
-    }
-
-    protected void btnFinalizar_Click(object sender, EventArgs e)
-    {
-        DSCadastroCliente.InsertParameters["NOME"].DefaultValue = cripto.Encrypt(txtNome.Text);
-        DSCadastroCliente.InsertParameters["TELEFONE"].DefaultValue = cripto.Encrypt(txtTelefone.Text);
-        DSCadastroCliente.InsertParameters["CEP"].DefaultValue = cripto.Encrypt(txtCEP.Text);
-        DSCadastroCliente.InsertParameters["NUMERO"].DefaultValue = cripto.Encrypt(txtNumero.Text);
-
-        if (txtComplemento.Text != "")
-        {
-            DSCadastroCliente.InsertParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt(txtComplemento.Text);
-        }
-        else
-        {
-            DSCadastroCliente.InsertParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt("Sem Complemento");
-        }
-
-        string genero = "";
-
-        if (ddlGenero.SelectedIndex == 0)
-        {
-            genero = "F";
-        }
-
-        if (ddlGenero.SelectedIndex == 1)
-        {
-            genero = "M";
-        }
-
-        if (ddlGenero.SelectedIndex == 2)
-        {
-            genero = "PND";
-        }
-
-        DSCadastroCliente.InsertParameters["GENERO"].DefaultValue = cripto.Encrypt(genero);
-        DSCadastroCliente.InsertParameters["DATANASC"].DefaultValue = cripto.Encrypt(txtDataNasc.Text);
-        DSCadastroCliente.InsertParameters["EMAIL"].DefaultValue = cripto.Encrypt(txtEmail.Text);
-        DSCadastroCliente.InsertParameters["CPF"].DefaultValue = cripto.Encrypt(txtCPF.Text);
-        DSCadastroCliente.InsertParameters["SENHA"].DefaultValue = cripto.Encrypt(txtSenha.Text);
-
-        DSCadastroCliente.Insert();
-
-        LimparCampos();
     }
 
     public void SenhaForte()

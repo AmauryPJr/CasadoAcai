@@ -115,7 +115,7 @@
 
             <div class="header">
                 <nav class="navbar navbar-expand-lg">
-                    <a class="navbar-brand" href="./index.html" style="margin-left: 17%;" id="a">CasaDoAç@í</a>
+                    <a class="navbar-brand" href="Menu.aspx" style="margin-left: 17%;" id="a">CasaDoAç@í</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -133,7 +133,7 @@
                                 <a class="nav-link" id="btn3" href="Contato.aspx" onclick="mudarCor('btn3')">CONTATO</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="btn4" href="Produtos.aspx" onclick="mudarCor('btn4')">CADÁPIO</a>
+                                <a class="nav-link" id="btn4" href="Cardapio_NaoLogado.aspx" onclick="mudarCor('btn4')">CARDÁPIO</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="btn5" href="Login.aspx" onclick="mudarCor('btn5')">LOGIN</a>
@@ -145,7 +145,7 @@
 
             <div class="container-fluid">
                 <div class="row justify-content-center">
-                    <div class="auto-style1">
+                    <div class="col-12 col-md-6">
                         <div class="card">
                             <div class="card-body login-box">
                                 <h1>Cadastre-se</h1>
@@ -153,94 +153,88 @@
                                     <div class="col-12 col-md-6">
                                         <div class="textBox">
                                             <i class="fa fa-user-circle" aria-hidden="true"></i>
-                                            <asp:TextBox runat="server"
-                                                class="txt" type="text" ID="txtNome" placeholder="Nome completo" />
+                                            <asp:TextBox runat="server" CssClass="input" ID="txtNome"
+                                                placeholder="Nome completo" BorderStyle="None" />
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="textBox">
-                                            <i class="fa fa-user-circle" aria-hidden="true"></i>
-                                            <asp:TextBox runat="server"
-                                                class="txt" type="text" ID="txtCPF" placeholder="CPF" />
+                                            <i class="fa fa-address-card" aria-hidden="true"></i>
+                                            <asp:TextBox runat="server" CssClass="input" ID="txtCPF"
+                                                placeholder="CPF" BorderStyle="None" />
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="textBox">
                                             <i class="fa fa-envelope" aria-hidden="true"></i>
-                                            <asp:TextBox runat="server"
-                                                class="txt" type="email" ID="txtEmail" placeholder="E-mail" />
+                                            <asp:TextBox runat="server" CssClass="input" ID="txtEmail"
+                                                placeholder="E-mail" BorderStyle="None" />
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="textBox">
                                             <i class="fa fa-lock" aria-hidden="true"></i>
-                                            <asp:TextBox runat="server"
-                                                class="txt" type="password" ID="txtSenha" placeholder="Senha" />
+                                            <asp:TextBox runat="server" CssClass="input" ID="txtSenha"
+                                                placeholder="Senha" BorderStyle="None" />
                                         </div>
                                     </div>
-                                    <input class="btn" id="btnProximo" type="button" name="" value="Próximo"
+                                    <asp:Button runat="server" CssClass="btn" ID="btnValidarCPF" type="button" Text="Validar CPF" OnClick="btnValidarCPF_Click" />
+                                    <asp:Button ID="btnValidarSenha" runat="server" CssClass="btn" Text="Validar Senha" OnClick="btnValidarSenha_Click" />
+                                    <input class="btn" id="btnProximo" type="button" name="" value="próximo"
                                         onclick="handleContinue()">
                                 </div>
                                 <div class="step-2 row" hidden>
                                     <div class="col-12 col-md-6">
                                         <div class="textBox">
                                             <i class="fa fa-address-book" aria-hidden="true"></i>
-                                            <asp:TextBox runat="server"
-                                                class="txt" type="text" ID="txtCEP" placeholder="CEP" onKeyPress="MascaraCEP(this)" />
+                                            <asp:TextBox runat="server" CssClass="input" ID="txtCEP"
+                                                placeholder="CEP" onkeypress="MascaraCEP(this)" BorderStyle="None" />
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="textBox">
                                             <i class="fa fa-phone" aria-hidden="true"></i>
-                                            <asp:TextBox runat="server"
-                                                class="txt" type="text" ID="txtTelefone" placeholder="Telefone" onKeyPress="MascaraTelefone(this)" />
+                                            <asp:TextBox runat="server" CssClass="input" ID="txtTelefone"
+                                                placeholder="Telefone" onkeypress="MascaraTelefone(this)" BorderStyle="None" />
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="textBox">
                                             <i class="fa fa-address-book" aria-hidden="true"></i>
-                                            <asp:TextBox runat="server"
-                                                class="txt" type="text" ID="txtComplemento" placeholder="Complemento" />
+                                            <asp:TextBox runat="server" CssClass="input" ID="txtComplemento" placeholder="Complemento" BorderStyle="None" />
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="textBox">
                                             <i class="fa fa-address-book" aria-hidden="true"></i>
-                                            <asp:TextBox runat="server"
-                                                class="txt" type="number" ID="txtNumero" placeholder="Numero" />
+                                            <asp:TextBox runat="server" CssClass="input" ID="txtNumero" placeholder="Número" BorderStyle="None" />
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <input class="btn" id="btnProximo" type="button" name="" value="Próximo"
-                                            onclick="handleAvanced()">
-                                        <input class="btn" id="btnVoltar1" type="button" name="" value="Voltar"
+                                        <input class="btn" id="btnVoltar" type="button" name="" value="voltar"
                                             onclick="handleBack()">
+                                        <asp:Button runat="server" CssClass="btn" ID="btnValidarCEP" type="button" Text="Validar CEP" OnClick="btnValidarCEP_Click" />
+                                        <input class="btn" id="btnProximo" type="button" name="" value="próximo"
+                                            onclick="handleAvanced()">
                                     </div>
                                 </div>
                                 <div class="step-3 row" hidden>
                                     <div class="col-12 col-md-6">
                                         <div class="textBox">
-                                            <asp:TextBox runat="server" type="text" ID="txtDataNasc" placeholder="Data de Nascimento"
-                                                class="txt" onKeyPress="MascaraData(this)" />
-                                        </div>
-                                        <div id="dvCaptcha">
+                                            <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                                            <asp:TextBox runat="server" CssClass="input" ID="txtDataNasc" placeholder="Data de Nascimento" onkeypress="MascaraData(this)" BorderStyle="None" />
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="textBox">
                                             <i class="fa fa-user" aria-hidden="true"></i>
-                                            <asp:DropDownList ID="ddlGenero" runat="server" placeholder="Gênero" AppendDataBoundItems="True" Width="150px" CssClass="auto-style3">
-                                                <asp:ListItem Value="F">Femenino</asp:ListItem>
-                                                <asp:ListItem Value="M">Masculino</asp:ListItem>
-                                                <asp:ListItem Value="PND">Prefiro Não Dizer</asp:ListItem>
-                                            </asp:DropDownList>
+                                            <asp:DropDownList runat="server" CssClass="textBox" ID="ddlGenero" placeholder="Gênero" />
                                         </div>
-                                        
                                     </div>
                                     <div class="row">
-                                        <asp:Button runat="server" class="btn" id="btnFinalizar" type="button" name="" Text="Finalizar" OnClick="btnFinalizar_Click"/>
-                                        <input class="btn" id="btnVoltar2" type="button" name="" value="Voltar"
+                                        <input class="btn" id="btnVoltar" type="button" name="" value="voltar"
                                             onclick="handleGoBack()">
+                                        <asp:Button runat="server" CssClass="btn" ID="btnFinalizar" type="button" name="" value="Finalizar" />
                                     </div>
                                 </div>
                             </div>
@@ -249,7 +243,6 @@
                 </div>
             </div>
 
-            <asp:Button ID="btnVerificarSenha" runat="server" Text="Verificar Senha" Width="144px" OnClick="btnVerificarSenha_Click" CssClass="auto-style3" />
             <br />
             <br />
         </div>

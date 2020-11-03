@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Cardapio.aspx.cs" Inherits="Carrinho" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Cardapio_Logado.aspx.cs" Inherits="Cardapio_Logado" %>
 
 <!DOCTYPE html>
 
@@ -124,11 +124,11 @@
             <asp:Button ID="btnContinuar" runat="server" Text="Continuar" Width="130px" OnClick="btnContinuar_Click" BackColor="#990099" Font-Names="CHICKEN Pie" Font-Size="16px" ForeColor="White" />
             <asp:Button ID="btnAdicionar" runat="server" Text="Adicionar" Width="130px" OnClick="btnAdicionar_Click" BackColor="#990099" Font-Names="CHICKEN Pie" Font-Size="16px" ForeColor="White" Visible="False" />
             <br />
-            <asp:Label ID="lblIds" runat="server" Text="Label"></asp:Label>
+            <asp:Label ID="lblIds" runat="server"></asp:Label>
             <br />
-            <asp:Label ID="lblAdd" runat="server" Text="Label"></asp:Label>
+            <asp:Label ID="lblAdd" runat="server"></asp:Label>
             <br />
-            <asp:Label ID="lblQtdIds" runat="server" Text="Label"></asp:Label>
+            <asp:Label ID="lblQtdIds" runat="server"></asp:Label>
         </div>
         <br />
         <br />
@@ -145,6 +145,48 @@
             </InsertParameters>
         </asp:SqlDataSource>
 
+        <div class="principal" style="margin-top: 5px;">
+            <div class="row container-fluid ">
+                <div class="col-12 col-md-3 text-center">
+                    <p class="tituloFooter">ENDEREÇO</p>
+                    <p class="textoFooter">Rua H30B, 108 </p>
+                    <p class="textoFooter">Campus do CTA</p>
+                    <p class="textoFooter">São José dos Campos</p>
+                </div>
+                <div class="col-12 col-md-3 text-center">
+                    <p class="tituloFooter">CONTATO</p>
+
+                    <p class="textoFooter">joao03araujo@gmail.com</p>
+                    <p class="textoFooter">Tel : (12) 99709-2686</p>
+
+                </div>
+
+                <div class="col-12 col-md-3 text-center">
+                    <p class="tituloFooter">HORÁRIOS</p>
+
+                    <p class="textoFooter">ABERTO DE SEG À SEX </p>
+                    <p class="textoFooter">09:00 - 22:00</p>
+                    <br>
+
+                    <p class="textoFooter">SÁB/DOM e FERIADOS </p>
+                    <p class="textoFooter" style="margin-bottom: 4px;">13:00 - 21:00</p>
+
+                </div>
+
+                <div class="col-12 col-md-3 text-center">
+                    <p>Logo</p>
+                    <a><i class="fa fa-facebook fa-lg icon" aria-hidden="true"></i></a>
+                    <a><i class="fa fa-instagram fa-lg icon" aria-hidden="true"></i></a>
+
+                </div>
+            </div>
+            <div class="divCopy">
+                <p class="textoCopy text-center">
+                    <i class="fa fa-copyright" aria-hidden="true"></i>Todos os direitos
+                    reservados a MNT-Gaming 2020
+                </p>
+            </div>
+        </div>
     </form>
 </body>
 </html>

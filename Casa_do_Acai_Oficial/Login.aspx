@@ -83,7 +83,7 @@
                             <a class="nav-link" id="btn3" href="Contato.aspx" onclick="mudarCor('btn3')">CONTATO</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn4" href="Cardapio.aspx" onclick="mudarCor('btn4')">CADÁPIO</a>
+                            <a class="nav-link" id="btn4" href="Cardapio_NaoLogado.aspx" onclick="mudarCor('btn4')">CADÁPIO</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="btn5" href="Login.aspx" onclick="mudarCor('btn5')">LOGIN</a>
@@ -110,13 +110,8 @@
                 <div id="dvCaptcha"></div>
                 <asp:Button runat="server" class="btn" ID="btnEntrar" OnClick="btnEntrar_Click" Text="Entrar" />
                 <p>Ainda não tem conta? <a href="CadastroUsuario.aspx">Cadastre-se</a> </p>
-
             </div>
-
         </div>
-
-
-
         <asp:SqlDataSource ID="DSLogin" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT senha_cli, cpf_cli FROM cadastro_cliente WHERE (senha_cli = @SENHA) AND (cpf_cli = @LOGIN)">
             <SelectParameters>
                 <asp:Parameter Name="LOGIN" />

@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 
-public partial class Carrinho : System.Web.UI.Page
+public partial class Cardapio_Logado : System.Web.UI.Page
 {
     Criptografia cripto = new Criptografia("ETEP");
 
@@ -15,12 +15,12 @@ public partial class Carrinho : System.Web.UI.Page
     string[] adicionais = { "Morango", "Chocolate", "Caramelo", "Menta", "Tutti frutti", "Maracujá" };
 
     private bool ImbAcaiClicado = false;
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
-                   
+
     }
-    
+
     protected void imbAcai_Click(object sender, ImageClickEventArgs e)
     {
         CarregarProduto(1);
@@ -77,7 +77,7 @@ public partial class Carrinho : System.Web.UI.Page
 
     protected void btnContinuar_Click(object sender, EventArgs e)
     {
-        btnVoltar.Visible = true;        
+        btnVoltar.Visible = true;
         gvProduto.Visible = false;
         AcaiClicado();
         gvAdicional.Visible = true;
@@ -86,9 +86,7 @@ public partial class Carrinho : System.Web.UI.Page
     protected void btnVoltar_Click(object sender, EventArgs e)
     {
         gvAdicional.Visible = false;
-
         gvProduto.Visible = true;
-
         btnVoltar.Visible = false;
         btnAdicionar.Visible = false;
         btnContinuar.Visible = true;
@@ -111,7 +109,7 @@ public partial class Carrinho : System.Web.UI.Page
             if (rbEscolhaProd.Checked == true)
             {
                 qtdIds++;
-                
+
                 int linhaSelecionada = linha.DataItemIndex;
 
                 Session["idProd"] = Convert.ToString(listaProd.Table.Rows[linhaSelecionada]["id_prod"]);
@@ -143,6 +141,9 @@ public partial class Carrinho : System.Web.UI.Page
                 }
             }
         }
+
+        Response.Write("<script>if ('" + qtdIds + "' == 1) alert('" + qtdIds + " produto foi adicionado ao Carrinho'); " +
+            " else alert('" + qtdIds + " produtos foi adicionado ao Carrinho');</script>");
     }
 
     private void CarregarAdicionais()
@@ -153,7 +154,7 @@ public partial class Carrinho : System.Web.UI.Page
         for (int i = 0; i < adicionais.GetLength(0); i++)
         {
             listaAdd.Rows.Add();
-            listaAdd.Rows[i]["Adicional"] = adicionais[i].ToString();            
+            listaAdd.Rows[i]["Adicional"] = adicionais[i].ToString();
         }
 
         gvAdicional.DataSource = listaAdd;
@@ -172,24 +173,24 @@ public partial class Carrinho : System.Web.UI.Page
 
         listaProd = (DataView)DSProduto.Select(DataSourceSelectArguments.Empty);
 
-        listaDescripto.DefaultView.RowFilter = "id_tipoProd = '" + tipoProd + "'";        
-        
+        listaDescripto.DefaultView.RowFilter = "id_tipoProd = '" + tipoProd + "'";
+
         for (int i = 0; i < listaProd.Table.Rows.Count; i++)
         {
             DataRow linha = listaDescripto.NewRow();
 
-            linha["id_prod"]     = listaProd.Table.Rows[i]["id_prod"].ToString();
-            linha["nome_prod"]   = cripto.Decrypt(listaProd.Table.Rows[i]["nome_prod"].ToString());
+            linha["id_prod"] = listaProd.Table.Rows[i]["id_prod"].ToString();
+            linha["nome_prod"] = cripto.Decrypt(listaProd.Table.Rows[i]["nome_prod"].ToString());
             linha["id_tipoProd"] = listaProd.Table.Rows[i]["id_tipoProd"].ToString();
-            linha["tam_prod"]    = cripto.Decrypt(listaProd.Table.Rows[i]["tam_prod"].ToString());
-            linha["preco_prod"]  = cripto.Decrypt(listaProd.Table.Rows[i]["preco_prod"].ToString()).Replace('.', ',');
+            linha["tam_prod"] = cripto.Decrypt(listaProd.Table.Rows[i]["tam_prod"].ToString());
+            linha["preco_prod"] = cripto.Decrypt(listaProd.Table.Rows[i]["preco_prod"].ToString()).Replace('.', ',');
 
             listaDescripto.Rows.Add(linha);
-        }        
+        }
 
         gvProduto.DataSource = listaDescripto;
         gvProduto.DataBind();
-    }    
+    }
 
     private void AcaiClicado()
     {
