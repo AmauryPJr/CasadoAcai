@@ -21,7 +21,7 @@ public partial class CadastroLogin : System.Web.UI.Page
         if (IsPostBack)
         {
             txtSenha.Attributes["value"] = txtSenha.Text;
-        }
+        }        
     }
 
     protected void btnValidarCEP_Click(object sender, EventArgs e)
@@ -94,6 +94,8 @@ public partial class CadastroLogin : System.Web.UI.Page
         DSCadastroCliente.Insert();
 
         LimparCampos();
+
+        Session["logado"] = "1";        
     }
 
     protected void btnValidarSenha_Click(object sender, EventArgs e)
@@ -336,5 +338,5 @@ public partial class CadastroLogin : System.Web.UI.Page
         ddlGenero.ClearSelection();
         txtCPF.Text = "";
         txtSenha.Text = "";
-    }    
+    }
 }

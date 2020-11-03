@@ -13,7 +13,7 @@ public partial class Login : System.Web.UI.Page
     protected static String ReCaptcha_Key = "6LeVDr4ZAAAAAIlwbRdNXOHyg3S0SgY_HzFOcG2R";
     protected static String ReCaptcha_Secret = "6LeVDr4ZAAAAABRLyjixpCyIytS9GJRDjLxOvhIt";
 
-    Criptografia cripto = new Criptografia("ETEP");    
+    Criptografia cripto = new Criptografia("ETEP");
 
     protected void Page_Load(object sender, EventArgs e)
     {

@@ -19,6 +19,25 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
 
+    <style type="text/css">
+        .btnFinalizar {
+            width: 20%;
+            background: none;
+            border: 2px solid #FF00FF;
+            color: black;
+            padding: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 15px 0;
+            margin-left: 480px;
+            font-family: chicken pie;
+        }   
+        
+        .ddl {
+            margin: 0 10px;
+        }
+    </style>
+
     <script>
         function handleContinue() {
             $('.step-1').attr('hidden', 'hidden')
@@ -44,12 +63,7 @@
             $('.step-3').attr('hidden', 'hidden')
         }
     </script>
-    <style type="text/css">
-        .auto-style1 {
-            left: 0px;
-            top: -155px;
-        }
-    </style>
+    
 </head>
 <body>
     <form id="form1" runat="server">
@@ -228,13 +242,18 @@
                                     <div class="col-12 col-md-6">
                                         <div class="textBox">
                                             <i class="fa fa-user" aria-hidden="true"></i>
-                                            <asp:DropDownList runat="server" CssClass="textBox" ID="ddlGenero" placeholder="Gênero" />
+                                            <asp:DropDownList runat="server" ID="ddlGenero" placeholder="Gênero" CssClass="ddl" Font-Names="CHICKEN Pie">
+                                                <asp:ListItem Value="F">Feminino</asp:ListItem>
+                                                <asp:ListItem Value="M">Masculino</asp:ListItem>
+                                                <asp:ListItem Value="PND">Prefiro Não Dizer</asp:ListItem>
+                                            </asp:DropDownList>
                                         </div>
                                     </div>
+                                    <div id="dvCaptcha" style="margin: 0 13px"></div>
                                     <div class="row">
                                         <input class="btn" id="btnVoltar" type="button" name="" value="voltar"
                                             onclick="handleGoBack()">
-                                        <asp:Button runat="server" CssClass="btn" ID="btnFinalizar" type="button" name="" value="Finalizar" />
+                                        <asp:Button runat="server" CssClass="btnFinalizar" ID="btnFinalizar" type="button" Text="Finalizar" OnClick="btnFinalizar_Click" BorderStyle="Solid"/>
                                     </div>
                                 </div>
                             </div>
