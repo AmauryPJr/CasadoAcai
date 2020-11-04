@@ -18,10 +18,10 @@ public partial class Cardapio_Logado : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["logado"].ToString() != "Ok")
-        {
-            Response.Redirect("Cardapio_NaoLogado.aspx");
-        }
+        //if (Session["logado"].ToString() != "Ok")
+        //{
+        //    Response.Redirect("Cardapio_NaoLogado.aspx");
+        //}
     }
 
     protected void imbAcai_Click(object sender, ImageClickEventArgs e)
@@ -115,18 +115,16 @@ public partial class Cardapio_Logado : System.Web.UI.Page
 
                 int linhaSelecionada = linha.DataItemIndex;
 
-                Session["idProd"] = Convert.ToString(listaProd.Table.Rows[linhaSelecionada]["id_prod"]);
+                Session["nome_prod"] = cripto.Decrypt(listaProd.Table.Rows[linhaSelecionada]["nome_prod"].ToString());
                 Session["qtdIds"] = qtdIds;
 
-                lblIds.Text += Session["idProd"].ToString();
+                lblIds.Text += Session["nome_prod"].ToString() + " ";
 
                 lblQtdIds.Text = qtdIds.ToString();
             }
         }
 
-        if (gvAdicional.Visible == false)
-            return;
-        else
+        if (gvAdicional.Visible == true)
         {
             foreach (GridViewRow linha in gvAdicional.Rows)
             {
@@ -142,11 +140,11 @@ public partial class Cardapio_Logado : System.Web.UI.Page
 
                     lblAdd.Text += Session["Adicional"].ToString() + " ";
                 }
-            }
+            }            
         }
 
         Response.Write("<script>if ('" + qtdIds + "' == 1) alert('" + qtdIds + " produto foi adicionado ao Carrinho'); " +
-            " else alert('" + qtdIds + " produtos foi adicionado ao Carrinho');</script>");
+            " else alert('" + qtdIds + " produtos foram adicionados ao Carrinho');</script>");
     }
 
     private void CarregarAdicionais()

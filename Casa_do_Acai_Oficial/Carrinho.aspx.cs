@@ -43,6 +43,14 @@ public partial class Carrinho : System.Web.UI.Page
         carrinho.Columns.Add("Adicional");
         carrinho.Columns.Add("Total Unitário");
         carrinho.Columns.Add("Total do Produto");
+
+        DataView listaCarrinho;
+        listaCarrinho = (DataView)DSItemVenda.Select(DataSourceSelectArguments.Empty);
+
+        for (int i = 0; i < listaCarrinho.Table.Rows.Count; i++)
+        {
+            DataRow linha = listaDescripto.NewRow();
+        }
     }
 
     private void Quantidade()

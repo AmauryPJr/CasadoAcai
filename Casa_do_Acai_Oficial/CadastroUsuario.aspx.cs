@@ -94,8 +94,6 @@ public partial class CadastroLogin : System.Web.UI.Page
         DSCadastroCliente.Insert();
 
         LimparCampos();
-
-        Session["logado"] = "1";        
     }
 
     protected void btnValidarSenha_Click(object sender, EventArgs e)

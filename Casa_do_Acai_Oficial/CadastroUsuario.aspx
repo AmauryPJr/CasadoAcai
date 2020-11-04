@@ -189,7 +189,7 @@
                                         <div class="textBox">
                                             <i class="fa fa-lock" aria-hidden="true"></i>
                                             <asp:TextBox runat="server" CssClass="input" ID="txtSenha"
-                                                placeholder="Senha" BorderStyle="None" />
+                                                placeholder="Senha" BorderStyle="None" TextMode="Password" />
                                         </div>
                                     </div>
                                     <asp:Button runat="server" CssClass="btn" ID="btnValidarCPF" type="button" Text="Validar CPF" OnClick="btnValidarCPF_Click" />

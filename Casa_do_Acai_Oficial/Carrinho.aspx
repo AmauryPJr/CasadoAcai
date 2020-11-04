@@ -83,7 +83,14 @@
         </asp:GridView>
         <br />
         <asp:SqlDataSource ID="DSVendas" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM vendas"></asp:SqlDataSource>
-        <asp:SqlDataSource ID="DSItemVenda" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM it_venda"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="DSItemVenda" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM it_venda" InsertCommand="INSERT INTO it_venda(id_vda, id_prod, qtd_it, adicional) VALUES (@VDA,@PROD,@QTD,@ADD)">
+            <InsertParameters>
+                <asp:Parameter Name="VDA" />
+                <asp:Parameter Name="PROD" />
+                <asp:Parameter Name="QTD" />
+                <asp:Parameter Name="ADD" />
+            </InsertParameters>
+        </asp:SqlDataSource>
         <div class="principal" style="margin-top: 5px;">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">

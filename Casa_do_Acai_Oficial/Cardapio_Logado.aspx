@@ -131,12 +131,7 @@
             <asp:Label ID="lblQtdIds" runat="server"></asp:Label>
         </div>
         <br />
-        <br />
-        <div id="teste2">
-        </div>
-        <br />
-        <asp:SqlDataSource ID="DSTipoProduto" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM tipo_prod"></asp:SqlDataSource>
-        &nbsp;<asp:SqlDataSource ID="DSProduto" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO produto(id_prod, nome_prod, id_tipoProd, tam_prod) VALUES (@IDPROD, @NOME, @TIPO, @TAMANHO)" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM produto">
+        <asp:SqlDataSource ID="DSProduto" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO produto(id_prod, nome_prod, id_tipoProd, tam_prod) VALUES (@IDPROD, @NOME, @TIPO, @TAMANHO)" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM produto">
             <InsertParameters>
                 <asp:Parameter Name="IDPROD" />
                 <asp:Parameter Name="NOME" />
@@ -145,7 +140,13 @@
             </InsertParameters>
         </asp:SqlDataSource>
 
-        <div class="principal" style="margin-top: 5px;">
+        <asp:SqlDataSource ID="DSTipoProduto" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM tipo_prod"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="DSItemVenda" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM it_venda"></asp:SqlDataSource>
+        <br />
+        <div id="teste2">
+        </div>
+        <br />
+        &nbsp;<div class="principal" style="margin-top: 5px;">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>
