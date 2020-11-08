@@ -31,39 +31,12 @@
             margin: 15px 0;
             margin-left: 480px;
             font-family: chicken pie;
-        }   
-        
+        }
+
         .ddl {
             margin: 0 10px;
         }
     </style>
-
-    <script>
-        function handleContinue() {
-            $('.step-1').attr('hidden', 'hidden')
-            $('.step-2').removeAttr('hidden')
-            $('.step-3').attr('hidden', 'hidden')
-        }
-
-        function handleBack() {
-            $('.step-1').removeAttr('hidden')
-            $('.step-2').attr('hidden', 'hidden')
-            $('.step-3').attr('hidden', 'hidden')
-        }
-
-        function handleAvanced() {
-            $('.step-1').attr('hidden', 'hidden')
-            $('.step-2').attr('hidden', 'hidden')
-            $('.step-3').removeAttr('hidden')
-        }
-
-        function handleGoBack() {
-            $('.step-1').attr('hidden', 'hidden')
-            $('.step-2').removeAttr('hidden')
-            $('.step-3').attr('hidden', 'hidden')
-        }
-    </script>
-    
 </head>
 <body>
     <form id="form1" runat="server">
@@ -124,6 +97,30 @@
 
                     if (fone.value.length == 10)
                         fone.value += '-';
+                }
+
+                function handleContinue() {
+                    $('.step-1').attr('hidden', 'hidden')
+                    $('.step-2').removeAttr('hidden')
+                    $('.step-3').attr('hidden', 'hidden')
+                }
+
+                function handleBack() {
+                    $('.step-1').removeAttr('hidden')
+                    $('.step-2').attr('hidden', 'hidden')
+                    $('.step-3').attr('hidden', 'hidden')
+                }
+
+                function handleAvanced() {
+                    $('.step-1').attr('hidden', 'hidden')
+                    $('.step-2').attr('hidden', 'hidden')
+                    $('.step-3').removeAttr('hidden')
+                }
+
+                function handleGoBack() {
+                    $('.step-1').attr('hidden', 'hidden')
+                    $('.step-2').removeAttr('hidden')
+                    $('.step-3').attr('hidden', 'hidden')
                 }
             </script>
 
@@ -253,7 +250,7 @@
                                     <div class="row">
                                         <input class="btn" id="btnVoltar" type="button" name="" value="voltar"
                                             onclick="handleGoBack()">
-                                        <asp:Button runat="server" CssClass="btnFinalizar" ID="btnFinalizar" type="button" Text="Finalizar" OnClick="btnFinalizar_Click" BorderStyle="Solid"/>
+                                        <asp:Button runat="server" CssClass="btnFinalizar" ID="btnFinalizar" type="button" Text="Finalizar" OnClick="btnFinalizar_Click" BorderStyle="Solid" />
                                     </div>
                                 </div>
                             </div>

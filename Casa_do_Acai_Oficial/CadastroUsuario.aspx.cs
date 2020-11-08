@@ -37,6 +37,12 @@ public partial class CadastroLogin : System.Web.UI.Page
         {
             Response.Write("<script>alert('CEP Incorreto. Coloque um CEP válido !');</script>");            
         }
+
+        string script = "$('.step-1').attr('hidden', 'hidden'); " +
+                    "$('.step-2').removeAttr('hidden'); " +
+                    "$('.step-3').attr('hidden', 'hidden');";
+
+        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "", script, true);
     }
 
     protected void btnValidarCPF_Click(object sender, EventArgs e)
@@ -49,7 +55,7 @@ public partial class CadastroLogin : System.Web.UI.Page
         else
         {
             Response.Write("<script>alert('CPF Inválido. Coloque um CPF válido !');</script>");
-        }
+        }        
     }
 
     protected void btnFinalizar_Click(object sender, EventArgs e)
@@ -110,7 +116,13 @@ public partial class CadastroLogin : System.Web.UI.Page
 
         if (qtd_Letras > 16)
         {
-            Response.Write("<script>alert('O limite máximo é de 16 caracteres');</script>");
+            Response.Write("<script>alert('O limite máximo é de 16 caracteres.');</script>");
+            return;
+        }
+
+        if (qtd_Letras < 8)
+        {
+            Response.Write("<script>alert('A senha deve ter no mínimo 8 caracteres.');</script>");
             return;
         }
 
@@ -305,7 +317,7 @@ public partial class CadastroLogin : System.Web.UI.Page
 
     public void SenhaForte()
     {
-        Response.Write("<script>alert('A sua senha é Forte. Clique em Cadastar para finalizar o Cadastro !');</script>");
+        Response.Write("<script>alert('A sua senha é Forte. Clique em Próximo para prossegir com o Cadastro !');</script>");
 
         btnFinalizar.Enabled = true;
     }
