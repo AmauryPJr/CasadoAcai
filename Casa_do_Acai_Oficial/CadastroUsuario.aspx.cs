@@ -60,6 +60,8 @@ public partial class CadastroLogin : System.Web.UI.Page
 
     protected void btnFinalizar_Click(object sender, EventArgs e)
     {
+        Session["nomeCli"] = txtNome.Text;
+
         DSCadastroCliente.InsertParameters["NOME"].DefaultValue = cripto.Encrypt(txtNome.Text);
         DSCadastroCliente.InsertParameters["TELEFONE"].DefaultValue = cripto.Encrypt(txtTelefone.Text);
         DSCadastroCliente.InsertParameters["CEP"].DefaultValue = cripto.Encrypt(txtCEP.Text);
@@ -100,8 +102,12 @@ public partial class CadastroLogin : System.Web.UI.Page
         DSCadastroCliente.Insert();
 
         LimparCampos();
-    }
 
+        Session["logado"] = "Ok";
+
+        Response.Redirect("Menu_Logado.aspx");
+    }
+    
     protected void btnValidarSenha_Click(object sender, EventArgs e)
     {
         int qtd_Letras = 0;

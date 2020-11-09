@@ -18,10 +18,11 @@ public partial class Cardapio_Logado : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //if (Session["logado"].ToString() != "Ok")
-        //{
-        //    Response.Redirect("Cardapio_NaoLogado.aspx");
-        //}
+        if (Session["logado"].ToString() != "Ok")
+        {
+            Response.Redirect("Cardapio_NaoLogado");
+        }
+        else { return; }
     }
 
     protected void imbAcai_Click(object sender, ImageClickEventArgs e)
