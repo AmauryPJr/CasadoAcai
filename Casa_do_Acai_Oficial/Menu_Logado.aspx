@@ -39,8 +39,7 @@
                             <a class="nav-link" id="btn3" href="Contato.aspx" onclick="mudarCor('btn3')">CONTATO</a>
                         </li>
                         <li class="nav-item">
-                            <a runat="server" class="nav-link" id="btn4" OnClientClick="mudarCor('btn4')" Text="CARDÁPIO"
-                                />
+                            <a class="nav-link" id="btn4" href="Cardapio_NaoLogado.aspx" onclick="mudarCor('btn5')">CARDÁPIO</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="btn5" href="Login.aspx" onclick="mudarCor('btn5')">LOGIN</a>

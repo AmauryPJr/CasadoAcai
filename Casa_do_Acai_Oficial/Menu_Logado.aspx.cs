@@ -9,10 +9,10 @@ public partial class Menu_Logado : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!Session["logado"].Equals("Ok"))
-        {
+        if (Session["logado"] == null)
             Response.Redirect("Menu.aspx");
-        }
-        else { lblBemVindo.Text = "Bem-Vindo, " + Session["nomeCli"].ToString() + " !"; }        
+
+        else
+            lblBemVindo.Text = "Bem-Vindo, " + Session["nomeCli"].ToString() + " !";
     }
 }

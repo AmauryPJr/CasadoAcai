@@ -84,7 +84,7 @@
             <asp:ImageButton ID="ImbCremosinho" runat="server" Height="125px" ImageUrl="~/Imagens/Cremosinho.png" Width="135px" OnClick="ImbCremosinho_Click" />
             <br />
             <br />
-            <asp:GridView ID="gvProduto" runat="server" AutoGenerateColumns="False" DataKeyNames="id_prod" Font-Names="CHICKEN Pie" Font-Size="16pt" AllowPaging="True" PageSize="6">
+            <asp:GridView ID="gvProduto" runat="server" AutoGenerateColumns="False" DataKeyNames="id_prod" Font-Names="CHICKEN Pie" Font-Size="16pt" AllowPaging="True" PageSize="6" OnPageIndexChanging="gvProduto_PageIndexChanging">
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>

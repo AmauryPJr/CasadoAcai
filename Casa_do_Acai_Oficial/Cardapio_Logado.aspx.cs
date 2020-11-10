@@ -18,11 +18,11 @@ public partial class Cardapio_Logado : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["logado"].ToString() != "Ok")
-        {
-            Response.Redirect("Cardapio_NaoLogado");
-        }
-        else { return; }
+        if (Session["logado"] == null)
+            Response.Redirect("Cardapio_NaoLogado.aspx");
+
+        else
+            return;
     }
 
     protected void imbAcai_Click(object sender, ImageClickEventArgs e)
@@ -192,6 +192,8 @@ public partial class Cardapio_Logado : System.Web.UI.Page
 
         gvProduto.DataSource = listaDescripto;
         gvProduto.DataBind();
+
+        Session["tipoProd"] = tipoProd;
     }
 
     private void AcaiClicado()
@@ -224,5 +226,11 @@ public partial class Cardapio_Logado : System.Web.UI.Page
 
             AcaiClicado();
         }
+    }
+
+    protected void gvProduto_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvProduto.PageIndex = e.NewPageIndex;
+        CarregarProduto((int)Session["tipoProd"]);
     }
 }

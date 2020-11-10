@@ -9,11 +9,14 @@ public partial class Cardapio_NaoLogado : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["logado"].Equals("Ok"))
-        {
+        if (Session["logado"] == null)
+            return;
+
+        else if (Session["logado"].Equals("Ok"))
             Response.Redirect("Cardapio_Logado.aspx");
-        }
-        else { return; }        
+
+        else
+            return;
     }
 
     protected void btnLogin_Click(object sender, EventArgs e)

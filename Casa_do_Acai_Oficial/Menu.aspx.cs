@@ -9,11 +9,14 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["logado"].ToString() == "")
-        {
+        if (Session["logado"] == null)
+            return;
+
+        else if (Session["logado"].Equals("Ok"))
             Response.Redirect("Menu_Logado.aspx");
-        }
-        else { return; }
+
+        else
+            return;
     }
 
     protected void btnTelaCadastro_Click(object sender, EventArgs e)
