@@ -148,6 +148,12 @@ public partial class Cardapio_Logado : System.Web.UI.Page
             " else alert('" + qtdIds + " produtos foram adicionados ao Carrinho');</script>");
     }
 
+    protected void gvProduto_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvProduto.PageIndex = e.NewPageIndex;
+        CarregarProduto((int)Session["tipoProd"]);
+    }
+
     private void CarregarAdicionais()
     {
         DataTable listaAdd = new DataTable();
@@ -196,6 +202,20 @@ public partial class Cardapio_Logado : System.Web.UI.Page
         Session["tipoProd"] = tipoProd;
     }
 
+    private void EscolherOutroProd()
+    {
+        if (gvAdicional.Visible == true)
+        {
+            gvAdicional.Visible = false;
+
+            ImbAcaiClicado = false;
+
+            btnVoltar.Visible = false;
+
+            AcaiClicado();
+        }
+    }
+
     private void AcaiClicado()
     {
         if (ImbAcaiClicado == true)
@@ -214,23 +234,5 @@ public partial class Cardapio_Logado : System.Web.UI.Page
         }
     }
 
-    private void EscolherOutroProd()
-    {
-        if (gvAdicional.Visible == true)
-        {
-            gvAdicional.Visible = false;
-
-            ImbAcaiClicado = false;
-
-            btnVoltar.Visible = false;
-
-            AcaiClicado();
-        }
-    }
-
-    protected void gvProduto_PageIndexChanging(object sender, GridViewPageEventArgs e)
-    {
-        gvProduto.PageIndex = e.NewPageIndex;
-        CarregarProduto((int)Session["tipoProd"]);
-    }
+    
 }
