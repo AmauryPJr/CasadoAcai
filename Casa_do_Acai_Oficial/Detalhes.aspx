@@ -1,11 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Cardapio_Logado.aspx.cs" Inherits="Cardapio_Logado" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Detalhes.aspx.cs" Inherits="Detalhes" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="Style/Style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><link rel="stylesheet" href="Style/Style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <title>CasaDoAç@í</title>
@@ -16,30 +15,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
-
-    <style type="text/css">
-        p {
-            font-family: 'CHICKEN Pie';
-        }
-
-        #body {
-            text-align: center;
-        }
-
-        #gvProduto {
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        #gvAdicional {
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .auto-style1 {
-            font-size: x-large;
-        }
-    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -72,29 +47,30 @@
                 </div>
             </nav>
         </div>
-        <div id="body">
-            <p class="auto-style1">Escolha um ou mais produtos !</p>
-            <asp:ImageButton ID="imbAcai" runat="server" Height="125px" ImageUrl="~/Imagens/Acai.png" Width="135px" OnClick="imbAcai_Click" />
-            <asp:ImageButton ID="imbSacole" runat="server" Height="125px" ImageUrl="~/Imagens/Sacole.png" Width="135px" OnClick="imbSacole_Click" />
-            <asp:ImageButton ID="imbGeladinho" runat="server" Height="125px" ImageUrl="~/Imagens/Geladinho.png" Width="135px" OnClick="imbGeladinho_Click" />
+        
+        <div>
+            <h1>Detalhes do Produto</h1>
+
+            <asp:Image ID="imgProd" runat="server" Height="125px" Width="135px" />
             <br />
             <br />
-            <asp:ImageButton ID="ImbSorvete" runat="server" Height="125px" ImageUrl="~/Imagens/Sorvete.png" Width="135px" OnClick="ImbSorvete_Click" />
-            <asp:ImageButton ID="imbPicole" runat="server" Height="125px" ImageUrl="~/Imagens/Picole.png" Width="135px" OnClick="imbPicole_Click" />
-            <asp:ImageButton ID="ImbCremosinho" runat="server" Height="125px" ImageUrl="~/Imagens/Cremosinho.png" Width="135px" OnClick="ImbCremosinho_Click" />
+
+            Nome: <asp:Label runat="server" ID="txtNome"/>
+            <br />
+            Preço:
+            <asp:Label runat="server" ID="txtPreco"/>
+            <br />
+            Tamanho:
+            <asp:Label ID="txtTamanho" runat="server"></asp:Label>
+            <br />
+            Tipo:
+            <asp:Label ID="txtTipo" runat="server"></asp:Label>
+            <br />
+            <asp:Label runat="server" ID="lblQtd" Text ="Quantidade Desejada: "/>
+            <asp:TextBox runat="server" ID="txtQtd" Width="115px"/>
             <br />
             <br />
-            <asp:GridView ID="gvProduto" runat="server" AutoGenerateColumns="False" DataKeyNames="id_prod" Font-Names="CHICKEN Pie" Font-Size="16pt" AllowPaging="True" PageSize="6" OnPageIndexChanging="gvProduto_PageIndexChanging" OnSelectedIndexChanged="gvProduto_SelectedIndexChanged">
-                <Columns>
-                    <asp:CommandField HeaderText="Detalhes" SelectText="Clique Aqui" ShowSelectButton="True" />
-                    <asp:BoundField DataField="id_prod" HeaderText="Código" SortExpression="id_prod" Visible="false"/>
-                    <asp:BoundField DataField="nome_prod" HeaderText="Nome" SortExpression="nome_prod" />
-                    <asp:BoundField DataField="preco_prod" DataFormatString="{0:c}" HeaderText="Preço" SortExpression="preco_prod" />
-                </Columns>
-                <FooterStyle BackColor="White" ForeColor="White" />
-                <HeaderStyle BackColor="#990099" Font-Bold="False" ForeColor="White" />
-            </asp:GridView>
-            <asp:GridView ID="gvAdicional" runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" Font-Size="16pt" ForeColor="Black" GridLines="Vertical">
+            <asp:GridView ID="gvAdicional" runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" Font-Size="16pt" ForeColor="Black" GridLines="Vertical" Enabled="False">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
                     <asp:TemplateField>
@@ -117,33 +93,17 @@
             </asp:GridView>
             <br />
             <br />
-            <asp:Button ID="btnVoltar" runat="server" Text="Voltar" Width="130px" OnClick="btnVoltar_Click" BackColor="#990099" Font-Names="CHICKEN Pie" Font-Size="16px" ForeColor="White" Visible="False" />
-            <asp:Button ID="btnContinuar" runat="server" Text="Continuar" Width="130px" OnClick="btnContinuar_Click" BackColor="#990099" Font-Names="CHICKEN Pie" Font-Size="16px" ForeColor="White" />
-            <asp:Button ID="btnAdicionar" runat="server" Text="Adicionar" Width="130px" OnClick="btnAdicionar_Click" BackColor="#990099" Font-Names="CHICKEN Pie" Font-Size="16px" ForeColor="White" Visible="False" />
+            <asp:Button runat="server" ID="btnAdicionar" Text="Adicionar" OnClick="btnAdicionar_Click"/>
             <br />
-            <asp:Label ID="lblIds" runat="server"></asp:Label>
             <br />
-            <asp:Label ID="lblAdd" runat="server"></asp:Label>
-            <br />
-            <asp:Label ID="lblQtdIds" runat="server"></asp:Label>
+            <asp:SqlDataSource ID="DSDetalhes" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT produto.id_prod, produto.nome_prod, produto.tam_prod, produto.preco_prod, tipo_prod.nome_tipo FROM produto INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd WHERE (produto.id_prod = @IDPROD)">
+                <SelectParameters>
+                    <asp:SessionParameter Name="IDPROD" SessionField="idProd" />
+                </SelectParameters>
+            </asp:SqlDataSource>
         </div>
-        <br />
-        <asp:SqlDataSource ID="DSProduto" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO produto(id_prod, nome_prod, id_tipoProd, tam_prod) VALUES (@IDPROD, @NOME, @TIPO, @TAMANHO)" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM produto">
-            <InsertParameters>
-                <asp:Parameter Name="IDPROD" />
-                <asp:Parameter Name="NOME" />
-                <asp:Parameter Name="TIPO" />
-                <asp:Parameter Name="TAMANHO" />
-            </InsertParameters>
-        </asp:SqlDataSource>
 
-        <asp:SqlDataSource ID="DSTipoProduto" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM tipo_prod"></asp:SqlDataSource>
-        <asp:SqlDataSource ID="DSItemVenda" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM it_venda"></asp:SqlDataSource>
-        <br />
-        <div id="teste2">
-        </div>
-        <br />
-        &nbsp;<div class="principal" style="margin-top: 5px;">
+        <div class="principal" style="margin-top: 5px;">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>

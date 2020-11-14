@@ -38,8 +38,10 @@ public partial class Login : System.Web.UI.Page
 
         if (listaLogin.Table.Rows.Count > 0)
         {
-            Session["Logado"] = "Ok";
-            Session["nomeCli"] = cripto.Decrypt(listaLogin.Table.Rows[0]["nome_cli"].ToString());
+            Session["Logado"]     = "Ok";
+            Session["idCli"]      = listaLogin.Table.Rows[0]["id_cli"].ToString();
+            Session["nomeCli"]    = cripto.Decrypt(listaLogin.Table.Rows[0]["nome_cli"].ToString());
+            Session["novaCompra"] = "Sim";
             Response.Redirect("Menu_Logado.aspx");
         }
         else

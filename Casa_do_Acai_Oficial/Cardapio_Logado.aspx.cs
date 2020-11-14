@@ -154,6 +154,30 @@ public partial class Cardapio_Logado : System.Web.UI.Page
         CarregarProduto((int)Session["tipoProd"]);
     }
 
+    protected void gvProduto_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        int id;
+        string dataKey;
+
+        foreach (GridViewRow linha in gvProduto.Rows)
+        {
+            if (linha.RowState == (DataControlRowState.Alternate|DataControlRowState.Selected))
+                linha.RowState = DataControlRowState.Selected;
+
+            if (linha.RowState == DataControlRowState.Selected)
+            {
+                dataKey = gvProduto.DataKeys[linha.RowIndex].Values["id_prod"].ToString();
+                id = Convert.ToInt32(dataKey);
+
+                Session["idProd"] = id;
+                linha.RowState = DataControlRowState.Normal;
+                break;
+            }
+        }        
+
+        Response.Redirect("Detalhes.aspx");
+    }
+
     private void CarregarAdicionais()
     {
         DataTable listaAdd = new DataTable();
@@ -233,6 +257,4 @@ public partial class Cardapio_Logado : System.Web.UI.Page
             btnAdicionar.Visible = true;
         }
     }
-
-    
 }
