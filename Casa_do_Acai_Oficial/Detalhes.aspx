@@ -4,7 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><link rel="stylesheet" href="Style/Style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="Style/Style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <title>CasaDoAç@í</title>
@@ -15,12 +16,64 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
+
+    <style>
+        h1 {
+            text-align: center;
+            font-family: 'CHICKEN Pie';
+        }
+
+        .divs {
+            display: inline-block;
+            margin-left: 50px;
+            font-family: 'CHICKEN Pie';
+            width: 385px;
+        }
+
+        #grid {
+            margin-bottom: 100px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        #btnVoltar {
+            background: none;
+            border: 2px solid #FF00FF;
+            color: black;
+            padding: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 12px 0;
+            margin-left: 3em;
+            font-family: chicken pie;
+            width: 125px;
+        }
+
+        #btnAdicionar {
+            background: none;
+            border: 2px solid #FF00FF;
+            color: black;
+            padding: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 12px 0;
+            margin-left: 3em;
+            font-family: chicken pie;
+            width: 125px;
+        }
+
+        #imgProd {
+            margin-left: 50px;
+        }        
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="header">
             <nav class="navbar navbar-expand-lg">
-                <a class="navbar-brand" href="Menu.aspx" style="margin-left: 17%;" id="a">CasaDoAç@í</a>
+                    <a class="navbar-brand" href="Menu.aspx" style="margin-left: 17%;" id="a">CasaDoAç@í</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,68 +91,109 @@
                             <a class="nav-link" id="btn3" href="Contato.aspx" onclick="mudarCor('btn3')">CONTATO</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn4" href="Cardapio_NaoLogado.aspx" onclick="mudarCor('btn4')">CADÁPIO</a>
+                            <a class="nav-link" id="btn4" href="Cardapio_NaoLogado.aspx" onclick="mudarCor('btn4')">CARDÁPIO</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn5" href="Login.aspx" onclick="mudarCor('btn5')">LOGIN</a>
+                            <asp:Literal runat="server" ID="lCarrinho" />
+                        </li>
+                        <li class="nav-item">
+                            <asp:Literal runat="server" ID="lSair" />
                         </li>
                     </ul>
                 </div>
             </nav>
         </div>
-        
+
         <div>
             <h1>Detalhes do Produto</h1>
 
-            <asp:Image ID="imgProd" runat="server" Height="125px" Width="135px" />
+            <div id="dvImagem">
+                <asp:Image ID="imgProd" runat="server" Height="125px" Width="135px" />
+            </div>
             <br />
             <br />
 
-            Nome: <asp:Label runat="server" ID="txtNome"/>
+            <div id="dvDetalhes" class="divs">
+                <div id="conteudo">
+                    <p>
+                        Nome:
+                <asp:Label runat="server" ID="txtNome" />
+                    </p>
+                    <br />
+                    <p>
+                        Preço: R$
+                <asp:Label runat="server" ID="txtPreco" />
+                    </p>
+                    <br />
+                    <p>
+                        <asp:Label ID="lblTamnho" runat="server" Text="Tamanho:"></asp:Label>
+                        &nbsp;<asp:Label ID="txtTamanho" runat="server"></asp:Label>
+                    </p>
+                    <br />
+                    <p>
+                        Tipo:
+                <asp:Label ID="txtTipo" runat="server"></asp:Label>
+                    </p>
+
+                    <br />
+                    <p>
+                        Quantidade Desejada:
+                <asp:TextBox runat="server" ID="txtQtdDesejada" Width="115px" />
+                    </p>
+                </div>
+                <br />
+            </div>
+            <div id="grid" class="divs">
+                        <asp:GridView ID="gvAdicional" runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" Font-Size="16pt" ForeColor="Black" GridLines="Vertical">
+                            <AlternatingRowStyle BackColor="#CCCCCC" />
+                            <Columns>
+                                <asp:TemplateField>
+                                    <EditItemTemplate>
+                                        <asp:CheckBox ID="CheckBox1" runat="server" />
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:RadioButton ID="rbEscolhaAdd" runat="server" AutoPostBack="True" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                            <FooterStyle BackColor="#CCCCCC" />
+                            <HeaderStyle BackColor="#CC00CC" Font-Bold="True" ForeColor="White" />
+                            <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                            <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                            <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                            <SortedAscendingHeaderStyle BackColor="Gray" />
+                            <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                            <SortedDescendingHeaderStyle BackColor="#383838" />
+                        </asp:GridView>
+                    </div>
             <br />
-            Preço:
-            <asp:Label runat="server" ID="txtPreco"/>
-            <br />
-            Tamanho:
-            <asp:Label ID="txtTamanho" runat="server"></asp:Label>
-            <br />
-            Tipo:
-            <asp:Label ID="txtTipo" runat="server"></asp:Label>
-            <br />
-            <asp:Label runat="server" ID="lblQtd" Text ="Quantidade Desejada: "/>
-            <asp:TextBox runat="server" ID="txtQtd" Width="115px"/>
+            <asp:Button runat="server" CssClass="btn" ID="btnVoltar" Text="Voltar" PostBackUrl="~/Cardapio_Logado.aspx" Width="125px" />
+            <asp:Button runat="server" CssClass="btn" ID="btnAdicionar" Text="Adicionar" OnClick="btnAdicionar_Click" BorderStyle="Solid" Width="125px" />
             <br />
             <br />
-            <asp:GridView ID="gvAdicional" runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" Font-Size="16pt" ForeColor="Black" GridLines="Vertical" Enabled="False">
-                <AlternatingRowStyle BackColor="#CCCCCC" />
-                <Columns>
-                    <asp:TemplateField>
-                        <EditItemTemplate>
-                            <asp:CheckBox ID="CheckBox1" runat="server" />
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <asp:RadioButton ID="rbEscolhaAdd" runat="server" AutoPostBack="True" />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-                <FooterStyle BackColor="#CCCCCC" />
-                <HeaderStyle BackColor="#990099" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                <SortedAscendingHeaderStyle BackColor="Gray" />
-                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                <SortedDescendingHeaderStyle BackColor="#383838" />
-            </asp:GridView>
             <br />
-            <br />
-            <asp:Button runat="server" ID="btnAdicionar" Text="Adicionar" OnClick="btnAdicionar_Click"/>
             <br />
             <br />
             <asp:SqlDataSource ID="DSDetalhes" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT produto.id_prod, produto.nome_prod, produto.tam_prod, produto.preco_prod, tipo_prod.nome_tipo FROM produto INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd WHERE (produto.id_prod = @IDPROD)">
                 <SelectParameters>
                     <asp:SessionParameter Name="IDPROD" SessionField="idProd" />
                 </SelectParameters>
+            </asp:SqlDataSource>
+            <asp:SqlDataSource ID="DSNovaVenda" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO vendas(id_cli, id_forma, data_vda, valor_vda) VALUES (@IDCLI, 1, @DATA, 0)" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM [vendas]">
+                <InsertParameters>
+                    <asp:SessionParameter Name="IDCLI" SessionField="idCli" />
+                    <asp:Parameter Name="DATA" />
+                </InsertParameters>
+            </asp:SqlDataSource>
+            <asp:SqlDataSource ID="DSUltimaVenda" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT MAX(id_vda) AS ultVenda FROM vendas"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="DSItemVenda" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO it_venda(id_vda, id_prod, qtd_it, total_ped, adicional) VALUES (@IDVDA,@IDPROD,@QTD,@TOTAL,@ADICIONAL)" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM [it_venda]">
+                <InsertParameters>
+                    <asp:SessionParameter Name="IDVDA" SessionField="ultVenda" />
+                    <asp:SessionParameter Name="IDPROD" SessionField="idProd" />
+                    <asp:Parameter Name="QTD" />
+                    <asp:Parameter Name="TOTAL" />
+                    <asp:Parameter Name="ADICIONAL" />
+                </InsertParameters>
             </asp:SqlDataSource>
         </div>
 

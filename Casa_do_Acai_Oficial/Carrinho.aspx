@@ -21,7 +21,7 @@
     <form id="form1" runat="server">
         <div class="header">
             <nav class="navbar navbar-expand-lg">
-                <a class="navbar-brand" href="./index.html" style="margin-left: 17%;" id="a">CasaDoAç@í</a>
+                <a class="navbar-brand" href="Menu.aspx" style="margin-left: 17%;" id="a">CasaDoAç@í</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -39,10 +39,13 @@
                             <a class="nav-link" id="btn3" href="Contato.aspx" onclick="mudarCor('btn3')">CONTATO</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn4" href="Cardapio_NaoLogado.aspx" onclick="mudarCor('btn4')">CADÁPIO</a>
+                            <a class="nav-link" id="btn4" href="Cardapio_NaoLogado.aspx" onclick="mudarCor('btn4')">CARDÁPIO</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn5" href="Login.aspx" onclick="mudarCor('btn5')">LOGIN</a>
+                            <asp:Literal runat="server" ID="lCarrinho" />
+                        </li>
+                        <li class="nav-item">
+                            <asp:Literal runat="server" ID="lSair" />
                         </li>
                     </ul>
                 </div>
@@ -52,25 +55,21 @@
         <asp:GridView ID="gvCarrinho" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="id_vda" Font-Names="CHICKEN Pie" ForeColor="Black" GridLines="Vertical">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:RadioButton ID="rbExcluir" runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Imagem">
                     <ItemTemplate>
                         <asp:Image ID="imgProduto" runat="server" Height="90px" Width="100px" />
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Produto"></asp:TemplateField>
-                <asp:BoundField HeaderText="Adicional" />
-                <asp:TemplateField HeaderText="Quantidade">
-                    <ItemTemplate>
-                        &nbsp;
-                            <asp:Button ID="btnMenos" runat="server" OnClick="btnMenos_Click" Text="&lt;" />
-                        &nbsp;
-                            <asp:Label ID="lblQtd" runat="server" Font-Size="20px" Text="0"></asp:Label>
-                        &nbsp;
-                            <asp:Button ID="btnMais" runat="server" OnClick="btnMais_Click" Text="&gt;" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:BoundField DataFormatString="{0:c}" HeaderText="Preço Unitário" />
-                <asp:BoundField DataField="valor_vda" HeaderText="Total do Produto" SortExpression="valor_vda" />
+                <asp:BoundField DataField="id_prod" HeaderText="Produto" SortExpression="id_prod" />
+                <asp:BoundField HeaderText="Adicional" DataField="adicional" SortExpression="adicional" />
+<asp:BoundField HeaderText="Quantidade" DataField="qtd_it" SortExpression="qtd_it"></asp:BoundField>
+                <asp:BoundField DataFormatString="{0:c}" HeaderText="Preço Unitário" DataField="preco_prod" SortExpression="preco_prod" />
+                <asp:BoundField DataField="total_ped" HeaderText="Total do Produto" SortExpression="total_ped" />
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />
             <HeaderStyle BackColor="#990099" Font-Bold="True" ForeColor="White" />
@@ -90,6 +89,11 @@
                 <asp:Parameter Name="QTD" />
                 <asp:Parameter Name="ADD" />
             </InsertParameters>
+        </asp:SqlDataSource>
+        <asp:SqlDataSource ID="DSCarrinho" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT it_venda.qtd_it, it_venda.total_ped, it_venda.adicional, produto.nome_prod, produto.preco_prod, it_venda.id_vda, it_venda.id_it_venda, tipo_prod.nome_tipo FROM it_venda INNER JOIN produto ON it_venda.id_prod = produto.id_prod INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd WHERE (it_venda.id_vda = @IDVDA)">
+            <SelectParameters>
+                <asp:SessionParameter Name="IDVDA" SessionField="ultVenda" />
+            </SelectParameters>
         </asp:SqlDataSource>
         <div class="principal" style="margin-top: 5px;">
             <div class="row container-fluid ">

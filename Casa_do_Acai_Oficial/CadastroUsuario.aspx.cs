@@ -73,7 +73,7 @@ public partial class CadastroLogin : System.Web.UI.Page
         }
         else
         {
-            DSCadastroCliente.InsertParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt("Sem Complemento");
+            DSCadastroCliente.InsertParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt("");
         }
 
         string genero = "";
@@ -103,7 +103,7 @@ public partial class CadastroLogin : System.Web.UI.Page
 
         LimparCampos();
 
-        Session["logado"] = "Ok";
+        Session["logado"] = "Entrou";
 
         Response.Redirect("Menu_Logado.aspx");
     }

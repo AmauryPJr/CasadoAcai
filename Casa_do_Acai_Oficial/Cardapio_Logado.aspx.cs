@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Text;
 
 public partial class Cardapio_Logado : System.Web.UI.Page
 {
@@ -12,140 +13,78 @@ public partial class Cardapio_Logado : System.Web.UI.Page
 
     DataTable listaDescripto = new DataTable();
 
-    string[] adicionais = { "Morango", "Chocolate", "Caramelo", "Menta", "Tutti frutti", "Maracujá" };
-
-    private bool ImbAcaiClicado = false;
-
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["logado"] == null)
+        if (Session["logado"] == null || Session["logado"].Equals("Saiu"))
             Response.Redirect("Cardapio_NaoLogado.aspx");
 
         else
-            return;
+        {
+            lCarrinho.Text = GerarNavCarrinho();
+            lSair.Text     = GerarNavSair();
+        }
+    }
+
+    public string GerarNavCarrinho()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        sb.AppendLine("<a class='nav-link' id='btn5' href='Carrinho.aspx' onclick='mudarCor('btn4')'>CARRINHO</a>");
+
+        return sb.ToString();
+    }
+
+    public string GerarNavSair()
+    {
+        StringBuilder sbSair = new StringBuilder();
+
+        if (Session["logado"] == null || Session["logado"].Equals("Saiu"))
+        {
+            sbSair.AppendLine("<a class='nav-link' id='btn5' href='Login.aspx' onclick='mudarCor('btn4')'>LOGIN</a>");
+            return sbSair.ToString();
+        }
+
+        else
+        {
+            sbSair.AppendLine("<a class='nav-link' id='btn5' href='Sair.aspx' onclick='mudarCor('btn4')'>SAIR</a>");
+            return sbSair.ToString();
+        }
     }
 
     protected void imbAcai_Click(object sender, ImageClickEventArgs e)
     {
         CarregarProduto(1);
-        gvProduto.Visible = true;
-        ImbAcaiClicado = true;
-        AcaiClicado();
-        gvAdicional.Visible = false;
+        gvProduto.Visible = true;        
     }
 
     protected void imbSacole_Click(object sender, ImageClickEventArgs e)
     {
         CarregarProduto(2);
         gvProduto.Visible = true;
-        ImbAcaiClicado = false;
-        AcaiClicado();
-        EscolherOutroProd();
     }
 
     protected void imbGeladinho_Click(object sender, ImageClickEventArgs e)
     {
         CarregarProduto(3);
         gvProduto.Visible = true;
-        ImbAcaiClicado = false;
-        AcaiClicado();
-        EscolherOutroProd();
     }
 
     protected void ImbSorvete_Click(object sender, ImageClickEventArgs e)
     {
         CarregarProduto(4);
         gvProduto.Visible = true;
-        ImbAcaiClicado = false;
-        AcaiClicado();
-        EscolherOutroProd();
     }
 
     protected void imbPicole_Click(object sender, ImageClickEventArgs e)
     {
         CarregarProduto(5);
         gvProduto.Visible = true;
-        ImbAcaiClicado = false;
-        AcaiClicado();
-        EscolherOutroProd();
     }
 
     protected void ImbCremosinho_Click(object sender, ImageClickEventArgs e)
     {
         CarregarProduto(6);
         gvProduto.Visible = true;
-        ImbAcaiClicado = false;
-        AcaiClicado();
-        EscolherOutroProd();
-    }
-
-    protected void btnContinuar_Click(object sender, EventArgs e)
-    {
-        btnVoltar.Visible = true;
-        gvProduto.Visible = false;
-        AcaiClicado();
-        gvAdicional.Visible = true;
-    }
-
-    protected void btnVoltar_Click(object sender, EventArgs e)
-    {
-        gvAdicional.Visible = false;
-        gvProduto.Visible = true;
-        btnVoltar.Visible = false;
-        btnAdicionar.Visible = false;
-        btnContinuar.Visible = true;
-    }
-
-    protected void btnAdicionar_Click(object sender, EventArgs e)
-    {
-        DataView listaProd;
-        listaProd = (DataView)DSProduto.Select(DataSourceSelectArguments.Empty);
-        lblIds.Text = "";
-        lblAdd.Text = "";
-        int qtdIds = 0;
-
-        foreach (GridViewRow linha in gvProduto.Rows)
-        {
-            RadioButton rbEscolhaProd;
-
-            rbEscolhaProd = (RadioButton)linha.FindControl("rbEscolhaProd");
-
-            if (rbEscolhaProd.Checked == true)
-            {
-                qtdIds++;
-
-                int linhaSelecionada = linha.DataItemIndex;
-
-                Session["nome_prod"] = cripto.Decrypt(listaProd.Table.Rows[linhaSelecionada]["nome_prod"].ToString());
-                Session["qtdIds"] = qtdIds;
-
-                lblIds.Text += Session["nome_prod"].ToString() + " ";
-
-                lblQtdIds.Text = qtdIds.ToString();
-            }
-        }
-
-        if (gvAdicional.Visible == true)
-        {
-            foreach (GridViewRow linha in gvAdicional.Rows)
-            {
-                RadioButton rbEscolhaAdd;
-
-                rbEscolhaAdd = (RadioButton)linha.FindControl("rbEscolhaAdd");
-
-                if (rbEscolhaAdd.Checked == true)
-                {
-                    string AddSelecionado = adicionais[linha.DataItemIndex].ToString();
-
-                    Session["Adicional"] = AddSelecionado;
-
-                    lblAdd.Text += Session["Adicional"].ToString() + " ";
-                }
-            }            
-        }
-
-        Response.Write("<script>if ('" + qtdIds + "' == 1) alert('" + qtdIds + " produto foi adicionado ao Carrinho'); " +
-            " else alert('" + qtdIds + " produtos foram adicionados ao Carrinho');</script>");
     }
 
     protected void gvProduto_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -178,23 +117,14 @@ public partial class Cardapio_Logado : System.Web.UI.Page
         Response.Redirect("Detalhes.aspx");
     }
 
-    private void CarregarAdicionais()
-    {
-        DataTable listaAdd = new DataTable();
-        listaAdd.Columns.Add("Adicional");
-
-        for (int i = 0; i < adicionais.GetLength(0); i++)
-        {
-            listaAdd.Rows.Add();
-            listaAdd.Rows[i]["Adicional"] = adicionais[i].ToString();
-        }
-
-        gvAdicional.DataSource = listaAdd;
-        gvAdicional.DataBind();
-    }
-
     private void CarregarProduto(int tipoProd)
     {
+        if (Session["tipoProd"] != null)
+        {
+             if (tipoProd != (int)Session["tipoProd"])
+                gvProduto.PageIndex = 0;
+        }
+
         listaDescripto.Columns.Add("id_prod", typeof(int));
         listaDescripto.Columns.Add("nome_prod", typeof(string));
         listaDescripto.Columns.Add("id_tipoProd", typeof(int));
@@ -224,37 +154,5 @@ public partial class Cardapio_Logado : System.Web.UI.Page
         gvProduto.DataBind();
 
         Session["tipoProd"] = tipoProd;
-    }
-
-    private void EscolherOutroProd()
-    {
-        if (gvAdicional.Visible == true)
-        {
-            gvAdicional.Visible = false;
-
-            ImbAcaiClicado = false;
-
-            btnVoltar.Visible = false;
-
-            AcaiClicado();
-        }
-    }
-
-    private void AcaiClicado()
-    {
-        if (ImbAcaiClicado == true)
-        {
-            CarregarAdicionais();
-
-            btnContinuar.Visible = true;
-
-            btnAdicionar.Visible = false;
-        }
-        else
-        {
-            btnContinuar.Visible = false;
-
-            btnAdicionar.Visible = true;
-        }
     }
 }

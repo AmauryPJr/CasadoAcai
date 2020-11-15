@@ -38,7 +38,7 @@ public partial class Login : System.Web.UI.Page
 
         if (listaLogin.Table.Rows.Count > 0)
         {
-            Session["Logado"]     = "Ok";
+            Session["Logado"]     = "Entrou";
             Session["idCli"]      = listaLogin.Table.Rows[0]["id_cli"].ToString();
             Session["nomeCli"]    = cripto.Decrypt(listaLogin.Table.Rows[0]["nome_cli"].ToString());
             Session["novaCompra"] = "Sim";
@@ -48,8 +48,7 @@ public partial class Login : System.Web.UI.Page
         {
             Response.Write("<script>alert('Login ou Senha Incorretos !');</script>");
 
-            txtLogin.Text = "";
-            txtSenha.Text = "";
+            txtSenha.Text = "";            
         }
     }
 }

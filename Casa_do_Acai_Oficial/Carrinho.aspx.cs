@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Text;
 
 public partial class Carrinho : System.Web.UI.Page
 {
@@ -17,68 +18,105 @@ public partial class Carrinho : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        CarregarCarrinho();
-    }
-    
-    protected void btnMenos_Click(object sender, EventArgs e)
-    {
-        DiminuirQtd = true;
-        AumentarQtd = false;
-        Quantidade();
+        if (Session["logado"] == null || Session["logado"].Equals("Saiu"))
+            Response.Redirect("Menu.aspx");
+
+        else
+        {
+            lCarrinho.Text = GerarNavCarrinho();
+            lSair.Text = GerarNavSair();
+            CarregarCarrinho();
+        }
     }
 
-    protected void btnMais_Click(object sender, EventArgs e)
+    public string GerarNavCarrinho()
     {
-        AumentarQtd = true;
-        DiminuirQtd = false;
-        Quantidade();
+        StringBuilder sbCarrinho = new StringBuilder();
+
+        sbCarrinho.AppendLine("<a class='nav-link' id='btn5' href='Carrinho.aspx' onclick='mudarCor('btn4')'>CARRINHO</a>");
+        return sbCarrinho.ToString();
+    }
+
+    public string GerarNavSair()
+    {
+        StringBuilder sbSair = new StringBuilder();
+
+        if (Session["logado"] == null || Session["logado"].Equals("Saiu"))
+        {
+            sbSair.AppendLine("<a class='nav-link' id='btn5' href='Login.aspx' onclick='mudarCor('btn4')'>LOGIN</a>");
+            return sbSair.ToString();
+        }
+
+        else
+        {
+            sbSair.AppendLine("<a class='nav-link' id='btn5' href='Sair.aspx' onclick='mudarCor('btn4')'>SAIR</a>");
+            return sbSair.ToString();
+        }
     }
 
     private void CarregarCarrinho()
     {
         DataTable carrinho = new DataTable();
 
-        carrinho.Columns.Add("Imagem");
-        carrinho.Columns.Add("Produto");
-        carrinho.Columns.Add("Adicional");
-        carrinho.Columns.Add("Total Unitário");
-        carrinho.Columns.Add("Total do Produto");
+        carrinho.Columns.Add("nome_prod");
+        carrinho.Columns.Add("adicional");
+        carrinho.Columns.Add("qtd_it");
+        carrinho.Columns.Add("preco_prod");
+        carrinho.Columns.Add("total_ped");
 
         DataView listaCarrinho;
-        listaCarrinho = (DataView)DSItemVenda.Select(DataSourceSelectArguments.Empty);
+        listaCarrinho = (DataView)DSCarrinho.Select(DataSourceSelectArguments.Empty);
 
         for (int i = 0; i < listaCarrinho.Table.Rows.Count; i++)
         {
-            DataRow linha = listaDescripto.NewRow();
+            foreach (GridView gLinha in gvCarrinho.Rows)
+            {
+                Image imgProduto = new Image();
+
+                string tipoProd = cripto.Decrypt(listaCarrinho.Table.Rows[0]["nome_tipo"].ToString());
+
+                switch (tipoProd)
+                {
+                    case "Açaí":
+                        imgProduto.ImageUrl = "~/Imagens/Acai.png";
+                        break;
+
+                    case "Sacolé":
+                        imgProduto.ImageUrl = "~/Imagens/Sacole.png";
+                        break;
+
+                    case "Geladinho":
+                        imgProduto.ImageUrl = "~/Imagens/Geladinho.png";
+                        break;
+
+                    case "Sorvete":
+                        imgProduto.ImageUrl = "~/Imagens/Sorvete.png";
+                        break;
+
+                    case "Picolé":
+                        imgProduto.ImageUrl = "~/Imagens/Picole.png";
+                        break;
+
+                    case "Cremosinho":
+                        imgProduto.ImageUrl = "~/Imagens/Cremosinho.png";
+                        break;
+                }
+
+                Session["imagem"] = imgProduto.ImageUrl;
+            }
+
+            DataRow rLinha = listaDescripto.NewRow();
+
+            rLinha["qtd_it"]     = cripto.Decrypt(listaCarrinho.Table.Rows[i]["qtd_it"].ToString());
+            rLinha["nome_prod"]  = cripto.Decrypt(listaCarrinho.Table.Rows[i]["nome_prod"].ToString());
+            rLinha["adicional"]  = cripto.Decrypt(listaCarrinho.Table.Rows[i]["adicional"].ToString());
+            rLinha["preco_prod"] = cripto.Decrypt(listaCarrinho.Table.Rows[i]["preco_prod"].ToString());
+            rLinha["total_ped"]  = cripto.Decrypt(listaCarrinho.Table.Rows[i]["total_ped"].ToString());
+
+            carrinho.Rows.Add(rLinha);
         }
-    }
 
-    private void Quantidade()
-    {
-        int qtd = 0;
-
-        foreach (GridViewRow linha in gvCarrinho.Rows)
-        {
-            Button btnMais, btnMenos;
-            Label lblQtd;
-
-            btnMais = (Button)linha.FindControl("btnMais");
-            btnMenos = (Button)linha.FindControl("btnMenos");
-            lblQtd = (Label)linha.FindControl("lblQtd");
-
-            if (AumentarQtd == true)
-            {
-                qtd++;
-
-                lblQtd.Text = qtd.ToString();
-            }
-
-            if (DiminuirQtd == true)
-            {
-                qtd--;
-
-                lblQtd.Text = qtd.ToString();
-            }
-        }        
+        gvCarrinho.DataSource = carrinho;
+        gvCarrinho.DataBind();
     }
 }

@@ -39,10 +39,13 @@
                             <a class="nav-link" id="btn3" href="Contato.aspx" onclick="mudarCor('btn3')">CONTATO</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn4" href="Cardapio_NaoLogado.aspx" onclick="mudarCor('btn5')">CARDÁPIO</a>
+                            <a class="nav-link" id="btn4" href="Cardapio_NaoLogado.aspx" onclick="mudarCor('btn4')">CARDÁPIO</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn5" href="Login.aspx" onclick="mudarCor('btn5')">LOGIN</a>
+                            <asp:Literal runat="server" ID="lCarrinho"/>
+                        </li>
+                        <li class="nav-item">
+                            <asp:Literal runat="server" ID="lSair" />
                         </li>
                     </ul>
                 </div>

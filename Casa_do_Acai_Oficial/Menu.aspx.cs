@@ -9,28 +9,13 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["logado"] == null)
+        if (Session["logado"] == null || Session["logado"].Equals("Saiu"))
             return;
 
-        else if (Session["logado"].Equals("Ok"))
+        else if (Session["logado"].Equals("Entrou"))
             Response.Redirect("Menu_Logado.aspx");
 
         else
             return;
-    }
-
-    protected void btnTelaCadastro_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("CadastroUsuario.aspx");
-    }
-
-    protected void btnTelaLogin_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("Login.aspx");
-    }
-
-    protected void btnProdutos_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("Produtos.aspx");
     }
 }
