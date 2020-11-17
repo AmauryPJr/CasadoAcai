@@ -37,10 +37,7 @@ public partial class Detalhes : System.Web.UI.Page
                     txtTamanho.Text = cripto.Decrypt(prodEscolhido.Table.Rows[0]["tam_prod"].ToString());
 
                     if (txtTamanho.Text == "")
-                    {
-                        lblTamnho.Visible = false;
-                        txtTamanho.Visible = false;
-                    }
+                        txtTamanho.Text = "Não Unitário";
 
                     txtTipo.Text = cripto.Decrypt(prodEscolhido.Table.Rows[0]["nome_tipo"].ToString());
 
@@ -135,13 +132,14 @@ public partial class Detalhes : System.Web.UI.Page
                     Session["novaCompra"] = "Não";
                 }
 
-                double qtd, preco, totalProd;
-                qtd = Convert.ToDouble(txtQtdDesejada.Text);
+                double preco, totalProd;
+                int qtd;
+                qtd = Convert.ToInt32(txtQtdDesejada.Text);
                 preco = Convert.ToDouble(txtPreco.Text);
                 totalProd = qtd * preco;
 
                 DSItemVenda.InsertParameters["QTD"].DefaultValue = cripto.Encrypt(qtd.ToString());
-                DSItemVenda.InsertParameters["TOTAL"].DefaultValue = cripto.Encrypt(totalProd.ToString().Replace(',', '.'));
+                DSItemVenda.InsertParameters["TOTAL"].DefaultValue = cripto.Encrypt(totalProd.ToString());
 
                 if (gvAdicional.Visible)
                 {
@@ -155,7 +153,16 @@ public partial class Detalhes : System.Web.UI.Page
                         }
                     }
 
-                    Session["add"].ToString().TrimEnd();
+                    if (Session["add"] == null)
+                        Session["add"] = "";
+
+                    else
+                        Session["add"].ToString().TrimEnd();
+                }
+
+                else
+                {
+                    Session["add"] = "";
                 }
 
                 if (Session["add"].Equals(""))

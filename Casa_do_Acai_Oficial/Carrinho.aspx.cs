@@ -58,59 +58,34 @@ public partial class Carrinho : System.Web.UI.Page
     {
         DataTable carrinho = new DataTable();
 
-        carrinho.Columns.Add("nome_prod");
-        carrinho.Columns.Add("adicional");
-        carrinho.Columns.Add("qtd_it");
-        carrinho.Columns.Add("preco_prod");
-        carrinho.Columns.Add("total_ped");
+        carrinho.Columns.Add("nome_prod", typeof(String));
+        carrinho.Columns.Add("adicional", typeof(String));
+        carrinho.Columns.Add("qtd_it", typeof(int));
+        carrinho.Columns.Add("preco_prod", typeof(double));
+        carrinho.Columns.Add("total_ped", (typeof(double)));
+        carrinho.Columns.Add("nome_tipo", (typeof(String)));
 
         DataView listaCarrinho;
         listaCarrinho = (DataView)DSCarrinho.Select(DataSourceSelectArguments.Empty);
 
         for (int i = 0; i < listaCarrinho.Table.Rows.Count; i++)
         {
-            foreach (GridView gLinha in gvCarrinho.Rows)
-            {
-                Image imgProduto = new Image();
+            DataRow rLinha = carrinho.NewRow();
 
-                string tipoProd = cripto.Decrypt(listaCarrinho.Table.Rows[0]["nome_tipo"].ToString());
+            string tipo = cripto.Decrypt(listaCarrinho.Table.Rows[i]["adicional"].ToString());
 
-                switch (tipoProd)
-                {
-                    case "Açaí":
-                        imgProduto.ImageUrl = "~/Imagens/Acai.png";
-                        break;
-
-                    case "Sacolé":
-                        imgProduto.ImageUrl = "~/Imagens/Sacole.png";
-                        break;
-
-                    case "Geladinho":
-                        imgProduto.ImageUrl = "~/Imagens/Geladinho.png";
-                        break;
-
-                    case "Sorvete":
-                        imgProduto.ImageUrl = "~/Imagens/Sorvete.png";
-                        break;
-
-                    case "Picolé":
-                        imgProduto.ImageUrl = "~/Imagens/Picole.png";
-                        break;
-
-                    case "Cremosinho":
-                        imgProduto.ImageUrl = "~/Imagens/Cremosinho.png";
-                        break;
-                }
-
-                Session["imagem"] = imgProduto.ImageUrl;
-            }
-
-            DataRow rLinha = listaDescripto.NewRow();
-
-            rLinha["qtd_it"]     = cripto.Decrypt(listaCarrinho.Table.Rows[i]["qtd_it"].ToString());
+            string add = cripto.Decrypt(listaCarrinho.Table.Rows[i]["adicional"].ToString());
+            
             rLinha["nome_prod"]  = cripto.Decrypt(listaCarrinho.Table.Rows[i]["nome_prod"].ToString());
-            rLinha["adicional"]  = cripto.Decrypt(listaCarrinho.Table.Rows[i]["adicional"].ToString());
-            rLinha["preco_prod"] = cripto.Decrypt(listaCarrinho.Table.Rows[i]["preco_prod"].ToString());
+
+            if (add == "")
+                rLinha["adicional"] = "Nenhum";
+
+            else
+                rLinha["adicional"] = add;
+            
+            rLinha["qtd_it"]     = cripto.Decrypt(listaCarrinho.Table.Rows[i]["qtd_it"].ToString());
+            rLinha["preco_prod"] = cripto.Decrypt(listaCarrinho.Table.Rows[i]["preco_prod"].ToString()).Replace('.', ',');
             rLinha["total_ped"]  = cripto.Decrypt(listaCarrinho.Table.Rows[i]["total_ped"].ToString());
 
             carrinho.Rows.Add(rLinha);

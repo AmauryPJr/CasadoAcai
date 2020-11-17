@@ -104,6 +104,7 @@ public partial class CadastroLogin : System.Web.UI.Page
         LimparCampos();
 
         Session["logado"] = "Entrou";
+        Session["novaCompra"] = "Sim";
 
         Response.Redirect("Menu_Logado.aspx");
     }

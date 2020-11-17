@@ -16,6 +16,49 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            font-family: 'CHICKEN Pie';
+        }
+
+        #gvCarrinho {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #btnExcluir {
+            background: none;
+            border: 2px solid #FF00FF;
+            color: black;
+            padding: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 12px 0;
+            margin-left: 3em;
+            font-family: chicken pie;
+            width: 175px;
+        }
+
+        #btnFinalizar {
+            background: none;
+            border: 2px solid #FF00FF;
+            color: black;
+            padding: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 12px 0;
+            margin-left: 3em;
+            font-family: chicken pie;
+            width: 175px;
+        }
+
+        p {
+            margin-left: 4em;
+            color: black;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -52,7 +95,9 @@
             </nav>
         </div>
 
-        <asp:GridView ID="gvCarrinho" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataKeyNames="id_vda" Font-Names="CHICKEN Pie" ForeColor="Black" GridLines="Vertical">
+        <h1 style="text-align: center;">SEU CARRINHO</h1>
+        <div id="dvGrid" style="text-align: center;">
+            <asp:GridView ID="gvCarrinho" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" ForeColor="Black" GridLines="Vertical">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 <asp:TemplateField>
@@ -65,14 +110,14 @@
                         <asp:Image ID="imgProduto" runat="server" Height="90px" Width="100px" />
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="id_prod" HeaderText="Produto" SortExpression="id_prod" />
+                <asp:BoundField DataField="nome_prod" HeaderText="Produto" SortExpression="nome_prod" />
                 <asp:BoundField HeaderText="Adicional" DataField="adicional" SortExpression="adicional" />
-<asp:BoundField HeaderText="Quantidade" DataField="qtd_it" SortExpression="qtd_it"></asp:BoundField>
+                <asp:BoundField HeaderText="Quantidade" DataField="qtd_it" SortExpression="qtd_it"></asp:BoundField>
                 <asp:BoundField DataFormatString="{0:c}" HeaderText="Preço Unitário" DataField="preco_prod" SortExpression="preco_prod" />
-                <asp:BoundField DataField="total_ped" HeaderText="Total do Produto" SortExpression="total_ped" />
+                <asp:BoundField DataFormatString="{0:c}" DataField="total_ped" HeaderText="Total do Produto" SortExpression="total_ped" />
             </Columns>
             <FooterStyle BackColor="#CCCCCC" />
-            <HeaderStyle BackColor="#990099" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#CC00CC" Font-Bold="True" ForeColor="White" />
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
             <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
             <SortedAscendingCellStyle BackColor="#F1F1F1" />
@@ -80,6 +125,20 @@
             <SortedDescendingCellStyle BackColor="#CAC9C9" />
             <SortedDescendingHeaderStyle BackColor="#383838" />
         </asp:GridView>
+        </div>
+        <br />
+        <asp:Button ID="btnExcluir" runat="server" Text="Excluir Produto" BorderStyle="None" CssClass="btn" />
+        <br />
+        <br />
+        <p>Forma de pagamento: <asp:DropDownList ID="ddlForma" runat="server">
+                <asp:ListItem>Dinheiro</asp:ListItem>
+                <asp:ListItem>Cartão de Crédito</asp:ListItem>
+                <asp:ListItem>Cartão de Débito</asp:ListItem>
+            </asp:DropDownList>
+        </p>
+        <p>Total da compra: R$ <asp:Label runat="server" ID="txtTotalVenda" /></p>
+        <asp:Button ID="btnFinalizar" runat="server" BorderStyle="None" CssClass="btn" Text="Finalizar Compra" />
+        <br />
         <br />
         <asp:SqlDataSource ID="DSVendas" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM vendas"></asp:SqlDataSource>
         <asp:SqlDataSource ID="DSItemVenda" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM it_venda" InsertCommand="INSERT INTO it_venda(id_vda, id_prod, qtd_it, adicional) VALUES (@VDA,@PROD,@QTD,@ADD)">
@@ -90,7 +149,7 @@
                 <asp:Parameter Name="ADD" />
             </InsertParameters>
         </asp:SqlDataSource>
-        <asp:SqlDataSource ID="DSCarrinho" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT it_venda.qtd_it, it_venda.total_ped, it_venda.adicional, produto.nome_prod, produto.preco_prod, it_venda.id_vda, it_venda.id_it_venda, tipo_prod.nome_tipo FROM it_venda INNER JOIN produto ON it_venda.id_prod = produto.id_prod INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd WHERE (it_venda.id_vda = @IDVDA)">
+        <asp:SqlDataSource ID="DSCarrinho" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT tipo_prod.nome_tipo, produto.nome_prod, it_venda.adicional, it_venda.qtd_it, produto.preco_prod, it_venda.total_ped, it_venda.id_it_venda, it_venda.id_vda FROM it_venda INNER JOIN produto ON it_venda.id_prod = produto.id_prod INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd WHERE (it_venda.id_vda = @IDVDA)">
             <SelectParameters>
                 <asp:SessionParameter Name="IDVDA" SessionField="ultVenda" />
             </SelectParameters>

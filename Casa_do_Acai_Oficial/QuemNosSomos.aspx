@@ -94,7 +94,7 @@
                         alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="Imagens/Banner3.png" class="d-block" style="height: 400px; width: 100%;"
+                    <img src="Imagens/Banner5.png" class="d-block" style="height: 400px; width: 100%;"
                         alt="...">
                 </div>
             </div>

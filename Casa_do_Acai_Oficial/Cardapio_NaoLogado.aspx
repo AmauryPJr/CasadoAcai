@@ -17,6 +17,20 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
+
+    <style>
+        h2 {
+            font-family: 'Segoe UI';
+        }       
+
+        #textosNossoSabor {
+            text-align: center;
+        }
+
+        #textosNossoSabor p {
+            font-family: 'Segoe UI';
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -71,24 +85,67 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6" id="divSabor">
-                    <h2 class="text-center" style="font-family: chicken-pie;">Nossos Sabores</h2>
+                    <h2 class="text-center">Nossos Sabores</h2>
 
                     <div id="textosNossoSabor">
-                        <p class="text-center">
+                        <p>
                             Aqui na CasaDoAç@í, nós trabalhamos com uma grande variedade de
                             sabores,<br>
                             para deliciar sua vida
                         </p>
-                        <p class="text-center">
+                        <p>
                             nossa empresa está no mercado para trazer o grande e gostoso sabor de um
                             sorvete,
                         </p>
-                        <p class="text-center">feito e montado com o amor e carinho que você merece.</p>
+                        <p>feito e montado com o amor e carinho que você merece.</p>
                     </div>
                     <asp:Button runat="server" CssClass="btn" ID="btnLogin" Text="Login/Cadastro" OnClick="btnLogin_Click"/>
                 </div>
             </div>
         </div>
+
+        <div class="principal" style="margin-top: 8%;">
+        <div class="row container-fluid ">
+            <div class="col-12 col-md-3 text-center">
+                <p class="tituloFooter">ENDEREÇO</p>
+                <p class="textoFooter">Rua H30B, 108 </p>
+                <p class="textoFooter">Campus do CTA</p>
+                <p class="textoFooter">São José dos Campos</p>
+            </div>
+            <div class="col-12 col-md-3 text-center">
+                <p class="tituloFooter">CONTATO</p>
+
+                <p class="textoFooter">joao03araujo@gmail.com</p>
+                <p class="textoFooter">Tel : (12) 99709-2686</p>
+
+            </div>
+
+            <div class="col-12 col-md-3 text-center">
+                <p class="tituloFooter">HORÁRIOS</p>
+
+                <p class="textoFooter">ABERTO DE SEG À SEX </p>
+                <p class="textoFooter">09:00 - 22:00</p>
+                <br>
+
+                <p class="textoFooter">SÁB/DOM e FERIADOS </p>
+                <p class="textoFooter" style="margin-bottom: 4px;">13:00 - 21:00</p>
+
+            </div>
+
+            <div class="col-12 col-md-3 text-center">
+                <p>Logo</p>
+                <a><i class="fa fa-facebook fa-lg icon" aria-hidden="true"></i></a>
+                <a><i class="fa fa-instagram fa-lg icon" aria-hidden="true"></i></a>
+
+            </div>
+        </div>
+        <div class="divCopy">
+            <p class="textoCopy text-center">
+                <i class="fa fa-copyright" aria-hidden="true"></i>Todos os direitos
+                reservados a MNT-Gaming 2020
+            </p>
+        </div>
+    </div>
     </form>
 </body>
 </html>
