@@ -200,7 +200,7 @@
             </div>
             <div class="divCopy">
                 <p class="textoCopy text-center">
-                    <i class="fa fa-copyright" aria-hidden="true"></i>Todos os direitos
+                    <i class="fa fa-copyright" aria-hidden="true"></i> Todos os direitos
                 reservados a MNT-Gaming 2020
                 </p>
             </div>

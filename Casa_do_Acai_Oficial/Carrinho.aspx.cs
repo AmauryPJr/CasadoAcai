@@ -13,8 +13,7 @@ public partial class Carrinho : System.Web.UI.Page
 
     DataTable listaDescripto = new DataTable();
 
-    private bool AumentarQtd = false;
-    private bool DiminuirQtd = false;
+    DataView itens;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -56,23 +55,43 @@ public partial class Carrinho : System.Web.UI.Page
 
     private void CarregarCarrinho()
     {
+        double totalCompra = 0;
+
         DataTable carrinho = new DataTable();
 
+        carrinho.Columns.Add("imagem", (typeof(String)));
         carrinho.Columns.Add("nome_prod", typeof(String));
         carrinho.Columns.Add("adicional", typeof(String));
         carrinho.Columns.Add("qtd_it", typeof(int));
         carrinho.Columns.Add("preco_prod", typeof(double));
         carrinho.Columns.Add("total_ped", (typeof(double)));
-        carrinho.Columns.Add("nome_tipo", (typeof(String)));
-
+        
         DataView listaCarrinho;
         listaCarrinho = (DataView)DSCarrinho.Select(DataSourceSelectArguments.Empty);
 
         for (int i = 0; i < listaCarrinho.Table.Rows.Count; i++)
         {
+            string tipoProd = cripto.Decrypt(listaCarrinho.Table.Rows[i]["nome_tipo"].ToString());
+            
             DataRow rLinha = carrinho.NewRow();
 
-            string tipo = cripto.Decrypt(listaCarrinho.Table.Rows[i]["adicional"].ToString());
+            if (tipoProd == "Açaí")
+                rLinha["imagem"] = "~/Imagens/Acai.png";
+
+            if (tipoProd == "Sacolé")
+                rLinha["imagem"] = "~/Imagens/Sacole.png";
+
+            if (tipoProd == "Geladinho")
+                rLinha["imagem"] = "~/Imagens/Geladinho.png";
+
+            if (tipoProd == "Sorvete")
+                rLinha["imagem"] = "~/Imagens/Sorvete.png";
+
+            if (tipoProd == "Picolé")
+                rLinha["imagem"] = "~/Imagens/Picole.png";
+
+            if (tipoProd == "Cremosinho")
+                rLinha["imagem"] = "~/Imagens/Cremosinho.png";
 
             string add = cripto.Decrypt(listaCarrinho.Table.Rows[i]["adicional"].ToString());
             
@@ -88,10 +107,41 @@ public partial class Carrinho : System.Web.UI.Page
             rLinha["preco_prod"] = cripto.Decrypt(listaCarrinho.Table.Rows[i]["preco_prod"].ToString()).Replace('.', ',');
             rLinha["total_ped"]  = cripto.Decrypt(listaCarrinho.Table.Rows[i]["total_ped"].ToString());
 
+            totalCompra += Convert.ToDouble(rLinha["total_ped"]);
+
             carrinho.Rows.Add(rLinha);
         }
 
         gvCarrinho.DataSource = carrinho;
         gvCarrinho.DataBind();
+
+        txtTotalVenda.Text = totalCompra.ToString();
+    }
+
+    protected void btnExcluir_Click(object sender, EventArgs e)
+    {
+        itens = (DataView)DSCarrinho.Select(DataSourceSelectArguments.Empty);
+
+        foreach (GridViewRow linha in gvCarrinho.Rows)
+        {
+            RadioButton rbExcluir;
+            rbExcluir = (RadioButton)linha.FindControl("rbExcluir");
+
+            if (rbExcluir.Checked == true)
+            {
+                int linhaSelecionada = linha.DataItemIndex;
+                string idItem = itens.Table.Rows[linhaSelecionada]["id_it_venda"].ToString();
+
+                DSCarrinho.DeleteParameters["IDITEM"].DefaultValue = idItem;
+                DSCarrinho.Delete();
+            }
+        }
+
+        CarregarCarrinho();
+    }
+
+    protected void btnFinalizar_Click(object sender, EventArgs e)
+    {
+
     }
 }

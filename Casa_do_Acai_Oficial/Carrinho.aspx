@@ -55,8 +55,9 @@
         }
 
         p {
-            margin-left: 4em;
+            margin-left: 3em;
             color: black;
+            font-size: 20px;
         }
     </style>
 </head>
@@ -107,7 +108,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Imagem">
                     <ItemTemplate>
-                        <asp:Image ID="imgProduto" runat="server" Height="90px" Width="100px" />
+                        <asp:Image ID="imgProduto" runat="server" Height="90px" Width="100px" ImageUrl='<%# Eval ("imagem", "{0}") %>' />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="nome_prod" HeaderText="Produto" SortExpression="nome_prod" />
@@ -127,17 +128,17 @@
         </asp:GridView>
         </div>
         <br />
-        <asp:Button ID="btnExcluir" runat="server" Text="Excluir Produto" BorderStyle="None" CssClass="btn" />
+        <asp:Button ID="btnExcluir" runat="server" Text="Excluir Produto" BorderStyle="Solid" CssClass="btn" OnClick="btnExcluir_Click" />
         <br />
         <br />
         <p>Forma de pagamento: <asp:DropDownList ID="ddlForma" runat="server">
-                <asp:ListItem>Dinheiro</asp:ListItem>
-                <asp:ListItem>Cartão de Crédito</asp:ListItem>
-                <asp:ListItem>Cartão de Débito</asp:ListItem>
+            <asp:ListItem>Dinheiro</asp:ListItem>
+            <asp:ListItem>Cartão de Crédito</asp:ListItem>
+            <asp:ListItem>Cartão de Débito</asp:ListItem>
             </asp:DropDownList>
         </p>
         <p>Total da compra: R$ <asp:Label runat="server" ID="txtTotalVenda" /></p>
-        <asp:Button ID="btnFinalizar" runat="server" BorderStyle="None" CssClass="btn" Text="Finalizar Compra" />
+        <asp:Button ID="btnFinalizar" runat="server" BorderStyle="Solid" CssClass="btn" Text="Finalizar Compra" OnClick="btnFinalizar_Click" />
         <br />
         <br />
         <asp:SqlDataSource ID="DSVendas" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM vendas"></asp:SqlDataSource>
@@ -149,11 +150,15 @@
                 <asp:Parameter Name="ADD" />
             </InsertParameters>
         </asp:SqlDataSource>
-        <asp:SqlDataSource ID="DSCarrinho" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT tipo_prod.nome_tipo, produto.nome_prod, it_venda.adicional, it_venda.qtd_it, produto.preco_prod, it_venda.total_ped, it_venda.id_it_venda, it_venda.id_vda FROM it_venda INNER JOIN produto ON it_venda.id_prod = produto.id_prod INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd WHERE (it_venda.id_vda = @IDVDA)">
+        <asp:SqlDataSource ID="DSCarrinho" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT tipo_prod.nome_tipo, produto.nome_prod, it_venda.adicional, it_venda.qtd_it, produto.preco_prod, it_venda.total_ped, it_venda.id_it_venda, it_venda.id_vda FROM it_venda INNER JOIN produto ON it_venda.id_prod = produto.id_prod INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd WHERE (it_venda.id_vda = @IDVDA)" DeleteCommand="DELETE FROM it_venda WHERE (id_it_venda = @IDITEM)">
+            <DeleteParameters>
+                <asp:Parameter Name="IDITEM" />
+            </DeleteParameters>
             <SelectParameters>
                 <asp:SessionParameter Name="IDVDA" SessionField="ultVenda" />
             </SelectParameters>
         </asp:SqlDataSource>
+        <asp:SqlDataSource ID="DSForma" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT id_forma, tipo_forma FROM forma_pagto"></asp:SqlDataSource>
         <div class="principal" style="margin-top: 5px;">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
@@ -191,7 +196,7 @@
             </div>
             <div class="divCopy">
                 <p class="textoCopy text-center">
-                    <i class="fa fa-copyright" aria-hidden="true"></i>Todos os direitos
+                    <i class="fa fa-copyright" aria-hidden="true"></i> Todos os direitos
                 reservados a MNT-Gaming 2020
                 </p>
             </div>

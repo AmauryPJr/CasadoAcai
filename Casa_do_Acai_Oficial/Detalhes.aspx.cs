@@ -157,7 +157,7 @@ public partial class Detalhes : System.Web.UI.Page
                         Session["add"] = "";
 
                     else
-                        Session["add"].ToString().TrimEnd();
+                        Session["add"].ToString().TrimEnd().Replace(",","");
                 }
 
                 else
