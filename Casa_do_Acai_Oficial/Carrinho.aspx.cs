@@ -178,16 +178,13 @@ public partial class Carrinho : System.Web.UI.Page
             CheckBox chkExcluir;
             chkExcluir = (CheckBox)linha.FindControl("chkExcluir");
 
-            if (linha.RowState == DataControlRowState.Alternate)
+            if (chkExcluir.Checked == true)
             {
-                if (chkExcluir.Checked == true)
-                {
-                    int linhaSelecionada = linha.DataItemIndex;
-                    string idItem = itens.Table.Rows[linhaSelecionada]["id_it_venda"].ToString();
+                int linhaSelecionada = linha.DataItemIndex;
+                string idItem = itens.Table.Rows[linhaSelecionada]["id_it_venda"].ToString();
 
-                    DSCarrinho.DeleteParameters["IDITEM"].DefaultValue = idItem;
-                    DSCarrinho.Delete();
-                }
+                DSCarrinho.DeleteParameters["IDITEM"].DefaultValue = idItem;
+                DSCarrinho.Delete();
             }
         }
 
