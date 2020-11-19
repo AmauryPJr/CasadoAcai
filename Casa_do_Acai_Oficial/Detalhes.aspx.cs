@@ -145,9 +145,9 @@ public partial class Detalhes : System.Web.UI.Page
                 {
                     foreach (GridViewRow linha in gvAdicional.Rows)
                     {
-                        RadioButton rbEscolhaAdd = (RadioButton)linha.FindControl("rbEscolhaAdd");
+                        CheckBox chkEscolhaAdd = (CheckBox)linha.FindControl("chkEscolhaAdd");
 
-                        if (rbEscolhaAdd.Checked)
+                        if (chkEscolhaAdd.Checked)
                         {
                             Session["add"] += adicionais[linha.DataItemIndex].ToString() + ", ";
                         }
@@ -174,6 +174,8 @@ public partial class Detalhes : System.Web.UI.Page
                 DSItemVenda.Insert();
 
                 Response.Write("<script>alert('Item adicionado ao Carrinho !');</script>");
+
+                txtQtdDesejada.Text = "";              
             }
 
             else

@@ -144,15 +144,15 @@
                 <br />
             </div>
             <div id="grid" class="divs">
-                        <asp:GridView ID="gvAdicional" runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" Font-Size="16pt" ForeColor="Black" GridLines="Vertical">
-                            <AlternatingRowStyle BackColor="#CCCCCC" />
+                        <asp:GridView ID="gvAdicional" runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" Font-Size="16pt" ForeColor="Black">
+                            <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:TemplateField>
                                     <EditItemTemplate>
                                         <asp:CheckBox ID="CheckBox1" runat="server" />
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:RadioButton ID="rbEscolhaAdd" runat="server" AutoPostBack="True" />
+                                        <asp:CheckBox ID="chkEscolhaAdd" runat="server" AutoPostBack="True" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

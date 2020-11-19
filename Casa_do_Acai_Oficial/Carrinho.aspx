@@ -36,7 +36,7 @@
             font-size: 18px;
             cursor: pointer;
             margin: 12px 0;
-            margin-left: 3em;
+            margin-left: 62px;
             font-family: chicken pie;
             width: 175px;
         }
@@ -49,7 +49,7 @@
             font-size: 18px;
             cursor: pointer;
             margin: 12px 0;
-            margin-left: 3em;
+            margin-left: 60px;
             font-family: chicken pie;
             width: 175px;
         }
@@ -96,69 +96,77 @@
             </nav>
         </div>
 
-        <h1 style="text-align: center;">SEU CARRINHO</h1>
+        <asp:Literal runat="server" ID="lH1"/>
         <div id="dvGrid" style="text-align: center;">
-            <asp:GridView ID="gvCarrinho" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" ForeColor="Black" GridLines="Vertical">
-            <AlternatingRowStyle BackColor="#CCCCCC" />
-            <Columns>
-                <asp:TemplateField>
-                    <ItemTemplate>
-                        <asp:RadioButton ID="rbExcluir" runat="server" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Imagem">
-                    <ItemTemplate>
-                        <asp:Image ID="imgProduto" runat="server" Height="90px" Width="100px" ImageUrl='<%# Eval ("imagem", "{0}") %>' />
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:BoundField DataField="nome_prod" HeaderText="Produto" SortExpression="nome_prod" />
-                <asp:BoundField HeaderText="Adicional" DataField="adicional" SortExpression="adicional" />
-                <asp:BoundField HeaderText="Quantidade" DataField="qtd_it" SortExpression="qtd_it"></asp:BoundField>
-                <asp:BoundField DataFormatString="{0:c}" HeaderText="Preço Unitário" DataField="preco_prod" SortExpression="preco_prod" />
-                <asp:BoundField DataFormatString="{0:c}" DataField="total_ped" HeaderText="Total do Produto" SortExpression="total_ped" />
-            </Columns>
-            <FooterStyle BackColor="#CCCCCC" />
-            <HeaderStyle BackColor="#CC00CC" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-            <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-            <SortedAscendingCellStyle BackColor="#F1F1F1" />
-            <SortedAscendingHeaderStyle BackColor="Gray" />
-            <SortedDescendingCellStyle BackColor="#CAC9C9" />
-            <SortedDescendingHeaderStyle BackColor="#383838" />
-        </asp:GridView>
+            <asp:GridView ID="gvCarrinho" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" ForeColor="Black" GridLines="Both">
+                <AlternatingRowStyle BackColor="White" />
+                <Columns>
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:CheckBox ID="chkExcluir" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Imagem">
+                        <ItemTemplate>
+                            <asp:Image ID="imgProduto" runat="server" Height="90px" Width="100px" ImageUrl='<%# Eval ("imagem", "{0}") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="nome_prod" HeaderText="Produto" SortExpression="nome_prod" />
+                    <asp:BoundField HeaderText="Adicional" DataField="adicional" SortExpression="adicional" />
+                    <asp:BoundField HeaderText="Quantidade" DataField="qtd_it" SortExpression="qtd_it"></asp:BoundField>
+                    <asp:BoundField DataFormatString="{0:c}" HeaderText="Preço Unitário" DataField="preco_prod" SortExpression="preco_prod" />
+                    <asp:BoundField DataFormatString="{0:c}" DataField="total_ped" HeaderText="Total do Produto" SortExpression="total_ped" />
+                </Columns>
+                <FooterStyle BackColor="#CCCCCC" />
+                <HeaderStyle BackColor="#CC00CC" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                <SortedAscendingHeaderStyle BackColor="Gray" />
+                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                <SortedDescendingHeaderStyle BackColor="#383838" />
+            </asp:GridView>
         </div>
         <br />
         <asp:Button ID="btnExcluir" runat="server" Text="Excluir Produto" BorderStyle="Solid" CssClass="btn" OnClick="btnExcluir_Click" />
         <br />
-        <br />
-        <p>Forma de pagamento: <asp:DropDownList ID="ddlForma" runat="server">
-            <asp:ListItem>Dinheiro</asp:ListItem>
-            <asp:ListItem>Cartão de Crédito</asp:ListItem>
-            <asp:ListItem>Cartão de Débito</asp:ListItem>
+        <p>
+            Total da compra: <asp:Literal runat="server" ID="lRS" />
+            <asp:Label runat="server" ID="txtTotalVenda" />
+        </p>
+        <p>
+            Forma de pagamento:
+            <asp:DropDownList ID="ddlForma" runat="server">
+                <asp:ListItem Value="1">Dinheiro</asp:ListItem>
+                <asp:ListItem Value="2">Cartão de Crédito</asp:ListItem>
+                <asp:ListItem Value="3">Cartão de Débito</asp:ListItem>
             </asp:DropDownList>
         </p>
-        <p>Total da compra: R$ <asp:Label runat="server" ID="txtTotalVenda" /></p>
         <asp:Button ID="btnFinalizar" runat="server" BorderStyle="Solid" CssClass="btn" Text="Finalizar Compra" OnClick="btnFinalizar_Click" />
         <br />
         <br />
         <asp:SqlDataSource ID="DSVendas" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM vendas"></asp:SqlDataSource>
         <asp:SqlDataSource ID="DSItemVenda" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM it_venda" InsertCommand="INSERT INTO it_venda(id_vda, id_prod, qtd_it, adicional) VALUES (@VDA,@PROD,@QTD,@ADD)">
             <InsertParameters>
-                <asp:Parameter Name="VDA" />
+                <asp:Parameter Name="IDVDA" />
                 <asp:Parameter Name="PROD" />
                 <asp:Parameter Name="QTD" />
                 <asp:Parameter Name="ADD" />
             </InsertParameters>
         </asp:SqlDataSource>
-        <asp:SqlDataSource ID="DSCarrinho" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT tipo_prod.nome_tipo, produto.nome_prod, it_venda.adicional, it_venda.qtd_it, produto.preco_prod, it_venda.total_ped, it_venda.id_it_venda, it_venda.id_vda FROM it_venda INNER JOIN produto ON it_venda.id_prod = produto.id_prod INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd WHERE (it_venda.id_vda = @IDVDA)" DeleteCommand="DELETE FROM it_venda WHERE (id_it_venda = @IDITEM)">
+        <asp:SqlDataSource ID="DSCarrinho" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT tipo_prod.nome_tipo, produto.nome_prod, it_venda.adicional, it_venda.qtd_it, produto.preco_prod, it_venda.total_ped, it_venda.id_it_venda, it_venda.id_vda FROM it_venda INNER JOIN produto ON it_venda.id_prod = produto.id_prod INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd WHERE (it_venda.id_vda = @IDVDA)" DeleteCommand="DELETE FROM it_venda WHERE (id_it_venda = @IDITEM)" UpdateCommand="UPDATE vendas SET id_forma = @IDFORMA, valor_vda = @TOTAL WHERE (id_vda = @IDVDA)">
             <DeleteParameters>
                 <asp:Parameter Name="IDITEM" />
             </DeleteParameters>
             <SelectParameters>
                 <asp:SessionParameter Name="IDVDA" SessionField="ultVenda" />
             </SelectParameters>
+            <UpdateParameters>
+                <asp:ControlParameter ControlID="ddlForma" Name="IDFORMA" PropertyName="SelectedValue" />
+                <asp:Parameter Name="TOTAL" />
+                <asp:SessionParameter Name="IDVDA" SessionField="ultVenda" />
+            </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:SqlDataSource ID="DSForma" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT id_forma, tipo_forma FROM forma_pagto"></asp:SqlDataSource>
         <div class="principal" style="margin-top: 5px;">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
@@ -196,7 +204,7 @@
             </div>
             <div class="divCopy">
                 <p class="textoCopy text-center">
-                    <i class="fa fa-copyright" aria-hidden="true"></i> Todos os direitos
+                    <i class="fa fa-copyright" aria-hidden="true"></i>Todos os direitos
                 reservados a MNT-Gaming 2020
                 </p>
             </div>
