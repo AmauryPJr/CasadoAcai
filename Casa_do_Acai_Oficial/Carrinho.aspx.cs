@@ -193,7 +193,7 @@ public partial class Carrinho : System.Web.UI.Page
 
     protected void btnFinalizar_Click(object sender, EventArgs e)
     {
-        DSCarrinho.UpdateParameters["TOTAL"].DefaultValue = txtTotalVenda.Text.Replace(',', '.');
+        DSCarrinho.UpdateParameters["TOTAL"].DefaultValue = cripto.Encrypt(txtTotalVenda.Text.Replace(',', '.'));
         DSCarrinho.Update();
 
         Session["novaCompra"] = "Sim";

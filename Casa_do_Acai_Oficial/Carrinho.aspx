@@ -19,7 +19,7 @@
 
     <style>
         body {
-            font-family: 'CHICKEN Pie';
+            font-family: 'CHICKEN Pie';            
         }
 
         #gvCarrinho {
