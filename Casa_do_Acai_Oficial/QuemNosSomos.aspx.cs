@@ -16,16 +16,18 @@ public partial class QuemNosSomos : System.Web.UI.Page
         else
         {
             lCarrinho.Text = GerarNavCarrinho();
-            lSair.Text     = GerarNavSair();
+            lSair.Text = GerarNavSair();
+            lPerfil.Text = GerarNavPerfil();
         }
     }
 
     public string GerarNavCarrinho()
     {
-        StringBuilder sbCarrinho = new StringBuilder();
-        
-        sbCarrinho.AppendLine("<a class='nav-link' id='btn5' href='Carrinho.aspx' onclick='mudarCor('btn4')'>CARRINHO</a>");
-        return sbCarrinho.ToString();
+        StringBuilder sb = new StringBuilder();
+
+        sb.AppendLine("<a class='nav-link' id='btn5' href='Carrinho.aspx' onclick='mudarCor('btn4')'>CARRINHO</a>");
+
+        return sb.ToString();
     }
 
     public string GerarNavSair()
@@ -43,5 +45,13 @@ public partial class QuemNosSomos : System.Web.UI.Page
             sbSair.AppendLine("<a class='nav-link' id='btn5' href='Sair.aspx' onclick='mudarCor('btn4')'>SAIR</a>");
             return sbSair.ToString();
         }
+    }
+
+    public string GerarNavPerfil()
+    {
+        StringBuilder sbPefil = new StringBuilder();
+
+        sbPefil.AppendLine("<a class='nav-link' id='btn5' href='Perfil.aspx' onclick='mudarCor('btn4')>PERFIL</a>'");
+        return sbPefil.ToString();
     }
 }

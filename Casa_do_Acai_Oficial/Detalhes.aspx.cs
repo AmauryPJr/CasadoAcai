@@ -23,9 +23,6 @@ public partial class Detalhes : System.Web.UI.Page
             {
                 if (Session["logado"].Equals("Entrou"))
                 {
-                    lCarrinho.Text = GerarNavCarrinho();
-                    lSair.Text = GerarNavSair();
-
                     DataView prodEscolhido;
                     prodEscolhido = (DataView)DSDetalhes.Select(DataSourceSelectArguments.Empty);
 
@@ -79,32 +76,6 @@ public partial class Detalhes : System.Web.UI.Page
             {
                 Response.Redirect("Menu.aspx");
             }
-        }
-    }
-
-    public string GerarNavCarrinho()
-    {
-        StringBuilder sb = new StringBuilder();
-
-        sb.AppendLine("<a class='nav-link' id='btn5' href='Carrinho.aspx' onclick='mudarCor('btn4')'>CARRINHO</a>");
-
-        return sb.ToString();
-    }
-
-    public string GerarNavSair()
-    {
-        StringBuilder sbSair = new StringBuilder();
-
-        if (Session["logado"] == null || Session["logado"].Equals("Saiu"))
-        {
-            sbSair.AppendLine("<a class='nav-link' id='btn5' href='Login.aspx' onclick='mudarCor('btn4')'>LOGIN</a>");
-            return sbSair.ToString();
-        }
-
-        else
-        {
-            sbSair.AppendLine("<a class='nav-link' id='btn5' href='Sair.aspx' onclick='mudarCor('btn4')'>SAIR</a>");
-            return sbSair.ToString();
         }
     }
 

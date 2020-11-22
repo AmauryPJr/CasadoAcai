@@ -38,23 +38,6 @@
             margin-left: 62px;
             font-family: chicken pie;
         }
-        .auto-style1 {
-            display: inline-block;
-            font-weight: 400;
-            color: #212529;
-            text-align: center;
-            vertical-align: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            font-size: 1rem;
-            line-height: 1.5;
-            border-radius: .25rem;
-            transition: none;
-            border: 1px solid transparent;
-            background-color: transparent;
-        }
     </style>
 </head>
 <body>
@@ -99,7 +82,7 @@
             Digite uma data :
             <asp:TextBox runat="server" ID="txtData" onKeyPress="Mascara(this)" Width="115px" Font-Size="20px"/>
         &nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="btnPesquisar" runat="server" BorderColor="#CC00CC" BorderStyle="Solid" CssClass="auto-style1" Text="Pesquisar" OnClick="btnPesquisar_Click" Width="140px" />
+            <asp:Button ID="btnPesquisar" runat="server" BorderColor="#CC00CC" BorderStyle="Solid" CssClass="btn" Text="Pesquisar" OnClick="btnPesquisar_Click" Width="140px" />
         </p>
         <div style="text-align: center;">
             <asp:GridView runat="server" ID="gvRelatorio" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" Font-Size="20px" ForeColor="Black" AutoGenerateColumns="False">

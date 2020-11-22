@@ -46,6 +46,9 @@
                             <asp:Literal runat="server" ID="lCarrinho" />
                         </li>
                         <li class="nav-item">
+                            <asp:Literal runat="server" ID="lPerfil" />
+                        </li>
+                        <li class="nav-item">
                             <asp:Literal runat="server" ID="lSair" />
                         </li>
                     </ul>

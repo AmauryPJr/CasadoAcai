@@ -22,39 +22,11 @@ public partial class Carrinho : System.Web.UI.Page
 
         else
         {
-            lCarrinho.Text = GerarNavCarrinho();
-            lSair.Text     = GerarNavSair();
-            lH1.Text       = GerarH1();
-            lRS.Text       = GerarRS();
+            lH1.Text = GerarH1();
+            lRS.Text = GerarRS();
             CarregarCarrinho();
         }
     }
-
-    public string GerarNavCarrinho()
-    {
-        StringBuilder sbCarrinho = new StringBuilder();
-
-        sbCarrinho.AppendLine("<a class='nav-link' id='btn5' href='Carrinho.aspx' onclick='mudarCor('btn4')'>CARRINHO</a>");
-        return sbCarrinho.ToString();
-    }
-
-    public string GerarNavSair()
-    {
-        StringBuilder sbSair = new StringBuilder();
-
-        if (Session["logado"] == null || Session["logado"].Equals("Saiu"))
-        {
-            sbSair.AppendLine("<a class='nav-link' id='btn5' href='Login.aspx' onclick='mudarCor('btn4')'>LOGIN</a>");
-            return sbSair.ToString();
-        }
-
-        else
-        {
-            sbSair.AppendLine("<a class='nav-link' id='btn5' href='Sair.aspx' onclick='mudarCor('btn4')'>SAIR</a>");
-            return sbSair.ToString();
-        }
-    }
-
     public string GerarH1()
     {
         StringBuilder sbH1 = new StringBuilder();

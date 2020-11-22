@@ -11,19 +11,10 @@ public partial class Sair : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["logado"] == null || Session["logado"].Equals("Saiu"))
-            Response.Redirect("Menu_Logado.aspx");
+            Response.Redirect("Menu.aspx");
 
         else
-            lCarrinho.Text = GerarNavCarrinho();
-    }
-
-    public string GerarNavCarrinho()
-    {
-        StringBuilder sb = new StringBuilder();
-
-        sb.AppendLine("<a class='nav-link' id='btn5' href='Carrinho.aspx' onclick='mudarCor('btn4')'>CARRINHO</a>");
-
-        return sb.ToString();
+            return;
     }
 
     protected void btnSim_Click(object sender, EventArgs e)

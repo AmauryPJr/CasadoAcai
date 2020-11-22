@@ -4,112 +4,29 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Net;
-using System.Web.Services;
+using System.Data;
 using ServicoCorreios;
 
-public partial class CadastroLogin : System.Web.UI.Page
+public partial class Perfil : System.Web.UI.Page
 {
-    protected static String ReCaptcha_Key = "6LeVDr4ZAAAAAIlwbRdNXOHyg3S0SgY_HzFOcG2R";
-    protected static String ReCaptcha_Secret = "6LeVDr4ZAAAAABRLyjixpCyIytS9GJRDjLxOvhIt";
-
     Criptografia cripto = new Criptografia("ETEP");
+
+    DataTable listaDescripto = new DataTable();
 
     AtendeClienteClient sc = new AtendeClienteClient("AtendeClientePort");
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["logado"] == null || Session["logado"].Equals("Saiu"))
+            Response.Redirect("Menu.aspx");
+
+        else
+            CarregarCliente();
+
         if (IsPostBack)
-        {
             txtSenha.Attributes["value"] = txtSenha.Text;
-        }        
     }
 
-    protected void btnValidarCEP_Click(object sender, EventArgs e)
-    {
-        var dados = sc.consultaCEP(txtCEP.Text);
-
-        if (dados != null)
-        {
-            string endereco = "" + dados.end + ", " + dados.bairro + " " + dados.cidade + " - " + dados.uf + "";
-            Response.Write("<script>confirm('Confirma o seu Endereço: "+endereco+"')</script>");
-        }
-        else
-        {
-            Response.Write("<script>alert('CEP Incorreto. Coloque um CEP válido !');</script>");            
-        }
-
-        string script = "$('.step-1').attr('hidden', 'hidden'); " +
-                    "$('.step-2').removeAttr('hidden'); " +
-                    "$('.step-3').attr('hidden', 'hidden');";
-
-        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "", script, true);
-    }
-
-    protected void btnValidarCPF_Click(object sender, EventArgs e)
-    {
-        if (Validacao.ValidarCPF(txtCPF.Text) == true)
-        {
-            Response.Write("<script>alert('CPF é Válido !');</script>");
-            txtCPF.Text = Validacao.FormatarCPF(txtCPF.Text);
-        }
-        else
-        {
-            Response.Write("<script>alert('CPF Inválido. Coloque um CPF válido !');</script>");
-        }        
-    }
-
-    protected void btnFinalizar_Click(object sender, EventArgs e)
-    {
-        Session["nomeCli"] = txtNome.Text;
-
-        DSCadastroCliente.InsertParameters["NOME"].DefaultValue = cripto.Encrypt(txtNome.Text);
-        DSCadastroCliente.InsertParameters["TELEFONE"].DefaultValue = cripto.Encrypt(txtTelefone.Text);
-        DSCadastroCliente.InsertParameters["CEP"].DefaultValue = cripto.Encrypt(txtCEP.Text);
-        DSCadastroCliente.InsertParameters["NUMERO"].DefaultValue = cripto.Encrypt(txtNumero.Text);
-
-        if (txtComplemento.Text != "")
-        {
-            DSCadastroCliente.InsertParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt(txtComplemento.Text);
-        }
-        else
-        {
-            DSCadastroCliente.InsertParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt("");
-        }
-
-        string genero = "";
-
-        if (ddlGenero.SelectedIndex == 0)
-        {
-            genero = "F";
-        }
-
-        if (ddlGenero.SelectedIndex == 1)
-        {
-            genero = "M";
-        }
-
-        if (ddlGenero.SelectedIndex == 2)
-        {
-            genero = "PND";
-        }
-
-        DSCadastroCliente.InsertParameters["GENERO"].DefaultValue = cripto.Encrypt(genero);
-        DSCadastroCliente.InsertParameters["DATANASC"].DefaultValue = cripto.Encrypt(txtDataNasc.Text);
-        DSCadastroCliente.InsertParameters["EMAIL"].DefaultValue = cripto.Encrypt(txtEmail.Text);
-        DSCadastroCliente.InsertParameters["CPF"].DefaultValue = cripto.Encrypt(txtCPF.Text);
-        DSCadastroCliente.InsertParameters["SENHA"].DefaultValue = cripto.Encrypt(txtSenha.Text);
-
-        DSCadastroCliente.Insert();
-
-        LimparCampos();
-
-        Session["logado"] = "Entrou";
-        Session["novaCompra"] = "Sim";
-
-        Response.Redirect("Menu_Logado.aspx");
-    }
-    
     protected void btnValidarSenha_Click(object sender, EventArgs e)
     {
         int qtd_Letras = 0;
@@ -323,11 +240,140 @@ public partial class CadastroLogin : System.Web.UI.Page
         }
     }
 
+    protected void btnValidarCEP_Click(object sender, EventArgs e)
+    {
+        var dados = sc.consultaCEP(txtCEP.Text);
+
+        if (dados != null)
+        {
+            string endereco = "" + dados.end + ", " + dados.bairro + " " + dados.cidade + " - " + dados.uf + "";
+            Response.Write("<script>confirm('Confirma o seu Endereço: " + endereco + "')</script>");
+        }
+        else
+        {
+            Response.Write("<script>alert('CEP Incorreto. Coloque um CEP válido !');</script>");
+        }
+
+        string script = "$('.step-1').attr('hidden', 'hidden'); " +
+                    "$('.step-2').removeAttr('hidden'); " +
+                    "$('.step-3').attr('hidden', 'hidden');";
+
+        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "", script, true);
+    }
+
+    protected void btnValidarCPF_Click(object sender, EventArgs e)
+    {
+        if (Validacao.ValidarCPF(txtCPF.Text) == true)
+        {
+            Response.Write("<script>alert('CPF é Válido !');</script>");
+            txtCPF.Text = Validacao.FormatarCPF(txtCPF.Text);
+        }
+
+        else
+        {
+            Response.Write("<script>alert('CPF Inválido. Coloque um CPF válido !');</script>");
+        }
+    }
+
+    protected void btnAlterar_Click(object sender, EventArgs e)
+    {
+        Session["nomeCli"] = txtNome.Text;
+
+        DSPerfil.UpdateParameters["NOME"].DefaultValue = cripto.Encrypt(txtNome.Text);
+        DSPerfil.UpdateParameters["TELEFONE"].DefaultValue = cripto.Encrypt(txtTelefone.Text);
+        DSPerfil.UpdateParameters["CEP"].DefaultValue = cripto.Encrypt(txtCEP.Text);
+        DSPerfil.UpdateParameters["NUMERO"].DefaultValue = cripto.Encrypt(txtNumero.Text);
+
+        if (txtComplemento.Text != "")
+        {
+            DSPerfil.UpdateParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt(txtComplemento.Text);
+        }
+        else
+        {
+            DSPerfil.UpdateParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt("");
+        }
+
+        string genero = "";
+
+        if (ddlGenero.SelectedIndex == 0)
+        {
+            genero = "F";
+        }
+
+        if (ddlGenero.SelectedIndex == 1)
+        {
+            genero = "M";
+        }
+
+        if (ddlGenero.SelectedIndex == 2)
+        {
+            genero = "PND";
+        }
+
+        DSPerfil.UpdateParameters["GENERO"].DefaultValue = cripto.Encrypt(genero);
+        DSPerfil.UpdateParameters["DATANASC"].DefaultValue = cripto.Encrypt(txtDataNasc.Text);
+        DSPerfil.UpdateParameters["EMAIL"].DefaultValue = cripto.Encrypt(txtEmail.Text);
+        DSPerfil.UpdateParameters["CPF"].DefaultValue = cripto.Encrypt(txtCPF.Text);
+        DSPerfil.UpdateParameters["SENHA"].DefaultValue = cripto.Encrypt(txtSenha.Text);
+
+        DSPerfil.Update();
+
+        Response.Write("<script>alert('Seu perfil foi Alterado com Sucesso !')</script>");
+
+        string script = "$('.step-1').removeAttr('hidden'); " +
+                    "$('.step-2').attr('hidden', 'hidden'); " +
+                    "$('.step-3').attr('hidden', 'hidden');";
+
+        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "", script, true);
+    }
+
+    public void CarregarCliente()
+    {
+        DataView perfil;
+
+        DSPerfil.SelectParameters["IDCLI"].DefaultValue = Session["idCli"].ToString();
+
+        perfil = (DataView)DSPerfil.Select(DataSourceSelectArguments.Empty);
+
+        if (perfil.Table.Rows.Count > 0)
+        {
+            string genero = cripto.Decrypt(perfil.Table.Rows[0]["gen_cli"].ToString());
+
+            string data = cripto.Decrypt(perfil.Table.Rows[0]["dtnasc_cli"].ToString());
+            DateTime dataFormat = Convert.ToDateTime(data);
+
+            if (genero == "F")
+                ddlGenero.SelectedValue = "F";
+
+            if (genero == "M")
+                ddlGenero.SelectedValue = "M";
+
+            if (genero == "PND")
+                ddlGenero.SelectedValue = "PND";
+
+            txtNome.Text    = cripto.Decrypt(perfil.Table.Rows[0]["nome_cli"].ToString());
+            txtCPF.Text     = cripto.Decrypt(perfil.Table.Rows[0]["cpf_cli"].ToString());
+            txtEmail.Text   = cripto.Decrypt(perfil.Table.Rows[0]["email_cli"].ToString());
+            txtSenha.Text   = cripto.Decrypt(perfil.Table.Rows[0]["senha_cli"].ToString());
+            txtCEP.Text     = cripto.Decrypt(perfil.Table.Rows[0]["cep_cli"].ToString());
+            txtNumero.Text  = cripto.Decrypt(perfil.Table.Rows[0]["num_cli"].ToString());
+
+            if (perfil.Table.Rows[0]["comp_cli"].ToString() == "")
+                txtComplemento.Text = "";
+
+            else
+                txtComplemento.Text = (perfil.Table.Rows[0]["comp_cli"].ToString());
+
+            txtTelefone.Text = cripto.Decrypt(perfil.Table.Rows[0]["tel_cli"].ToString());
+            txtDataNasc.Text = dataFormat.ToShortDateString();
+        }
+    }
+
     public void SenhaForte()
     {
         Response.Write("<script>alert('A sua senha é Forte. Clique em Próximo para prossegir com o Cadastro !');</script>");
 
-        btnFinalizar.Enabled = true;
+        btnAlterar.Enabled = true;
     }
 
     public void SenhaMedia()
@@ -342,19 +388,5 @@ public partial class CadastroLogin : System.Web.UI.Page
         Response.Write("<script>alert('A sua senha é Fraca. Tente uma Senha mais Forte !')</script>");
 
         txtSenha.Attributes["value"] = "";
-    }
-
-    public void LimparCampos()
-    {
-        txtNome.Text = "";
-        txtTelefone.Text = "";
-        txtCEP.Text = "";
-        txtNumero.Text = "";
-        txtComplemento.Text = "";
-        txtEmail.Text = "";
-        txtDataNasc.Text = "";
-        ddlGenero.ClearSelection();
-        txtCPF.Text = "";
-        txtSenha.Text = "";
-    }
+    }    
 }

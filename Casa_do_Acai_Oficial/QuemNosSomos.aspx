@@ -67,6 +67,9 @@
                         <a class="nav-link" id="btn4" href="Cardapio_NaoLogado.aspx" onclick="mudarCor('btn4')">CARDÁPIO</a>
                     </li>
                     <li class="nav-item">
+                        <asp:Literal runat="server" ID="lPerfil" />
+                    </li>
+                    <li class="nav-item">
                         <asp:Literal runat="server" ID="lCarrinho" />
                     </li>
                     <li class="nav-item">
