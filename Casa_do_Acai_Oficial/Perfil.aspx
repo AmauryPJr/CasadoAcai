@@ -19,7 +19,7 @@
         crossorigin="anonymous"></script>
 
     <style type="text/css">
-        .btnFinalizar {
+        #btnFinalizar {
             width: 20%;
             background: none;
             border: 2px solid #FF00FF;
@@ -224,7 +224,9 @@
                                 <div class="row">
                                     <input class="btn" id="btnVoltar" type="button" name="" value="voltar"
                                         onclick="handleGoBack()">
-                                    <asp:Button runat="server" CssClass="btnFinalizar" ID="btnAlterar" type="button" Text="Alterar" OnClick="btnAlterar_Click" BorderStyle="Solid" Enabled="false"/>
+                                    <asp:Button runat="server" style="width: 20%; background: none; border: 2px solid #FF00FF;
+                                        color: black; padding: 5px; font-size: 18px; cursor: pointer; margin: 15px 0;
+                                        margin-left: 480px; font-family: chicken pie;" CssClass="btn" ID="btnAlterar" type="button" Text="Alterar" OnClick="btnAlterar_Click" />
                                 </div>
                             </div>
                         </div>
@@ -234,22 +236,25 @@
         </div>
         <asp:SqlDataSource ID="DSPerfil" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>"
             ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>"
-            SelectCommand="SELECT nome_cli, senha_cli, cpf_cli, tel_cli, cep_cli, num_cli, comp_cli, email_cli, dtnasc_cli, gen_cli FROM cadastro_cliente WHERE (id_cli = @IDCLI)"
-            UpdateCommand="UPDATE cadastro_cliente SET nome_cli = @NOVONOME, senha_cli = @SENHA, cpf_cli = @CPF, tel_cli = @FONE, cep_cli = @CEP, num_cli = @NUMERO, comp_cli = @COMP, email_cli = @EMAIL, dtnasc_cli = @DATANASC, gen_cli = @GENERO WHERE (id_cli = @IDCLI) AND (nome_cli = @NOME)">
+            SelectCommand="SELECT nome_cli, senha_cli, cpf_cli, tel_cli, cep_cli, num_cli, comp_cli, email_cli, dtnasc_cli, gen_cli FROM cadastro_cliente WHERE (id_cli = @IDCLI)">
             <SelectParameters>
                 <asp:Parameter Name="IDCLI" />
-            </SelectParameters>
+            </SelectParameters>            
+        </asp:SqlDataSource>
+
+        <asp:SqlDataSource ID="DSAlteração" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>"
+            ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>"
+            UpdateCommand="UPDATE cadastro_cliente SET nome_cli = @NOME, senha_cli = @SENHA, cpf_cli = @CPF, tel_cli = @TELEFONE, cep_cli = @CEP, num_cli = @NUMERO, comp_cli = @COMP, email_cli = @EMAIL, dtnasc_cli = @DATANASC, gen_cli = @GENERO WHERE (id_cli = @IDCLI)">
             <UpdateParameters>
                 <asp:SessionParameter Name="IDCLI" SessionField="idCli" />
-                <asp:SessionParameter Name="NOME" SessionField="nomeCli" />
-                <asp:Parameter Name="NOVONOME" />
+                <asp:Parameter Name="NOME" />
                 <asp:Parameter Name="CPF" />
-                <asp:Parameter Name="SENHA" />
-                <asp:Parameter Name="FONE" />
-                <asp:Parameter Name="CEP" />
-                <asp:Parameter Name="NUMERO" />
-                <asp:Parameter Name="COMPLEMENTO" />
                 <asp:Parameter Name="EMAIL" />
+                <asp:Parameter Name="SENHA" />
+                <asp:Parameter Name="CEP" />
+                <asp:Parameter Name="TELEFONE" />
+                <asp:Parameter Name="COMP" />
+                <asp:Parameter Name="NUMERO" />
                 <asp:Parameter Name="DATANASC" />
                 <asp:Parameter Name="GENERO" />
             </UpdateParameters>

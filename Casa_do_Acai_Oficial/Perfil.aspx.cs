@@ -21,7 +21,12 @@ public partial class Perfil : System.Web.UI.Page
             Response.Redirect("Menu.aspx");
 
         else
-            CarregarCliente();
+        {
+            if (!IsPostBack)
+            {
+                CarregarCliente();
+            }
+        }            
 
         if (IsPostBack)
             txtSenha.Attributes["value"] = txtSenha.Text;
@@ -279,18 +284,18 @@ public partial class Perfil : System.Web.UI.Page
     {
         Session["nomeCli"] = txtNome.Text;
 
-        DSPerfil.UpdateParameters["NOME"].DefaultValue = cripto.Encrypt(txtNome.Text);
-        DSPerfil.UpdateParameters["TELEFONE"].DefaultValue = cripto.Encrypt(txtTelefone.Text);
-        DSPerfil.UpdateParameters["CEP"].DefaultValue = cripto.Encrypt(txtCEP.Text);
-        DSPerfil.UpdateParameters["NUMERO"].DefaultValue = cripto.Encrypt(txtNumero.Text);
+        DSAlteração.UpdateParameters["NOME"].DefaultValue = cripto.Encrypt(txtNome.Text);
+        DSAlteração.UpdateParameters["TELEFONE"].DefaultValue = cripto.Encrypt(txtTelefone.Text);
+        DSAlteração.UpdateParameters["CEP"].DefaultValue = cripto.Encrypt(txtCEP.Text);
+        DSAlteração.UpdateParameters["NUMERO"].DefaultValue = cripto.Encrypt(txtNumero.Text);
 
         if (txtComplemento.Text != "")
         {
-            DSPerfil.UpdateParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt(txtComplemento.Text);
+            DSAlteração.UpdateParameters["COMP"].DefaultValue = cripto.Encrypt(txtComplemento.Text);
         }
         else
         {
-            DSPerfil.UpdateParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt("");
+            DSAlteração.UpdateParameters["COMP"].DefaultValue = cripto.Encrypt("");
         }
 
         string genero = "";
@@ -310,13 +315,13 @@ public partial class Perfil : System.Web.UI.Page
             genero = "PND";
         }
 
-        DSPerfil.UpdateParameters["GENERO"].DefaultValue = cripto.Encrypt(genero);
-        DSPerfil.UpdateParameters["DATANASC"].DefaultValue = cripto.Encrypt(txtDataNasc.Text);
-        DSPerfil.UpdateParameters["EMAIL"].DefaultValue = cripto.Encrypt(txtEmail.Text);
-        DSPerfil.UpdateParameters["CPF"].DefaultValue = cripto.Encrypt(txtCPF.Text);
-        DSPerfil.UpdateParameters["SENHA"].DefaultValue = cripto.Encrypt(txtSenha.Text);
+        DSAlteração.UpdateParameters["GENERO"].DefaultValue = cripto.Encrypt(genero);
+        DSAlteração.UpdateParameters["DATANASC"].DefaultValue = cripto.Encrypt(txtDataNasc.Text);
+        DSAlteração.UpdateParameters["EMAIL"].DefaultValue = cripto.Encrypt(txtEmail.Text);
+        DSAlteração.UpdateParameters["CPF"].DefaultValue = cripto.Encrypt(txtCPF.Text);
+        DSAlteração.UpdateParameters["SENHA"].DefaultValue = cripto.Encrypt(txtSenha.Text);
 
-        DSPerfil.Update();
+        DSAlteração.Update();
 
         Response.Write("<script>alert('Seu perfil foi Alterado com Sucesso !')</script>");
 
@@ -329,49 +334,60 @@ public partial class Perfil : System.Web.UI.Page
 
     public void CarregarCliente()
     {
-        DataView perfil;
+        if (txtNome.Text != "" && txtCPF.Text != "" && txtEmail.Text != "" &&
+            txtSenha.Text != "" && txtCEP.Text != "" && txtNumero.Text != "" &&
+            txtTelefone.Text != "" && txtDataNasc.Text != "" &&
+            ddlGenero.SelectedIndex == 0 || ddlGenero.SelectedIndex == 1 || ddlGenero.SelectedIndex == 2)
+            return;
 
-        DSPerfil.SelectParameters["IDCLI"].DefaultValue = Session["idCli"].ToString();
-
-        perfil = (DataView)DSPerfil.Select(DataSourceSelectArguments.Empty);
-
-        if (perfil.Table.Rows.Count > 0)
+        else
         {
-            string genero = cripto.Decrypt(perfil.Table.Rows[0]["gen_cli"].ToString());
+            DataView perfil;
 
-            string data = cripto.Decrypt(perfil.Table.Rows[0]["dtnasc_cli"].ToString());
-            DateTime dataFormat = Convert.ToDateTime(data);
+            DSPerfil.SelectParameters["IDCLI"].DefaultValue = Session["idCli"].ToString();
 
-            if (genero == "F")
-                ddlGenero.SelectedValue = "F";
+            perfil = (DataView)DSPerfil.Select(DataSourceSelectArguments.Empty);
 
-            if (genero == "M")
-                ddlGenero.SelectedValue = "M";
+            if (perfil.Table.Rows.Count > 0)
+            {
+                string genero = cripto.Decrypt(perfil.Table.Rows[0]["gen_cli"].ToString());
 
-            if (genero == "PND")
-                ddlGenero.SelectedValue = "PND";
+                string data = cripto.Decrypt(perfil.Table.Rows[0]["dtnasc_cli"].ToString());
+                DateTime dataFormat = Convert.ToDateTime(data);
 
-            txtNome.Text    = cripto.Decrypt(perfil.Table.Rows[0]["nome_cli"].ToString());
-            txtCPF.Text     = cripto.Decrypt(perfil.Table.Rows[0]["cpf_cli"].ToString());
-            txtEmail.Text   = cripto.Decrypt(perfil.Table.Rows[0]["email_cli"].ToString());
-            txtSenha.Text   = cripto.Decrypt(perfil.Table.Rows[0]["senha_cli"].ToString());
-            txtCEP.Text     = cripto.Decrypt(perfil.Table.Rows[0]["cep_cli"].ToString());
-            txtNumero.Text  = cripto.Decrypt(perfil.Table.Rows[0]["num_cli"].ToString());
+                string comp = perfil.Table.Rows[0]["comp_cli"].ToString();
 
-            if (perfil.Table.Rows[0]["comp_cli"].ToString() == "")
-                txtComplemento.Text = "";
+                if (genero == "F")
+                    ddlGenero.SelectedValue = "F";
 
-            else
-                txtComplemento.Text = (perfil.Table.Rows[0]["comp_cli"].ToString());
+                if (genero == "M")
+                    ddlGenero.SelectedValue = "M";
 
-            txtTelefone.Text = cripto.Decrypt(perfil.Table.Rows[0]["tel_cli"].ToString());
-            txtDataNasc.Text = dataFormat.ToShortDateString();
+                if (genero == "PND")
+                    ddlGenero.SelectedValue = "PND";
+
+                txtNome.Text = cripto.Decrypt(perfil.Table.Rows[0]["nome_cli"].ToString());
+                txtCPF.Text = cripto.Decrypt(perfil.Table.Rows[0]["cpf_cli"].ToString());
+                txtEmail.Text = cripto.Decrypt(perfil.Table.Rows[0]["email_cli"].ToString());
+                txtSenha.Text = cripto.Decrypt(perfil.Table.Rows[0]["senha_cli"].ToString());
+                txtCEP.Text = cripto.Decrypt(perfil.Table.Rows[0]["cep_cli"].ToString());
+                txtNumero.Text = cripto.Decrypt(perfil.Table.Rows[0]["num_cli"].ToString());
+
+                if (comp == "")
+                    txtComplemento.Text = "";
+
+                else
+                    txtComplemento.Text = cripto.Decrypt(comp);
+
+                txtTelefone.Text = cripto.Decrypt(perfil.Table.Rows[0]["tel_cli"].ToString());
+                txtDataNasc.Text = dataFormat.ToShortDateString();
+            }
         }
     }
 
     public void SenhaForte()
     {
-        Response.Write("<script>alert('A sua senha é Forte. Clique em Próximo para prossegir com o Cadastro !');</script>");
+        Response.Write("<script>alert('A sua senha é Forte. Clique em Próximo para atualizar o Perfil !');</script>");
 
         btnAlterar.Enabled = true;
     }

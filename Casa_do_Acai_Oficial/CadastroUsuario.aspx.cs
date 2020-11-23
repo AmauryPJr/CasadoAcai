@@ -107,7 +107,7 @@ public partial class CadastroLogin : System.Web.UI.Page
         Session["logado"] = "Entrou";
         Session["novaCompra"] = "Sim";
 
-        Response.Redirect("Menu_Logado.aspx");
+        Response.Redirect("Login.aspx");
     }
     
     protected void btnValidarSenha_Click(object sender, EventArgs e)
