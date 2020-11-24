@@ -15,16 +15,14 @@ public partial class Relatorios : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //if (Session["adm"] == null || Session.Equals("Saiu"))
-        //    Response.Redirect("Menu.aspx");
+        if (Session["adm"] == null || Session.Equals("Saiu"))
+            Response.Redirect("Menu.aspx");
 
-        //else
-        //{
-            
-        //}
-
-        lSair.Text = GerarNavSair();
-        lRelatorios.Text = GerarNavRelatorios();
+        else
+        {
+            lSair.Text = GerarNavSair();
+            lRelatorios.Text = GerarNavRelatorios();
+        }        
     }
 
     public string GerarNavSair()
@@ -72,7 +70,7 @@ public partial class Relatorios : System.Web.UI.Page
                 linha["adicional"] = adicional;
 
 
-            linha["valor_vda"] = cripto.Decrypt(lista.Table.Rows[i]["valor_vda"].ToString()).Replace('.', ',');
+            linha["valor_vda"] = cripto.Decrypt(lista.Table.Rows[i]["valor_vda"].ToString())/*.Replace('.', ',')*/;
 
             relatorio.Rows.Add(linha);
         }

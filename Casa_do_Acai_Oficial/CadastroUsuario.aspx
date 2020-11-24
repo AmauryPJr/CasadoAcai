@@ -250,7 +250,9 @@
                                     <div class="row">
                                         <input class="btn" id="btnVoltar" type="button" name="" value="voltar"
                                             onclick="handleGoBack()">
-                                        <asp:Button runat="server" CssClass="btnFinalizar" ID="btnFinalizar" type="button" Text="Finalizar" OnClick="btnFinalizar_Click" BorderStyle="Solid" />
+                                        <asp:Button runat="server" style="width: 20%; background: none; border: 2px solid #FF00FF;
+                                        color: black; padding: 5px; font-size: 18px; cursor: pointer; margin: 15px 0;
+                                        margin-left: 480px; font-family: chicken pie;" CssClass="btn" ID="btnFinalizar" type="button" Text="Finalizar" OnClick="btnFinalizar_Click" />
                                     </div>
                                 </div>
                             </div>

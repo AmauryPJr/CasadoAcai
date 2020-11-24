@@ -113,7 +113,7 @@
             <div id="dvImagem">
                 <asp:Image ID="imgProd" runat="server" Height="125px" Width="135px" />
             </div>
-            <br />
+
             <br />
 
             <div id="dvDetalhes" class="divs">
@@ -122,28 +122,26 @@
                         Nome:
                 <asp:Label runat="server" ID="txtNome" />
                     </p>
-                    <br />
                     <p>
                         Preço: R$
                 <asp:Label runat="server" ID="txtPreco" />
                     </p>
-                    <br />
                     <p>
                         <asp:Label ID="lblTamnho" runat="server" Text="Tamanho:"></asp:Label>
                         &nbsp;<asp:Label ID="txtTamanho" runat="server"></asp:Label>
                     </p>
-                    <br />
                     <p>
                         Tipo:
                 <asp:Label ID="txtTipo" runat="server"></asp:Label>
                     </p>
-
-                    <br />
                     <p>
                         Quantidade Desejada:
                 <asp:TextBox runat="server" ID="txtQtdDesejada" Width="115px" />
                     </p>
                 </div>
+                <br />
+                <br />
+                <br />
                 <br />
             </div>
             <div id="grid" class="divs">
@@ -172,9 +170,6 @@
             <br />
             <asp:Button runat="server" CssClass="btn" ID="btnVoltar" Text="Voltar" PostBackUrl="~/Cardapio_Logado.aspx" Width="125px" />
             <asp:Button runat="server" CssClass="btn" ID="btnAdicionar" Text="Adicionar" OnClick="btnAdicionar_Click" BorderStyle="Solid" Width="125px" />
-            <br />
-            <br />
-            <br />
             <br />
             <br />
             <asp:SqlDataSource ID="DSDetalhes" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT produto.id_prod, produto.nome_prod, produto.tam_prod, produto.preco_prod, tipo_prod.nome_tipo FROM produto INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd WHERE (produto.id_prod = @IDPROD)">
