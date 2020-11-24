@@ -29,26 +29,57 @@ public partial class Login : System.Web.UI.Page
 
     protected void btnEntrar_Click(object sender, EventArgs e)
     {
-        DataView listaLogin;
+        DataView loginCliente, loginAdm;
 
-        DSLogin.SelectParameters["LOGIN"].DefaultValue = cripto.Encrypt(txtLogin.Text);
-        DSLogin.SelectParameters["SENHA"].DefaultValue = cripto.Encrypt(txtSenha.Text);
+        DSLoginCliente.SelectParameters["LOGIN"].DefaultValue = cripto.Encrypt(txtLogin.Text);
+        DSLoginCliente.SelectParameters["SENHA"].DefaultValue = cripto.Encrypt(txtSenha.Text);
 
-        listaLogin = (DataView)DSLogin.Select(DataSourceSelectArguments.Empty);
+        DSLoginAdm.SelectParameters["LOGIN"].DefaultValue = cripto.Encrypt(txtLogin.Text);
+        DSLoginAdm.SelectParameters["SENHA"].DefaultValue = cripto.Encrypt(txtSenha.Text);
 
-        if (listaLogin.Table.Rows.Count > 0)
+        loginCliente = (DataView)DSLoginCliente.Select(DataSourceSelectArguments.Empty);
+
+        loginAdm = (DataView)DSLoginAdm.Select(DataSourceSelectArguments.Empty);
+
+        if (txtLogin.Text == "" && txtSenha.Text == "")
         {
-            Session["Logado"] = "Entrou";
-            Session["idCli"] = listaLogin.Table.Rows[0]["id_cli"].ToString();
-            Session["nomeCli"] = cripto.Decrypt(listaLogin.Table.Rows[0]["nome_cli"].ToString());
-            Session["novaCompra"] = "Sim";
-            Response.Redirect("Menu_Logado.aspx");
+            Response.Write("<script>alert('Digite o login e senha para Entrar !')</script>");
         }
+
         else
         {
-            Response.Write("<script>alert('Login ou Senha Incorretos !');</script>");
+            if (loginCliente.Table.Rows.Count > 0)
+            {
+                Session["Logado"] = "Entrou";
+                Session["idCli"] = loginCliente.Table.Rows[0]["id_cli"].ToString();
+                Session["nomeCli"] = cripto.Decrypt(loginCliente.Table.Rows[0]["nome_cli"].ToString());
+                Session["novaCompra"] = "Sim";
+                Response.Redirect("Menu_Logado.aspx");
 
-            txtSenha.Text = "";
+                return;
+            }
+
+            else
+            {
+                Response.Write("<script>alert('Login ou Senha Incorretos !');</script>");
+
+                txtSenha.Text = "";
+            }
+
+            if (loginAdm.Table.Rows.Count > 0)
+            {
+                Session["adm"] = "Entrou";
+                Response.Redirect("Menu_Adm.aspx");
+
+                return;
+            }
+
+            else
+            {
+                Response.Write("<script>alert('Login ou Senha Incorretos !');</script>");
+
+                txtSenha.Text = "";
+            }
         }
     }
 }

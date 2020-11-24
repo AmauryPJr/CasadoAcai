@@ -73,10 +73,10 @@
                             <a class="nav-link" id="btn5" href="Carrinho.aspx" onclick="mudarCor('btn5')">CARRINHO</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn5" href="Perfil.aspx" onclick="mudarCor('btn5')">PERFIL</a>
+                            <a class="nav-link" id="btn6" href="Perfil.aspx" onclick="mudarCor('btn6')">PERFIL</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn5" href="SAIR.aspx" onclick="mudarCor('btn5')">SAIR</a>
+                            <a class="nav-link" id="btn7" href="SAIR.aspx" onclick="mudarCor('btn7')">SAIR</a>
                         </li>
                     </ul>
                 </div>

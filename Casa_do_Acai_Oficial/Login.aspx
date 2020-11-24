@@ -112,12 +112,20 @@
                 <p>Ainda não tem conta? <a href="CadastroUsuario.aspx">Cadastre-se</a> </p>
             </div>
         </div>
-        <asp:SqlDataSource ID="DSLogin" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT id_cli, nome_cli, senha_cli, cpf_cli FROM cadastro_cliente WHERE (senha_cli = @SENHA) AND (cpf_cli = @LOGIN)">
+        <asp:SqlDataSource ID="DSLoginCliente" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT id_cli, nome_cli, senha_cli, cpf_cli FROM cadastro_cliente WHERE (senha_cli = @SENHA) AND (cpf_cli = @LOGIN)">
             <SelectParameters>
                 <asp:Parameter Name="LOGIN" />
                 <asp:Parameter Name="SENHA" />
             </SelectParameters>
         </asp:SqlDataSource>
+
+        <asp:SqlDataSource ID="DSLoginAdm" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT id_adm, login_adm, senha_adm FROM adm WHERE (login_adm = @LOGIN) AND (senha_adm = @SENHA)">
+            <SelectParameters>
+                <asp:Parameter Name="LOGIN" />
+                <asp:Parameter Name="SENHA" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+
     </form>
 </body>
 </html>

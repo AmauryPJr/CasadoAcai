@@ -45,10 +45,10 @@
                             <a class="nav-link" id="btn5" href="Carrinho.aspx" onclick="mudarCor('btn5')">CARRINHO</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn5" href="Perfil.aspx" onclick="mudarCor('btn5')">PERFIL</a>
+                            <a class="nav-link" id="btn6" href="Perfil.aspx" onclick="mudarCor('btn6')">PERFIL</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn5" href="SAIR.aspx" onclick="mudarCor('btn5')">SAIR</a>
+                            <a class="nav-link" id="btn7" href="SAIR.aspx" onclick="mudarCor('btn7')">SAIR</a>
                         </li>
                     </ul>
                 </div>
@@ -224,7 +224,8 @@
                 $('#btn3').removeClass('mudar_cor')
                 $('#btn4').removeClass('mudar_cor')
                 $('#btn5').removeClass('mudar_cor')
-
+                $('#btn6').removeClass('mudar_cor')
+                $('#btn7').removeClass('mudar_cor')
             } else {
 
                 if (elemento == 'btn2') {
@@ -233,7 +234,8 @@
                     $('#btn3').removeClass('mudar_cor')
                     $('#btn4').removeClass('mudar_cor')
                     $('#btn5').removeClass('mudar_cor')
-
+                    $('#btn6').removeClass('mudar_cor')
+                    $('#btn7').removeClass('mudar_cor')
                 } else {
 
                     if (elemento == 'btn3') {
@@ -242,20 +244,50 @@
                         $('#btn2').removeClass('mudar_cor')
                         $('#btn4').removeClass('mudar_cor')
                         $('#btn5').removeClass('mudar_cor')
+                        $('#btn6').removeClass('mudar_cor')
+                        $('#btn7').removeClass('mudar_cor')
                     } else {
+
                         if (elemento == 'btn4') {
                             $('#btn4').addClass('mudar_cor')
                             $('#btn1').removeClass('mudar_cor')
                             $('#btn2').removeClass('mudar_cor')
                             $('#btn3').removeClass('mudar_cor')
                             $('#btn5').removeClass('mudar_cor')
+                            $('#btn6').removeClass('mudar_cor')
+                            $('#btn7').removeClass('mudar_cor')
                         } else {
+
                             if (elemento == 'btn5') {
                                 $('#btn5').addClass('mudar_cor')
                                 $('#btn1').removeClass('mudar_cor')
                                 $('#btn2').removeClass('mudar_cor')
                                 $('#btn3').removeClass('mudar_cor')
                                 $('#btn4').removeClass('mudar_cor')
+                                $('#btn6').removeClass('mudar_cor')
+                                $('#btn7').removeClass('mudar_cor')
+                            } else {
+
+                                if (elemento == 'btn6') {
+                                    $('#btn6').addClass('mudar_cor')
+                                    $('#btn1').removeClass('mudar_cor')
+                                    $('#btn2').removeClass('mudar_cor')
+                                    $('#btn3').removeClass('mudar_cor')
+                                    $('#btn4').removeClass('mudar_cor')
+                                    $('#btn5').removeClass('mudar_cor')
+                                    $('#btn7').removeClass('mudar_cor')
+                                } else {
+
+                                    if (elemento == 'btn7') {
+                                        $('#btn7').addClass('mudar_cor')
+                                        $('#btn1').removeClass('mudar_cor')
+                                        $('#btn2').removeClass('mudar_cor')
+                                        $('#btn3').removeClass('mudar_cor')
+                                        $('#btn4').removeClass('mudar_cor')
+                                        $('#btn5').removeClass('mudar_cor')
+                                        $('#btn6').removeClass('mudar_cor')
+                                    }
+                                }
                             }
                         }
                     }
