@@ -19,26 +19,38 @@ public partial class Relatorios : System.Web.UI.Page
             Response.Redirect("Menu.aspx");
 
         else
+            return;      
+    }
+
+    protected void btnPesquisar_Click(object sender, EventArgs e)
+    {
+        DSRelatorios.SelectParameters["DATA"].DefaultValue = cripto.Encrypt(txtData.Text);
+
+        CarregarRelatorio();
+    }
+
+    protected void gvRelatorio_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        int id;
+        string dataKey;
+
+        foreach (GridViewRow linha in gvRelatorio.Rows)
         {
-            lSair.Text = GerarNavSair();
-            lRelatorios.Text = GerarNavRelatorios();
-        }        
-    }
+            if (linha.RowState == (DataControlRowState.Alternate | DataControlRowState.Selected))
+                linha.RowState = DataControlRowState.Selected;
 
-    public string GerarNavSair()
-    {
-        StringBuilder sbSair = new StringBuilder();
+            if (linha.RowState == DataControlRowState.Selected)
+            {
+                dataKey = gvRelatorio.DataKeys[linha.RowIndex].Values["id_vda"].ToString();
+                id = Convert.ToInt32(dataKey);
 
-        sbSair.AppendLine("<a class='nav-link' id='btn5' href='Sair.aspx' onclick='mudarCor('btn4')'>SAIR</a>");
-        return sbSair.ToString();
-    }
+                Session["idVda"] = id;
+                linha.RowState = DataControlRowState.Normal;
+                break;
+            }
+        }
 
-    public string GerarNavRelatorios()
-    {
-        StringBuilder sbRelatorios = new StringBuilder();
-
-        sbRelatorios.AppendLine("<a class='nav-link' id='btn5' href='Relatorios.aspx' onclick='mudarCor('btn4')'>RELATORIOS</a>");
-        return sbRelatorios.ToString();
+        Response.Redirect("DetalhesAdm.aspx");
     }
 
     public void CarregarRelatorio()
@@ -77,12 +89,5 @@ public partial class Relatorios : System.Web.UI.Page
 
         gvRelatorio.DataSource = relatorio;
         gvRelatorio.DataBind();
-    }
-
-    protected void btnPesquisar_Click(object sender, EventArgs e)
-    {
-        DSRelatorios.SelectParameters["DATA"].DefaultValue = cripto.Encrypt(txtData.Text);
-
-        CarregarRelatorio();
     }
 }

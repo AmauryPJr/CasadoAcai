@@ -39,7 +39,7 @@
                             <a class="nav-link" id="btn3" href="Produtos.aspx" onclick="mudarCor('btn3')">PRODUTOS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn4" href="Sair.aspx" onclick="mudarCor('btn4')">SAIR</a>
+                            <a class="nav-link" id="btn4" href="SAIR.aspx" onclick="mudarCor('btn4')">SAIR</a>
                         </li>
                     </ul>
                 </div>

@@ -81,14 +81,16 @@ public class Validacao
             // Calculo do 1º Digito Verificador
             for (int i = 0; i < 9; i++)
             {
-                // Converter o i em caractere do CPF em um numero
-                // Por exemplo, transforma o caractere '0' no inteiro 0
-                // Pois o caractere '0' na tabela ASCII, corresponde a 48
-                // No sistema decimal.
                 num = (int)(CPF[i] - 48);
                 soma += (num * peso);
                 peso -= 1;
             }
+
+            // Converter o i em caractere do CPF em um numero
+            // Por exemplo, transforma o caractere '0' no inteiro 0
+            // Pois o caractere '0' na tabela ASCII, corresponde a 48
+            // No sistema decimal.
+
 
             resto = 11 - (soma % 11);
 

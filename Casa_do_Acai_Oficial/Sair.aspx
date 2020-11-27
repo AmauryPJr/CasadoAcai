@@ -76,7 +76,7 @@
                             <a class="nav-link" id="btn6" href="Perfil.aspx" onclick="mudarCor('btn6')">PERFIL</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn7" href="SAIR.aspx" onclick="mudarCor('btn7')">SAIR</a>
+                            <a class="nav-link" id="btn7" href="Sair.aspx" onclick="mudarCor('btn7')">SAIR</a>
                         </li>
                     </ul>
                 </div>

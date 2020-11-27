@@ -23,7 +23,6 @@ public partial class Carrinho : System.Web.UI.Page
         else
         {
             lH1.Text = GerarH1();
-            lRS.Text = GerarRS();
             CarregarCarrinho();
         }
     }
@@ -41,23 +40,6 @@ public partial class Carrinho : System.Web.UI.Page
         {
             sbH1.AppendLine("<h1 style='text-align: center;'>SEU CARRINHO</h1>");
             return sbH1.ToString();
-        }
-    }
-
-    public string GerarRS()
-    {
-        StringBuilder sbRS = new StringBuilder();
-
-        if (Session["ultVenda"] == null)
-        {
-            sbRS.AppendLine("");
-            return sbRS.ToString();
-        }
-
-        else
-        {
-            sbRS.AppendLine("R$");
-            return sbRS.ToString();
         }
     }
 
@@ -135,7 +117,7 @@ public partial class Carrinho : System.Web.UI.Page
             gvCarrinho.DataSource = carrinho;
             gvCarrinho.DataBind();
 
-            txtTotalVenda.Text = totalCompra.ToString();
+            txtTotalVenda.Text = totalCompra.ToString("C");
         }
 
         else { DesabilitarCampos(); }
@@ -173,7 +155,6 @@ public partial class Carrinho : System.Web.UI.Page
         Session["ultVenda"] = null;
 
         lH1.Text = GerarH1();
-        lRS.Text = GerarRS();
 
         DesabilitarCampos();
 

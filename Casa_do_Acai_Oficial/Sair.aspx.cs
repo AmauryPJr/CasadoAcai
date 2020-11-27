@@ -10,7 +10,7 @@ public partial class Sair : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["logado"] == null || Session["logado"].Equals("Saiu"))
+        if (Session["logado"] == null && Session["adm"] == null)
             Response.Redirect("Menu.aspx");
 
         else
@@ -20,6 +20,7 @@ public partial class Sair : System.Web.UI.Page
     protected void btnSim_Click(object sender, EventArgs e)
     {
         Session["logado"] = "Saiu";
+        Session["adm"] = "Saiu";
         Response.Redirect("Login.aspx");
     }
 

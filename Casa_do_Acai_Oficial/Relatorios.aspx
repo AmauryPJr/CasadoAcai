@@ -66,10 +66,13 @@
                                 class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <asp:Literal runat="server" ID="lRelatorios" />
+                            <a class="nav-link" id="btn2" href="Relatorios.aspx" onclick="mudarCor('btn2')">RELATÓRIOS</a>
                         </li>
                         <li class="nav-item">
-                            <asp:Literal runat="server" ID="lSair" />
+                            <a class="nav-link" id="btn3" href="Produtos.aspx" onclick="mudarCor('btn3')">PRODUTOS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="btn4" href="Sair.aspx" onclick="mudarCor('btn4')">SAIR</a>
                         </li>
                     </ul>
                 </div>
@@ -85,10 +88,11 @@
             <asp:Button ID="btnPesquisar" runat="server" BorderColor="#CC00CC" BorderStyle="Solid" CssClass="btn" Text="Pesquisar" OnClick="btnPesquisar_Click" Width="140px" />
         </p>
         <div style="text-align: center;">
-            <asp:GridView runat="server" ID="gvRelatorio" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" Font-Size="20px" ForeColor="Black" AutoGenerateColumns="False">
+            <asp:GridView runat="server" ID="gvRelatorio" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" Font-Size="20px" ForeColor="Black" AutoGenerateColumns="False" OnSelectedIndexChanged="gvRelatorio_SelectedIndexChanged" DataKeyNames="id_vda">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
                     <asp:CommandField HeaderText="Detalhes" SelectText="Clique Aqui" ShowSelectButton="True" />
+                    <asp:BoundField DataField="id_vda" HeaderText="Código" SortExpression="id_vda" Visible="False" />
                     <asp:BoundField DataField="id_vda" HeaderText="Venda" SortExpression="id_vda" Visible="False" />
                     <asp:BoundField DataField="nome_cli" HeaderText="Cliente" SortExpression="nome_cli" />
                     <asp:BoundField DataField="nome_prod" HeaderText="Produto" SortExpression="nome_prod" />
