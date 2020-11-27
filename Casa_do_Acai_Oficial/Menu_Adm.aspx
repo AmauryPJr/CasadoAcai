@@ -152,7 +152,7 @@
             </div>
         </div>
 
-        <div class="principal" style="margin-top: 5px;">
+        <div class="principal" style="position: absolute; bottom: 0; width: 100%">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>
@@ -189,7 +189,7 @@
             </div>
             <div class="divCopy">
                 <p class="textoCopy text-center">
-                    <i class="fa fa-copyright" aria-hidden="true"></i>Todos os direitos
+                    <i class="fa fa-copyright" aria-hidden="true"></i> Todos os direitos
                 reservados a MNT-Gaming 2020
                 </p>
             </div>

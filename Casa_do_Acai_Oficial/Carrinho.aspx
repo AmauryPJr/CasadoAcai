@@ -54,7 +54,7 @@
             width: 175px;
         }
 
-        p {
+        .conteudo {
             margin-left: 3em;
             color: black;
             font-size: 20px;
@@ -133,11 +133,11 @@
         <br />
         <asp:Button ID="btnExcluir" runat="server" Text="Excluir Produto" BorderStyle="Solid" CssClass="btn" OnClick="btnExcluir_Click" />
         <br />
-        <p>
+        <p class="conteudo">
             Total da compra:
             <asp:Label runat="server" ID="txtTotalVenda" />
         </p>
-        <p>
+        <p class="conteudo">
             Forma de pagamento:
             <asp:DropDownList ID="ddlForma" runat="server">
                 <asp:ListItem Value="1">Dinheiro</asp:ListItem>
@@ -170,7 +170,8 @@
                 <asp:SessionParameter Name="IDVDA" SessionField="ultVenda" />
             </UpdateParameters>
         </asp:SqlDataSource>
-        <div class="principal" style="margin-top: 5px;">
+
+        <div class="principal" style="position: absolute; bottom: 0; width: 100%">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>
@@ -207,7 +208,7 @@
             </div>
             <div class="divCopy">
                 <p class="textoCopy text-center">
-                    <i class="fa fa-copyright" aria-hidden="true"></i>Todos os direitos
+                    <i class="fa fa-copyright" aria-hidden="true"></i> Todos os direitos
                 reservados a MNT-Gaming 2020
                 </p>
             </div>

@@ -74,7 +74,7 @@
             <asp:Button runat="server" ID="btnSim" Text="SIM" CssClass="btn" OnClick="btnSim_Click" />
         </div>
 
-        <div class="principal" style="margin-top: 209px;">
+        <div class="principal" style="position: absolute; bottom: 0; width: 100%">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>

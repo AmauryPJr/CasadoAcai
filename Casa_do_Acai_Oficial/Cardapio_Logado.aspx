@@ -35,7 +35,7 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         .auto-style1 {
             font-size: x-large;
         }
@@ -93,7 +93,7 @@
             <asp:GridView ID="gvProduto" runat="server" AutoGenerateColumns="False" DataKeyNames="id_prod" Font-Names="CHICKEN Pie" Font-Size="16pt" AllowPaging="True" PageSize="6" OnPageIndexChanging="gvProduto_PageIndexChanging" OnSelectedIndexChanged="gvProduto_SelectedIndexChanged">
                 <Columns>
                     <asp:CommandField HeaderText="Detalhes" SelectText="Clique Aqui" ShowSelectButton="True" />
-                    <asp:BoundField DataField="id_prod" HeaderText="Código" SortExpression="id_prod" Visible="false"/>
+                    <asp:BoundField DataField="id_prod" HeaderText="Código" SortExpression="id_prod" Visible="false" />
                     <asp:BoundField DataField="nome_prod" HeaderText="Nome" SortExpression="nome_prod" />
                     <asp:BoundField DataField="preco_prod" DataFormatString="{0:c}" HeaderText="Preço" SortExpression="preco_prod" />
                 </Columns>
@@ -117,7 +117,7 @@
         <div id="teste2">
         </div>
         <br />
-        &nbsp;<div class="principal" style="margin-top: 5px;">
+        <div class="principal" style="position: absolute; bottom: 0; width: 100%">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>

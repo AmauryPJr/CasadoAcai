@@ -34,7 +34,7 @@
             margin-bottom: 100px;
         }
 
-        p {
+        .conteudo {
             font-size: 20px;
         }
 
@@ -118,23 +118,23 @@
 
             <div id="dvDetalhes" class="divs">
                 <div id="conteudo">
-                    <p>
+                    <p class="conteudo">
                         Nome:
                 <asp:Label runat="server" ID="txtNome" />
                     </p>
-                    <p>
+                    <p class="conteudo">
                         Preço: R$
                 <asp:Label runat="server" ID="txtPreco" />
                     </p>
-                    <p>
+                    <p class="conteudo">
                         <asp:Label ID="lblTamnho" runat="server" Text="Tamanho:"></asp:Label>
                         &nbsp;<asp:Label ID="txtTamanho" runat="server"></asp:Label>
                     </p>
-                    <p>
+                    <p class="conteudo">
                         Tipo:
                 <asp:Label ID="txtTipo" runat="server"></asp:Label>
                     </p>
-                    <p>
+                    <p class="conteudo">
                         Quantidade Desejada:
                 <asp:TextBox runat="server" ID="txtQtdDesejada" Width="115px" />
                     </p>
@@ -195,7 +195,7 @@
             </asp:SqlDataSource>
         </div>
 
-        <div class="principal" style="margin-top: 5px;">
+        <div class="principal" style="position: absolute; bottom: 0; width: 100%">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>
@@ -232,7 +232,7 @@
             </div>
             <div class="divCopy">
                 <p class="textoCopy text-center">
-                    <i class="fa fa-copyright" aria-hidden="true"></i>Todos os direitos
+                    <i class="fa fa-copyright" aria-hidden="true"></i> Todos os direitos
                     reservados a MNT-Gaming 2020
                 </p>
             </div>
