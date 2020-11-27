@@ -100,7 +100,7 @@
                             <a class="nav-link" id="btn6" href="Perfil.aspx" onclick="mudarCor('btn6')">PERFIL</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn7" href="SAIR.aspx" onclick="mudarCor('btn7')">SAIR</a>
+                            <a class="nav-link" id="btn7" href="Sair.aspx" onclick="mudarCor('btn7')">SAIR</a>
                         </li>
                     </ul>
                 </div>
@@ -195,7 +195,7 @@
             </asp:SqlDataSource>
         </div>
 
-        <div class="principal" style="position: absolute; bottom: 0; width: 100%">
+        <div class="principal" style="position: absolute; width: 100%">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>

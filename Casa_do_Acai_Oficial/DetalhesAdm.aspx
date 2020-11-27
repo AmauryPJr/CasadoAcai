@@ -32,7 +32,7 @@
             margin-right: auto;
         }
         
-        p {
+        .conteudo {
             font-size: 20px;
             margin-left: 54px;
         }
@@ -66,7 +66,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav" id="textoNav">
                         <li class="nav-item">
-                            <a class="nav-link" id="btn1" href="Menu.aspx" onclick="mudarCor('btn1')">INÍCIO <span
+                            <a class="nav-link" id="btn1" href="Menu_Adm.aspx" onclick="mudarCor('btn1')">INÍCIO <span
                                 class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
@@ -111,16 +111,16 @@
             </asp:GridView>
         </div>
         <br />
-        <p>
+        <p class="conteudo">
             Total da venda: <asp:Literal runat="server" ID="lRS" />
             <asp:Label runat="server" ID="txtTotalVenda" />
         </p>
-        <p>
+        <p class="conteudo">
             Forma de pagamento:
             <asp:Label runat="server" ID="lblForma" />
         </p>
 
-        <asp:Button runat="server" CssClass="btn" ID="btnVoltar" Text="Voltar" PostBackUrl="~/Cardapio_Logado.aspx" Width="125px" />
+        <asp:Button runat="server" CssClass="btn" ID="btnVoltar" Text="Voltar" PostBackUrl="~/Relatorios.aspx" Width="125px" />
 
         <br />
         <asp:SqlDataSource ID="DSDetalhes" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>"
@@ -131,7 +131,7 @@
             </SelectParameters>
         </asp:SqlDataSource>
 
-        <div class="principal" style="position: absolute; bottom: 0; width: 100%">
+        <div class="principal" style="position: absolute; width: 100%">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>

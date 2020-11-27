@@ -171,7 +171,7 @@
             </UpdateParameters>
         </asp:SqlDataSource>
 
-        <div class="principal" style="position: absolute; bottom: 0; width: 100%">
+        <div class="principal" style="position: absolute; margin-top: 26px; width: 100%">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>

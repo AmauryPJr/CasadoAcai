@@ -23,8 +23,10 @@
             font-family: 'CHICKEN Pie';
         }
 
-        #gvRelatorios {
+        #gvRelatorio {
             text-align: center;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         #btnPesquisar {
@@ -62,7 +64,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav" id="textoNav">
                         <li class="nav-item">
-                            <a class="nav-link" id="btn1" href="Menu.aspx" onclick="mudarCor('btn1')">INÍCIO <span
+                            <a class="nav-link" id="btn1" href="Menu_Adm.aspx" onclick="mudarCor('btn1')">INÍCIO <span
                                 class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
@@ -81,7 +83,7 @@
 
         <h1 style="text-align: center; font-size: 32px">RELATÓRIOS</h1>
 
-        <p>
+        <p style="margin-left: 3em;">
             Digite uma data :
             <asp:TextBox runat="server" ID="txtData" onKeyPress="Mascara(this)" Width="115px" Font-Size="20px"/>
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -115,7 +117,7 @@
         </asp:SqlDataSource>
         <br />
 
-        <div class="principal" style="position: absolute; bottom: 0; width: 100%">
+        <div class="principal" style="position: absolute; margin-top: 201px; width: 100%">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>

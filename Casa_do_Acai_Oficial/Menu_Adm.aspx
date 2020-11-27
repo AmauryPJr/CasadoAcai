@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav" id="textoNav">
                         <li class="nav-item">
-                            <a class="nav-link" id="btn1" href="Menu.aspx" onclick="mudarCor('btn1')">INÍCIO <span
+                            <a class="nav-link" id="btn1" href="Menu_Adm.aspx" onclick="mudarCor('btn1')">INÍCIO <span
                                 class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
@@ -39,7 +39,7 @@
                             <a class="nav-link" id="btn3" href="Produtos.aspx" onclick="mudarCor('btn3')">PRODUTOS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn4" href="SAIR.aspx" onclick="mudarCor('btn4')">SAIR</a>
+                            <a class="nav-link" id="btn4" href="Sair.aspx" onclick="mudarCor('btn4')">SAIR</a>
                         </li>
                     </ul>
                 </div>
@@ -152,7 +152,7 @@
             </div>
         </div>
 
-        <div class="principal" style="position: absolute; bottom: 0; width: 100%">
+        <div class="principal" style="margin-top: 5px;">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>

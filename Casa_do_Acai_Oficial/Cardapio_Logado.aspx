@@ -72,7 +72,7 @@
                             <a class="nav-link" id="btn6" href="Perfil.aspx" onclick="mudarCor('btn6')">PERFIL</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn7" href="SAIR.aspx" onclick="mudarCor('btn7')">SAIR</a>
+                            <a class="nav-link" id="btn7" href="Sair.aspx" onclick="mudarCor('btn7')">SAIR</a>
                         </li>
                     </ul>
                 </div>
@@ -99,10 +99,7 @@
                 </Columns>
                 <FooterStyle BackColor="White" ForeColor="White" />
                 <HeaderStyle BackColor="#CC00CC" Font-Bold="False" ForeColor="White" />
-            </asp:GridView>
-            <br />
-            <br />
-            <br />
+            </asp:GridView>            
         </div>
         <br />
         <asp:SqlDataSource ID="DSProduto" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO produto(id_prod, nome_prod, id_tipoProd, tam_prod) VALUES (@IDPROD, @NOME, @TIPO, @TAMANHO)" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM produto">
@@ -117,7 +114,7 @@
         <div id="teste2">
         </div>
         <br />
-        <div class="principal" style="position: absolute; bottom: 0; width: 100%">
+        <div class="principal" style="position: absolute; width: 100%">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>
