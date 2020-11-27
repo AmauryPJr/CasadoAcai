@@ -61,21 +61,6 @@
                                 class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn2" href="QuemNosSomos.aspx" onclick="mudarCor('btn2')">QUEM SOMOS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="btn3" href="Contato.aspx" onclick="mudarCor('btn3')">CONTATO</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="btn4" href="Cardapio_Logado.aspx" onclick="mudarCor('btn4')">CARDÁPIO</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="btn5" href="Carrinho.aspx" onclick="mudarCor('btn5')">CARRINHO</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="btn6" href="Perfil.aspx" onclick="mudarCor('btn6')">PERFIL</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" id="btn7" href="Sair.aspx" onclick="mudarCor('btn7')">SAIR</a>
                         </li>
                     </ul>

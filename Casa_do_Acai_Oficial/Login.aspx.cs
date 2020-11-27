@@ -50,7 +50,7 @@ public partial class Login : System.Web.UI.Page
         {
             if (loginCliente.Table.Rows.Count > 0)
             {
-                Session["Logado"] = "Entrou";
+                Session["logado"] = "Entrou";
                 Session["idCli"] = loginCliente.Table.Rows[0]["id_cli"].ToString();
                 Session["nomeCli"] = cripto.Decrypt(loginCliente.Table.Rows[0]["nome_cli"].ToString());
                 Session["novaCompra"] = "Sim";
@@ -61,24 +61,20 @@ public partial class Login : System.Web.UI.Page
 
             else
             {
-                Response.Write("<script>alert('Login ou Senha Incorretos !');</script>");
+                if (loginAdm.Table.Rows.Count > 0)
+                {
+                    Session["adm"] = "Entrou";
+                    Response.Redirect("Menu_Adm.aspx");
 
-                txtSenha.Text = "";
-            }
+                    return;
+                }
 
-            if (loginAdm.Table.Rows.Count > 0)
-            {
-                Session["adm"] = "Entrou";
-                Response.Redirect("Menu_Adm.aspx");
+                else
+                {
+                    Response.Write("<script>alert('Login ou Senha Incorretos !');</script>");
 
-                return;
-            }
-
-            else
-            {
-                Response.Write("<script>alert('Login ou Senha Incorretos !');</script>");
-
-                txtSenha.Text = "";
+                    txtSenha.Text = "";
+                }
             }
         }
     }

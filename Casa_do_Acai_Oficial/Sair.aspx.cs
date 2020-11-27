@@ -26,6 +26,10 @@ public partial class Sair : System.Web.UI.Page
 
     protected void btnNao_Click(object sender, EventArgs e)
     {
-        Response.Redirect("Menu_Logado.aspx");
+        if (Session["logado"].Equals("Entrou"))
+            Response.Redirect("Menu_Logado.aspx");
+
+        if (Session["adm"].Equals("Entrou"))
+            Response.Redirect("Menu_Adm.aspx");
     }
 }
