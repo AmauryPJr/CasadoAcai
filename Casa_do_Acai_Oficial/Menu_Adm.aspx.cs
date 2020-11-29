@@ -13,6 +13,6 @@ public partial class Menu_Adm : System.Web.UI.Page
             Response.Redirect("Menu.aspx");
 
         else
-            lblBemVindo.Text = "Bem-Vindo, ADM !";
+            lblBemVindo.Text = "Bem-Vindo ADM !";
     }
 }

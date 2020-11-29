@@ -177,14 +177,14 @@
                     <asp:SessionParameter Name="IDPROD" SessionField="idProd" />
                 </SelectParameters>
             </asp:SqlDataSource>
-            <asp:SqlDataSource ID="DSNovaVenda" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO vendas(id_cli, id_forma, data_vda, valor_vda) VALUES (@IDCLI, 1, @DATA, 0)" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM [vendas]">
+            <asp:SqlDataSource ID="DSNovaVenda" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO vendas(id_cli, id_forma, data_vda, valor_vda, status_vda) VALUES (@IDCLI, 1, @DATA, 0, '1')" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM [vendas]">
                 <InsertParameters>
                     <asp:SessionParameter Name="IDCLI" SessionField="idCli" />
                     <asp:Parameter Name="DATA" />
                 </InsertParameters>
             </asp:SqlDataSource>
             <asp:SqlDataSource ID="DSUltimaVenda" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT MAX(id_vda) AS ultVenda FROM vendas"></asp:SqlDataSource>
-            <asp:SqlDataSource ID="DSItemVenda" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO it_venda(id_vda, id_prod, qtd_it, total_ped, adicional) VALUES (@IDVDA,@IDPROD,@QTD,@TOTAL,@ADICIONAL)" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM [it_venda]">
+            <asp:SqlDataSource ID="DSItemVenda" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO it_venda(id_vda, id_prod, qtd_it, total_ped, adicional, status_it_vda) VALUES (@IDVDA, @IDPROD, @QTD, @TOTAL, @ADICIONAL, '1')" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM [it_venda]">
                 <InsertParameters>
                     <asp:SessionParameter Name="IDVDA" SessionField="ultVenda" />
                     <asp:SessionParameter Name="IDPROD" SessionField="idProd" />

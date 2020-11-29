@@ -22,6 +22,7 @@
     <style>
         body {
             text-align: center;
+            font-family: 'CHICKEN Pie';
         }
 
         #gvProduto {
@@ -81,10 +82,12 @@
             <HeaderStyle BackColor="#CC00CC" Font-Bold="False" ForeColor="White" />
         </asp:GridView>
         <br />
-        <asp:SqlDataSource ID="DSProduto" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM produto">
+        <asp:HyperLink ID="hlCadastro" runat="server" NavigateUrl="~/Cadastro_Produto.aspx" Font-Size="20px">Deseja cadastrar um novo Produto?</asp:HyperLink>
+        <br />
+        <asp:SqlDataSource ID="DSProduto" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT id_prod, nome_prod, id_tipoProd, tam_prod, preco_prod FROM produto WHERE (statusProd = '1')">
         </asp:SqlDataSource>
 
-        <div class="principal" style="position: absolute; width: 100%">
+        <div class="principal" style="position: absolute; width: 100%; margin-top: 10px;">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>
@@ -121,7 +124,7 @@
             </div>
             <div class="divCopy">
                 <p class="textoCopy text-center">
-                    <i class="fa fa-copyright" aria-hidden="true"></i>Todos os direitos
+                    <i class="fa fa-copyright" aria-hidden="true"></i> Todos os direitos
                     reservados a MNT-Gaming 2020
                 </p>
             </div>

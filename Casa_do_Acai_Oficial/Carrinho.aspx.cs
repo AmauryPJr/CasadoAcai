@@ -125,7 +125,7 @@ public partial class Carrinho : System.Web.UI.Page
 
     protected void btnExcluir_Click(object sender, EventArgs e)
     {
-        itens = (DataView)DSCarrinho.Select(DataSourceSelectArguments.Empty);
+        itens = (DataView)DSExcluirProd.Select(DataSourceSelectArguments.Empty);
 
         foreach (GridViewRow linha in gvCarrinho.Rows)
         {
@@ -137,8 +137,8 @@ public partial class Carrinho : System.Web.UI.Page
                 int linhaSelecionada = linha.DataItemIndex;
                 string idItem = itens.Table.Rows[linhaSelecionada]["id_it_venda"].ToString();
 
-                DSCarrinho.DeleteParameters["IDITEM"].DefaultValue = idItem;
-                DSCarrinho.Delete();
+                DSExcluirProd.UpdateParameters["IDITEM"].DefaultValue = idItem;
+                DSExcluirProd.Update();
             }
         }
 
@@ -147,7 +147,11 @@ public partial class Carrinho : System.Web.UI.Page
 
     protected void btnFinalizar_Click(object sender, EventArgs e)
     {
-        DSCarrinho.UpdateParameters["TOTAL"].DefaultValue = cripto.Encrypt(txtTotalVenda.Text.Replace(',', '.'));
+        char[] rs = { 'R', '$' };
+
+        string preco = txtTotalVenda.Text.TrimStart(rs).Replace(',', '.');
+
+        DSCarrinho.UpdateParameters["TOTAL"].DefaultValue = cripto.Encrypt(preco);
         DSCarrinho.Update();
 
         Session["novaCompra"] = "Sim";

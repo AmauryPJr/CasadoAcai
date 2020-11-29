@@ -14,6 +14,6 @@ public partial class Menu_Logado : System.Web.UI.Page
             Response.Redirect("Menu.aspx");
 
         else
-            lblBemVindo.Text = "Bem-Vindo, " + Session["nomeCli"].ToString() + " !";
+            lblBemVindo.Text = "Bem-Vindo " + Session["nomeCli"].ToString() + " !";
     }    
 }

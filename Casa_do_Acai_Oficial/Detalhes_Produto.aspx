@@ -79,9 +79,10 @@
                     <asp:Label ID="lblTamnho" runat="server" Text="Tamanho:"></asp:Label>
                     &nbsp;<asp:TextBox ID="txtTamanho" runat="server"></asp:TextBox>
                 </p>
-                <asp:Button runat="server" CssClass="btn" ID="btnVoltar" Text="Voltar" Style="background: none; border: 2px solid #FF00FF; color: black; padding: 5px; font-size: 18px; cursor: pointer; margin: 12px 0; margin-left: 3em; width: 125px;" PostBackUrl="~/Cardapio_Logado.aspx" Width="125px" />
+                <asp:Button runat="server" CssClass="btn" ID="btnVoltar" Text="Voltar" Style="background: none; border: 2px solid #FF00FF; color: black; padding: 5px; font-size: 18px; cursor: pointer; margin: 12px 0; margin-left: 3em; width: 125px;" PostBackUrl="~/Produtos.aspx" />
                 <asp:Button runat="server" CssClass="btn" ID="btnAlterar" Text="Alterar" Style="background: none; border: 2px solid #FF00FF; color: black; padding: 5px; font-size: 18px; cursor: pointer; margin: 12px 0; margin-left: 3em; width: 125px;"
                     OnClick="btnAlterar_Click" />
+                <asp:Button runat="server" CssClass="btn" ID="btnExcluir" Text="Excluir" Style="background: none; border: 2px solid #FF00FF; color: black; padding: 5px; font-size: 18px; cursor: pointer; margin: 12px 0; margin-left: 3em; width: 125px;" OnClick="btnExcluir_Click" />
             </div>
 
             <asp:SqlDataSource ID="DSAlterar" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" UpdateCommand="UPDATE produto SET nome_prod = @NOME, tam_prod = @TAMANHO, preco_prod = @PRECO WHERE (id_prod = @IDPROD)">
@@ -92,14 +93,19 @@
                     <asp:Parameter Name="PRECO" />
                 </UpdateParameters>
             </asp:SqlDataSource>
-            <asp:SqlDataSource ID="DSDetalhes" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT produto.nome_prod, produto.tam_prod, produto.preco_prod, tipo_prod.nome_tipo FROM produto INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd WHERE (produto.id_prod = @IDPROD)">
+            <asp:SqlDataSource ID="DSDetalhes" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT produto.nome_prod, tipo_prod.nome_tipo, produto.tam_prod, produto.preco_prod FROM produto INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd WHERE (produto.id_prod = @IDPROD)">
                 <SelectParameters>
                     <asp:SessionParameter Name="IDPROD" SessionField="idProd" />
                 </SelectParameters>
             </asp:SqlDataSource>
+            <asp:SqlDataSource ID="DSExcluir" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" UpdateCommand="UPDATE produto SET statusProd = '0' WHERE (id_prod = @IDPROD)">
+                <UpdateParameters>
+                    <asp:SessionParameter Name="IDPROD" SessionField="idProd" />
+                </UpdateParameters>
+            </asp:SqlDataSource>
         </div>
 
-        <div class="principal" style="position: absolute; width: 100%">
+        <div class="principal" style="position: absolute; width: 100%; margin-top: 61px;">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>
@@ -136,7 +142,7 @@
             </div>
             <div class="divCopy">
                 <p class="textoCopy text-center">
-                    <i class="fa fa-copyright" aria-hidden="true"></i>Todos os direitos
+                    <i class="fa fa-copyright" aria-hidden="true"></i> Todos os direitos
                     reservados a MNT-Gaming 2020
                 </p>
             </div>

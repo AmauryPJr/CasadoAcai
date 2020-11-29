@@ -157,10 +157,7 @@
                 <asp:Parameter Name="ADD" />
             </InsertParameters>
         </asp:SqlDataSource>
-        <asp:SqlDataSource ID="DSCarrinho" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT tipo_prod.nome_tipo, produto.nome_prod, it_venda.adicional, it_venda.qtd_it, produto.preco_prod, it_venda.total_ped, it_venda.id_it_venda, it_venda.id_vda FROM it_venda INNER JOIN produto ON it_venda.id_prod = produto.id_prod INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd WHERE (it_venda.id_vda = @IDVDA)" DeleteCommand="DELETE FROM it_venda WHERE (id_it_venda = @IDITEM)" UpdateCommand="UPDATE vendas SET id_forma = @IDFORMA, valor_vda = @TOTAL WHERE (id_vda = @IDVDA)">
-            <DeleteParameters>
-                <asp:Parameter Name="IDITEM" />
-            </DeleteParameters>
+        <asp:SqlDataSource ID="DSCarrinho" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT tipo_prod.nome_tipo, produto.nome_prod, it_venda.adicional, it_venda.qtd_it, produto.preco_prod, it_venda.total_ped, it_venda.id_it_venda, it_venda.id_vda FROM it_venda INNER JOIN produto ON it_venda.id_prod = produto.id_prod INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd WHERE (it_venda.id_vda = @IDVDA) AND (it_venda.status_it_vda = '1')" UpdateCommand="UPDATE vendas SET id_forma = @IDFORMA, valor_vda = @TOTAL WHERE (id_vda = @IDVDA)">
             <SelectParameters>
                 <asp:SessionParameter Name="IDVDA" SessionField="ultVenda" />
             </SelectParameters>
@@ -168,6 +165,12 @@
                 <asp:ControlParameter ControlID="ddlForma" Name="IDFORMA" PropertyName="SelectedValue" />
                 <asp:Parameter Name="TOTAL" />
                 <asp:SessionParameter Name="IDVDA" SessionField="ultVenda" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
+
+        <asp:SqlDataSource ID="DSExcluirProd" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" UpdateCommand="UPDATE it_venda SET status_it_vda = '0' WHERE (id_it_venda = @IDITEM)">
+            <UpdateParameters>
+                <asp:Parameter Name="IDITEM" />
             </UpdateParameters>
         </asp:SqlDataSource>
 

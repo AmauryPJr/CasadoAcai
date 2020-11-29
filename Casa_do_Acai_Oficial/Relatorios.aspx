@@ -110,7 +110,7 @@
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
         </div>
-        <asp:SqlDataSource ID="DSRelatorios" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT vendas.id_vda, cadastro_cliente.nome_cli, produto.nome_prod, it_venda.adicional, vendas.valor_vda FROM vendas INNER JOIN it_venda ON vendas.id_vda = it_venda.id_vda INNER JOIN cadastro_cliente ON vendas.id_cli = cadastro_cliente.id_cli INNER JOIN produto ON it_venda.id_prod = produto.id_prod WHERE (vendas.data_vda = @DATA) ORDER BY vendas.data_vda DESC">
+        <asp:SqlDataSource ID="DSRelatorios" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT vendas.id_vda, cadastro_cliente.nome_cli, produto.nome_prod, it_venda.adicional, vendas.valor_vda FROM vendas INNER JOIN it_venda ON vendas.id_vda = it_venda.id_vda INNER JOIN cadastro_cliente ON vendas.id_cli = cadastro_cliente.id_cli INNER JOIN produto ON it_venda.id_prod = produto.id_prod WHERE (vendas.data_vda = @DATA) AND (vendas.status_vda = '1') ORDER BY vendas.data_vda DESC">
             <SelectParameters>
                 <asp:Parameter Name="DATA" />
             </SelectParameters>

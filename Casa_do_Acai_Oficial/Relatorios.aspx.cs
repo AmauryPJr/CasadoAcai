@@ -70,6 +70,7 @@ public partial class Relatorios : System.Web.UI.Page
             DataRow linha = relatorio.NewRow();
 
             string adicional = cripto.Decrypt(lista.Table.Rows[i]["adicional"].ToString());
+            string preco = cripto.Decrypt(lista.Table.Rows[i]["valor_vda"].ToString()).Replace('.',',');
 
             linha["id_vda"] = lista.Table.Rows[i]["id_vda"].ToString();
             linha["nome_cli"] = cripto.Decrypt(lista.Table.Rows[i]["nome_cli"].ToString());
@@ -82,7 +83,7 @@ public partial class Relatorios : System.Web.UI.Page
                 linha["adicional"] = adicional;
 
 
-            linha["valor_vda"] = cripto.Decrypt(lista.Table.Rows[i]["valor_vda"].ToString())/*.Replace('.', ',')*/;
+            linha["valor_vda"] = preco;
 
             relatorio.Rows.Add(linha);
         }

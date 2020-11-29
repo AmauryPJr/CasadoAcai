@@ -76,8 +76,36 @@ public partial class Detalhes_Produto : System.Web.UI.Page
         string preco = txtPreco.Text.TrimStart(rs).Replace(',','.');
         string tamanho = txtTamanho.Text;
 
+        if (tamanho == "Não Unitário")
+            tamanho = "";
+
         DSAlterar.UpdateParameters["NOME"].DefaultValue = cripto.Encrypt(txtNome.Text);
         DSAlterar.UpdateParameters["PRECO"].DefaultValue = cripto.Encrypt(preco);
-        //DSAlterar.UpdateParameters["TAMANHO"].DefaultValue = 
+        DSAlterar.UpdateParameters["TAMANHO"].DefaultValue = cripto.Encrypt(tamanho);
+        DSAlterar.Update();
+
+        Response.Write("<script>alert('Alteração realizada com Sucesso !')</script>");
+    }
+
+    protected void btnExcluir_Click(object sender, EventArgs e)
+    {
+        DSExcluir.Update();
+
+        Response.Write("<script>alert('Exclusão realizada com Sucesso !')</script>");
+
+        DesabilitarCampos();
+    }
+
+    public void DesabilitarCampos()
+    {
+        imgProd.Visible = false;
+
+        txtNome.Enabled = false;
+        txtPreco.Enabled = false;
+        txtTamanho.Enabled = false;
+
+        txtNome.Text = "";
+        txtPreco.Text = "";
+        txtTamanho.Text = "";
     }
 }

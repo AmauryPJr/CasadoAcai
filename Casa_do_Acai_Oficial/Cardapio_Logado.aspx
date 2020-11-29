@@ -102,7 +102,7 @@
             </asp:GridView>            
         </div>
         <br />
-        <asp:SqlDataSource ID="DSProduto" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO produto(id_prod, nome_prod, id_tipoProd, tam_prod) VALUES (@IDPROD, @NOME, @TIPO, @TAMANHO)" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT * FROM produto">
+        <asp:SqlDataSource ID="DSProduto" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO produto(id_prod, nome_prod, id_tipoProd, tam_prod) VALUES (@IDPROD, @NOME, @TIPO, @TAMANHO)" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" SelectCommand="SELECT id_prod, nome_prod, id_tipoProd, tam_prod, preco_prod FROM produto WHERE (statusProd = '1')">
             <InsertParameters>
                 <asp:Parameter Name="IDPROD" />
                 <asp:Parameter Name="NOME" />
@@ -151,7 +151,7 @@
             </div>
             <div class="divCopy">
                 <p class="textoCopy text-center">
-                    <i class="fa fa-copyright" aria-hidden="true"></i>Todos os direitos
+                    <i class="fa fa-copyright" aria-hidden="true"></i> Todos os direitos
                     reservados a MNT-Gaming 2020
                 </p>
             </div>

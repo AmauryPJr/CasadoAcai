@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="DetalhesAdm.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Cadastro_Produto.aspx.cs" Inherits="Cadastro_Produto" %>
 
 <!DOCTYPE html>
 
@@ -22,22 +22,12 @@
             font-family: 'CHICKEN Pie';
         }
 
-        h1 {
-            text-align: center;            
-        }
-
-        #gvDetalhes {
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
         .conteudo {
-            font-size: 20px;
-            margin-left: 54px;
+            margin-left: 52px;
+            font-size: 16pt;
         }
 
-        #btnVoltar {
+        #btnCadastrar {
             background: none;
             border: 2px solid #FF00FF;
             color: black;
@@ -48,10 +38,6 @@
             margin-left: 3em;
             width: 125px;
         }
-
-        #imgProd {
-            margin-left: 50px;
-        }        
     </style>
 </head>
 <body>
@@ -82,56 +68,44 @@
                 </div>
             </nav>
         </div>
-        
-        <h1 style='text-align: center;'>DETALHES DA VENDA</h1>
-        
-        <div style="text-align: center">
-              <asp:GridView ID="gvDetalhes" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" ForeColor="Black" GridLines="Both">
-                <AlternatingRowStyle BackColor="White" />
-                <Columns>
-                    <asp:TemplateField HeaderText="Imagem">
-                        <ItemTemplate>
-                            <asp:Image ID="imgProduto" runat="server" Height="90px" Width="100px" ImageUrl='<%# Eval ("imagem", "{0}") %>' />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="nome_prod" HeaderText="Produto" SortExpression="nome_prod" />
-                    <asp:BoundField HeaderText="Adicional" DataField="adicional" SortExpression="adicional" />
-                    <asp:BoundField HeaderText="Quantidade" DataField="qtd_it" SortExpression="qtd_it"></asp:BoundField>
-                    <asp:BoundField DataFormatString="{0:c}" HeaderText="Preço Unitário" DataField="preco_prod" SortExpression="preco_prod" />
-                    <asp:BoundField DataFormatString="{0:c}" DataField="total_ped" HeaderText="Total do Produto" SortExpression="total_ped" />
-                </Columns>
-                <FooterStyle BackColor="#CCCCCC" />
-                <HeaderStyle BackColor="#CC00CC" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                <SortedAscendingHeaderStyle BackColor="Gray" />
-                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                <SortedDescendingHeaderStyle BackColor="#383838" />
-            </asp:GridView>
+
+        <h1 style='text-align: center;'>NOVO PRODUTO</h1>
+
+        <div style="margin-top: 20px;">
+            <p class="conteudo">
+                Nome do produto:
+                <asp:TextBox ID="txtNome" runat="server"  Width="300px"/>
+            </p>
+
+            <p class="conteudo">
+                Tipo do produto:
+                <asp:TextBox ID="txtTipo" runat="server" Width="165px" />
+            </p>
+
+            <p class="conteudo">
+                Tamanho:
+                <asp:TextBox ID="txtTamanho" runat="server" Width="100px" />
+                <p style="font-size: 13px; color: red; margin-left: 4em;">*Não obrigatório</p>
+            </p>
+
+            <p class="conteudo">
+                Preço unitário:
+                <asp:TextBox ID="txtPreço" runat="server" Width="100px" />
+            </p>
+
+            <asp:Button ID="btnCadastrar" runat="server" Text="Cadastrar" CssClass="btn" OnClick="btnCadastrar_Click"/>
         </div>
-        <br />
-        <p class="conteudo">
-            Total da venda: <asp:Literal runat="server" ID="lRS" />
-            <asp:Label runat="server" ID="txtTotalVenda" />
-        </p>
-        <p class="conteudo">
-            Forma de pagamento:
-            <asp:Label runat="server" ID="lblForma" />
-        </p>
 
-        <asp:Button runat="server" CssClass="btn" ID="btnVoltar" Text="Voltar" PostBackUrl="~/Relatorios.aspx" Width="125px" />
-
-        <br />
-        <asp:SqlDataSource ID="DSDetalhes" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>"
-            ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>"
-            SelectCommand="SELECT it_venda.id_it_venda, it_venda.qtd_it, it_venda.total_ped, it_venda.adicional, vendas.valor_vda, produto.nome_prod, produto.preco_prod, tipo_prod.nome_tipo, forma_pagto.tipo_forma FROM it_venda INNER JOIN vendas ON it_venda.id_vda = vendas.id_vda INNER JOIN produto ON it_venda.id_prod = produto.id_prod INNER JOIN tipo_prod ON produto.id_tipoProd = tipo_prod.id_tipoProd INNER JOIN forma_pagto ON vendas.id_forma = forma_pagto.id_forma WHERE (it_venda.id_vda = @IDVDA) AND (it_venda.status_it_vda = '1')">
-            <SelectParameters>
-                <asp:SessionParameter Name="IDVDA" SessionField="idVda" />
-            </SelectParameters>
+        <asp:SqlDataSource ID="DSCadastro" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" InsertCommand="INSERT INTO produto(nome_prod, id_tipoProd, tam_prod, preco_prod, statusProd) VALUES (@NOME, @TIPO, @TAMANHO, @PRECO, '1')" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>">
+            <InsertParameters>
+                <asp:Parameter Name="NOME" />
+                <asp:Parameter Name="TIPO" />
+                <asp:Parameter Name="TAMANHO" />
+                <asp:Parameter Name="PRECO" DefaultValue="" />
+            </InsertParameters>
         </asp:SqlDataSource>
-
-        <div class="principal" style="position: absolute; width: 100%">
+        
+        <div class="principal" style="position: absolute; width: 100%; margin-top: 17px;">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>
@@ -152,7 +126,7 @@
 
                     <p class="textoFooter">ABERTO DE SEG À SEX </p>
                     <p class="textoFooter">09:00 - 22:00</p>
-                    <br/>
+                    <br />
 
                     <p class="textoFooter">SÁB/DOM e FERIADOS </p>
                     <p class="textoFooter" style="margin-bottom: 4px;">13:00 - 21:00</p>
