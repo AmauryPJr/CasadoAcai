@@ -32,7 +32,7 @@
     <form id="form1" runat="server">
         <div class="header">
             <nav class="navbar navbar-expand-lg">
-                <a class="navbar-brand" href="Menu.aspx" style="margin-left: 17%;" id="a">CasaDoAç@í</a>
+                <a class="navbar-brand" href="Menu.aspx" style="margin-left: 17%;" id="a"><asp:Image runat="server" ImageUrl="~/Imagens/Logo Casa do Acai.png" Height="90px" Width="150px"/></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -57,7 +57,7 @@
             </nav>
         </div>
 
-        <h1 style="text-align: center; font-size: 32px; font-family: 'CHICKEN Pie';">DETELHES DO PRODUTOS</h1>
+        <h1 style="text-align: center; font-size: 32px; font-family: 'CHICKEN Pie';">DETELHES DO PRODUTO</h1>
 
         <div id="dvImagem" style="margin-left: 52px;">
             <asp:Image ID="imgProd" runat="server" Height="125px" Width="135px" />
@@ -134,7 +134,7 @@
                 </div>
 
                 <div class="col-12 col-md-3 text-center">
-                    <p>Logo</p>
+                    <p><asp:Image runat="server" ImageUrl="~/Imagens/Logo Casa do Acai.png" Height="90px" Width="150px"/></p>
                     <a><i class="fa fa-facebook fa-lg icon" aria-hidden="true"></i></a>
                     <a><i class="fa fa-instagram fa-lg icon" aria-hidden="true"></i></a>
 

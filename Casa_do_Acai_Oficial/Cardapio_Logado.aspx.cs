@@ -85,7 +85,7 @@ public partial class Cardapio_Logado : System.Web.UI.Page
             }
         }        
 
-        Response.Redirect("Detalhes.aspx");
+        Response.Redirect("Detalhes_Pedido.aspx");
     }
 
     private void CarregarProduto(int tipoProd)
