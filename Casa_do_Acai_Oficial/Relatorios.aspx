@@ -81,7 +81,7 @@
             </nav>
         </div>
 
-        <h1 style="text-align: center; font-size: 32px">RELATÓRIOS</h1>
+        <h1 style="text-align: center; font-size: 32px">RELATÓRIO DE VENDA</h1>
 
         <p style="margin-left: 3em;">
             Digite uma data :
