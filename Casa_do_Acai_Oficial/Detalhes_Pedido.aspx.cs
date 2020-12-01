@@ -84,69 +84,75 @@ public partial class Detalhes : System.Web.UI.Page
         if (Session["logado"] != null || Session["logado"].Equals("Saiu"))
         {
             if (Session["logado"].Equals("Entrou"))
-            {                
-                if (Session["novaCompra"].ToString() == "Sim")
+            {
+                if (txtQtdDesejada.Text == "")
+                    Response.Write("<script>alert('Digite a quantidade deseja para adicionar ao Carrinho !');</script>");
+
+                else
                 {
-                    DateTime data;
-                    string dataFormatada;
-
-                    data = DateTime.Today;                    
-
-                    dataFormatada = data.ToString("dd/MM/yyyy");
-
-                    DSNovaVenda.InsertParameters["DATA"].DefaultValue = cripto.Encrypt(dataFormatada);
-                    DSNovaVenda.Insert();
-
-                    DataView ultVenda = (DataView)DSUltimaVenda.Select(DataSourceSelectArguments.Empty);
-                    Session["ultVenda"] = ultVenda.Table.Rows[0]["ultVenda"].ToString();
-
-                    Session["novaCompra"] = "Não";
-                }
-
-                double preco, totalProd;
-                int qtd;
-                qtd = Convert.ToInt32(txtQtdDesejada.Text);
-                preco = Convert.ToDouble(txtPreco.Text);
-                totalProd = qtd * preco;
-
-                DSItemVenda.InsertParameters["QTD"].DefaultValue = cripto.Encrypt(qtd.ToString());
-                DSItemVenda.InsertParameters["TOTAL"].DefaultValue = cripto.Encrypt(totalProd.ToString());
-
-                if (gvAdicional.Visible)
-                {
-                    foreach (GridViewRow linha in gvAdicional.Rows)
+                    if (Session["novaCompra"].ToString() == "Sim")
                     {
-                        CheckBox chkEscolhaAdd = (CheckBox)linha.FindControl("chkEscolhaAdd");
+                        DateTime data;
+                        string dataFormatada;
 
-                        if (chkEscolhaAdd.Checked)
-                        {
-                            Session["add"] += adicionais[linha.DataItemIndex].ToString() + ", ";
-                        }
+                        data = DateTime.Today;
+
+                        dataFormatada = data.ToString("dd/MM/yyyy");
+
+                        DSNovaVenda.InsertParameters["DATA"].DefaultValue = cripto.Encrypt(dataFormatada);
+                        DSNovaVenda.Insert();
+
+                        DataView ultVenda = (DataView)DSUltimaVenda.Select(DataSourceSelectArguments.Empty);
+                        Session["ultVenda"] = ultVenda.Table.Rows[0]["ultVenda"].ToString();
+
+                        Session["novaCompra"] = "Não";
                     }
 
-                    if (Session["add"] == null)
-                        Session["add"] = "";
+                    double preco, totalProd;
+                    int qtd;
+                    qtd = Convert.ToInt32(txtQtdDesejada.Text);
+                    preco = Convert.ToDouble(txtPreco.Text);
+                    totalProd = qtd * preco;
+
+                    DSItemVenda.InsertParameters["QTD"].DefaultValue = cripto.Encrypt(qtd.ToString());
+                    DSItemVenda.InsertParameters["TOTAL"].DefaultValue = cripto.Encrypt(totalProd.ToString());
+
+                    if (gvAdicional.Visible)
+                    {
+                        foreach (GridViewRow linha in gvAdicional.Rows)
+                        {
+                            CheckBox chkEscolhaAdd = (CheckBox)linha.FindControl("chkEscolhaAdd");
+
+                            if (chkEscolhaAdd.Checked)
+                            {
+                                Session["add"] += adicionais[linha.DataItemIndex].ToString() + ", ";
+                            }
+                        }
+
+                        if (Session["add"] == null)
+                            Session["add"] = "";
+
+                        else
+                            Session["add"].ToString().TrimEnd().Replace(",", "");
+                    }
 
                     else
-                        Session["add"].ToString().TrimEnd().Replace(",","");
+                    {
+                        Session["add"] = "";
+                    }
+
+                    if (Session["add"].Equals(""))
+                        DSItemVenda.InsertParameters["ADICIONAL"].DefaultValue = cripto.Encrypt(Session["add"].ToString());
+
+                    else
+                        DSItemVenda.InsertParameters["ADICIONAL"].DefaultValue = cripto.Encrypt(Session["add"].ToString());
+
+                    DSItemVenda.Insert();
+
+                    Response.Write("<script>alert('Item adicionado ao Carrinho !');</script>");
+
+                    txtQtdDesejada.Text = "";
                 }
-
-                else
-                {
-                    Session["add"] = "";
-                }
-
-                if (Session["add"].Equals(""))
-                    DSItemVenda.InsertParameters["ADICIONAL"].DefaultValue = cripto.Encrypt(Session["add"].ToString());
-
-                else
-                    DSItemVenda.InsertParameters["ADICIONAL"].DefaultValue = cripto.Encrypt(Session["add"].ToString());
-
-                DSItemVenda.Insert();
-
-                Response.Write("<script>alert('Item adicionado ao Carrinho !');</script>");
-
-                txtQtdDesejada.Text = "";              
             }
 
             else

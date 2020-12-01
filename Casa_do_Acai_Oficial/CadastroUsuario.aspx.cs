@@ -61,53 +61,60 @@ public partial class CadastroLogin : System.Web.UI.Page
 
     protected void btnFinalizar_Click(object sender, EventArgs e)
     {
-        Session["nomeCli"] = txtNome.Text;
+        if (txtNome.Text == "" || txtCPF.Text == "" || txtEmail.Text == "" || txtSenha.Text == "" ||
+            txtCEP.Text == "" || txtTelefone.Text == "" || txtNumero.Text == "" || txtDataNasc.Text == "")
+            Response.Write("<script>alert('Favor preencher os campos obrigatórios !');</script>");
 
-        DSCadastroCliente.InsertParameters["NOME"].DefaultValue = cripto.Encrypt(txtNome.Text);
-        DSCadastroCliente.InsertParameters["TELEFONE"].DefaultValue = cripto.Encrypt(txtTelefone.Text);
-        DSCadastroCliente.InsertParameters["CEP"].DefaultValue = cripto.Encrypt(txtCEP.Text);
-        DSCadastroCliente.InsertParameters["NUMERO"].DefaultValue = cripto.Encrypt(txtNumero.Text);
-
-        if (txtComplemento.Text != "")
-        {
-            DSCadastroCliente.InsertParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt(txtComplemento.Text);
-        }
         else
         {
-            DSCadastroCliente.InsertParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt("");
+            Session["nomeCli"] = txtNome.Text;
+
+            DSCadastroCliente.InsertParameters["NOME"].DefaultValue = cripto.Encrypt(txtNome.Text);
+            DSCadastroCliente.InsertParameters["TELEFONE"].DefaultValue = cripto.Encrypt(txtTelefone.Text);
+            DSCadastroCliente.InsertParameters["CEP"].DefaultValue = cripto.Encrypt(txtCEP.Text);
+            DSCadastroCliente.InsertParameters["NUMERO"].DefaultValue = cripto.Encrypt(txtNumero.Text);
+
+            if (txtComplemento.Text != "")
+            {
+                DSCadastroCliente.InsertParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt(txtComplemento.Text);
+            }
+            else
+            {
+                DSCadastroCliente.InsertParameters["COMPLEMENTO"].DefaultValue = cripto.Encrypt("");
+            }
+
+            string genero = "";
+
+            if (ddlGenero.SelectedIndex == 0)
+            {
+                genero = "F";
+            }
+
+            if (ddlGenero.SelectedIndex == 1)
+            {
+                genero = "M";
+            }
+
+            if (ddlGenero.SelectedIndex == 2)
+            {
+                genero = "PND";
+            }
+
+            DSCadastroCliente.InsertParameters["GENERO"].DefaultValue = cripto.Encrypt(genero);
+            DSCadastroCliente.InsertParameters["DATANASC"].DefaultValue = cripto.Encrypt(txtDataNasc.Text);
+            DSCadastroCliente.InsertParameters["EMAIL"].DefaultValue = cripto.Encrypt(txtEmail.Text);
+            DSCadastroCliente.InsertParameters["CPF"].DefaultValue = cripto.Encrypt(txtCPF.Text);
+            DSCadastroCliente.InsertParameters["SENHA"].DefaultValue = cripto.Encrypt(txtSenha.Text);
+
+            DSCadastroCliente.Insert();
+
+            LimparCampos();
+
+            Session["logado"] = "Entrou";
+            Session["novaCompra"] = "Sim";
+
+            Response.Redirect("Login.aspx");
         }
-
-        string genero = "";
-
-        if (ddlGenero.SelectedIndex == 0)
-        {
-            genero = "F";
-        }
-
-        if (ddlGenero.SelectedIndex == 1)
-        {
-            genero = "M";
-        }
-
-        if (ddlGenero.SelectedIndex == 2)
-        {
-            genero = "PND";
-        }
-
-        DSCadastroCliente.InsertParameters["GENERO"].DefaultValue = cripto.Encrypt(genero);
-        DSCadastroCliente.InsertParameters["DATANASC"].DefaultValue = cripto.Encrypt(txtDataNasc.Text);
-        DSCadastroCliente.InsertParameters["EMAIL"].DefaultValue = cripto.Encrypt(txtEmail.Text);
-        DSCadastroCliente.InsertParameters["CPF"].DefaultValue = cripto.Encrypt(txtCPF.Text);
-        DSCadastroCliente.InsertParameters["SENHA"].DefaultValue = cripto.Encrypt(txtSenha.Text);
-
-        DSCadastroCliente.Insert();
-
-        LimparCampos();
-
-        Session["logado"] = "Entrou";
-        Session["novaCompra"] = "Sim";
-
-        Response.Redirect("Login.aspx");
     }
     
     protected void btnValidarSenha_Click(object sender, EventArgs e)

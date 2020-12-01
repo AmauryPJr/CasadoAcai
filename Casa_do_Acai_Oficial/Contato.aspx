@@ -34,7 +34,7 @@
                                 class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="btn2" href="QuemNosSomos.aspx" onclick="mudarCor('btn2')">QUEM SOMOS</a>
+                            <a class="nav-link" id="btn2" href="QuemSomos.aspx" onclick="mudarCor('btn2')">QUEM SOMOS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="btn3" href="Contato.aspx" onclick="mudarCor('btn3')">CONTATO</a>

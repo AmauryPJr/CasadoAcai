@@ -24,9 +24,15 @@ public partial class Relatorios : System.Web.UI.Page
 
     protected void btnPesquisar_Click(object sender, EventArgs e)
     {
-        DSRelatorios.SelectParameters["DATA"].DefaultValue = cripto.Encrypt(txtData.Text);
+        if (txtData.Text == "")
+            Response.Write("<script>alert('Digite uma data para pesquisar uma venda !')</script>");
 
-        CarregarRelatorio();
+        else
+        {
+            DSRelatorios.SelectParameters["DATA"].DefaultValue = cripto.Encrypt(txtData.Text);
+
+            CarregarRelatorio();
+        }
     }
 
     protected void gvRelatorio_SelectedIndexChanged(object sender, EventArgs e)
