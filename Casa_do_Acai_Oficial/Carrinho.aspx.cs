@@ -49,7 +49,6 @@ public partial class Carrinho : System.Web.UI.Page
         txtTotalVenda.Text = "";
         ddlForma.ClearSelection();
         ddlForma.Enabled = false;
-        btnExcluir.Enabled = false;
         btnFinalizar.Enabled = false;
     }
 
@@ -121,28 +120,6 @@ public partial class Carrinho : System.Web.UI.Page
         }
 
         else { DesabilitarCampos(); }
-    }
-
-    protected void btnExcluir_Click(object sender, EventArgs e)
-    {
-        itens = (DataView)DSExcluirProd.Select(DataSourceSelectArguments.Empty);
-
-        foreach (GridViewRow linha in gvCarrinho.Rows)
-        {
-            CheckBox chkExcluir;
-            chkExcluir = (CheckBox)linha.FindControl("chkExcluir");
-
-            if (chkExcluir.Checked == true)
-            {
-                int linhaSelecionada = linha.DataItemIndex;
-                string idItem = itens.Table.Rows[linhaSelecionada]["id_it_venda"].ToString();
-
-                DSExcluirProd.UpdateParameters["IDITEM"].DefaultValue = idItem;
-                DSExcluirProd.Update();
-            }
-        }
-
-        CarregarCarrinho();
     }
 
     protected void btnFinalizar_Click(object sender, EventArgs e)

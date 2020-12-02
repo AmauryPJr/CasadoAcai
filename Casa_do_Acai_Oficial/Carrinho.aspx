@@ -101,14 +101,9 @@
 
         <asp:Literal runat="server" ID="lH1"/>
         <div id="dvGrid" style="text-align: center;">
-            <asp:GridView ID="gvCarrinho" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" ForeColor="Black" GridLines="Both">
+            <asp:GridView ID="gvCarrinho" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" Font-Names="CHICKEN Pie" ForeColor="Black">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
-                    <asp:TemplateField>
-                        <ItemTemplate>
-                            <asp:CheckBox ID="chkExcluir" runat="server" />
-                        </ItemTemplate>
-                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Imagem">
                         <ItemTemplate>
                             <asp:Image ID="imgProduto" runat="server" Height="90px" Width="100px" ImageUrl='<%# Eval ("imagem", "{0}") %>' />
@@ -130,8 +125,6 @@
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
         </div>
-        <br />
-        <asp:Button ID="btnExcluir" runat="server" Text="Excluir Produto" BorderStyle="Solid" CssClass="btn" OnClick="btnExcluir_Click" />
         <br />
         <p class="conteudo">
             Total da compra:
@@ -168,13 +161,7 @@
             </UpdateParameters>
         </asp:SqlDataSource>
 
-        <asp:SqlDataSource ID="DSExcluirProd" runat="server" ConnectionString="<%$ ConnectionStrings:casadoacaiConnectionString %>" ProviderName="<%$ ConnectionStrings:casadoacaiConnectionString.ProviderName %>" UpdateCommand="UPDATE it_venda SET status_it_vda = '0' WHERE (id_it_venda = @IDITEM)">
-            <UpdateParameters>
-                <asp:Parameter Name="IDITEM" />
-            </UpdateParameters>
-        </asp:SqlDataSource>
-
-        <div class="principal" style="position: absolute; margin-top: 26px; width: 100%">
+        <div class="principal" style="position: absolute; margin-top: 91px; width: 100%">
             <div class="row container-fluid ">
                 <div class="col-12 col-md-3 text-center">
                     <p class="tituloFooter">ENDEREÇO</p>
